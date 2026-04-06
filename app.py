@@ -8,6 +8,7 @@ import os
 import re
 import time
 import logging
+import unicodedata
 from pathlib import Path
 
 import streamlit as st
@@ -22,29 +23,71 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ─── Constantes ───────────────────────────────────────────────────────────────
-TTL_PATH        = Path("pinakes_graph.ttl")
+DEFAULT_GRAPH_PATH        = Path("pinakes_graph_enriched.ttl")
+FALLBACK_GRAPH_PATH       = Path("pinakes_graph.ttl")
 GROQ_MODEL      = "llama-3.3-70b-versatile"
 MAX_TOKENS      = 1024
 TEMPERATURE     = 0.3
 TOP_K_RESULTS   = 5
 APP_TITLE       = "🔍 SAVITS Pinakes RAG"
 APP_SUBTITLE    = "Sistema RAG Semântico para o ecossistema Pinakes/BrCris (IBICT)"
+TOKEN_LIMIT     = 12
+STOPWORDS_PT    = {
+    "como", "onde", "quando", "qual", "quais", "sobre", "para", "com", "sem", "dos",
+    "das", "de", "do", "da", "e", "ou", "em", "um", "uma", "os", "as", "no", "na",
+    "nos", "nas", "por", "que", "se", "ao", "aos", "a", "o", "tratam", "trata",
+}
+PRIORITY_TERMS  = {
+    "fair", "care", "lgpd", "deia", "governanca", "proveniencia",
+    "dados", "pesquisa", "ciencia", "informacao", "ontologia", "interoperabilidade",
+}
+GOVERNANCE_QUERY_TERMS = {
+    "fair", "care", "lgpd", "deia", "governanca", "proveniencia", "prov", "dcterms",
+}
 
 
 # ─── Carregamento do grafo RDF ─────────────────────────────────────────────────
 @st.cache_resource(show_spinner="Carregando grafo RDF…")
-def load_graph() -> Graph:
+def load_graph(graph_path: str, graph_mtime: float | None = None) -> Graph:
     """Carrega o grafo Turtle em cache na sessão do Streamlit."""
-    if not TTL_PATH.exists():
+    path = Path(graph_path)
+    if not path.exists():
         st.error(
-            f"Arquivo `{TTL_PATH}` não encontrado. "
-            "Execute `python src/semantic_integration.py` para gerá-lo."
+            f"Arquivo `{path}` não encontrado. "
+            "Execute `python build_graph.py` para gerar os TTLs."
         )
         st.stop()
     g = Graph()
-    g.parse(str(TTL_PATH), format="turtle")
-    logger.info(f"Grafo carregado: {len(g)} triplas")
+    g.parse(str(path), format="turtle")
+    logger.info(f"Grafo carregado: {len(g)} triplas de {path}")
     return g
+
+
+def resolve_graph_path() -> Path:
+    env_path = os.environ.get("PINAKES_GRAPH_PATH")
+    if env_path:
+        explicit = Path(env_path)
+        if explicit.exists():
+            return explicit
+        logger.warning("PINAKES_GRAPH_PATH configurado, mas arquivo não existe: %s", explicit)
+
+    if DEFAULT_GRAPH_PATH.exists():
+        return DEFAULT_GRAPH_PATH
+    return FALLBACK_GRAPH_PATH
+
+
+def refresh_graph_from_sources(output_path: Path = DEFAULT_GRAPH_PATH) -> tuple[int, int]:
+    """
+    Atualiza o grafo enriquecido a partir dos coletores (APIs/cache/fallback).
+    Retorna (documentos, triplas).
+    """
+    from src.curation.pipeline import run_pipeline
+    from src.graph.graph_builder import build_graph as build_enriched_graph
+
+    docs = run_pipeline()
+    graph = build_enriched_graph(docs)
+    graph.serialize(str(output_path), format="turtle")
+    return len(docs), len(graph)
 
 
 # ─── SPARQL: recuperação semântica ────────────────────────────────────────────
@@ -59,13 +102,37 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT DISTINCT ?work ?titulo ?resumo ?ano ?tipo ?autores ?keywords ?acesso
 WHERE {{
-  ?work dc:title ?titulo .
+  ?work a bibo:Document .
+  {{
+    ?work dc:title ?titulo .
+  }} UNION {{
+    ?work dcterms:title ?titulo .
+  }}
   OPTIONAL {{ ?work dcterms:abstract ?resumo . }}
-  OPTIONAL {{ ?work dc:date         ?ano . }}
+  OPTIONAL {{
+    {{
+      ?work dc:date ?ano .
+    }} UNION {{
+      ?work dcterms:issued ?ano .
+    }}
+  }}
   OPTIONAL {{ ?work a               ?tipo . FILTER(?tipo != <http://www.w3.org/2002/07/owl#Thing>) }}
-  OPTIONAL {{ ?work dc:creator      ?autor .
-              ?autor foaf:name      ?autores . }}
-  OPTIONAL {{ ?work schema:keywords ?keywords . }}
+  OPTIONAL {{
+    {{
+      ?work dc:creator ?autor .
+    }} UNION {{
+      ?work dcterms:creator ?autor .
+    }}
+    OPTIONAL {{ ?autor foaf:name ?autorNome . }}
+    BIND(COALESCE(?autorNome, ?autor) AS ?autores)
+  }}
+  OPTIONAL {{
+    {{
+      ?work schema:keywords ?keywords .
+    }} UNION {{
+      ?work dcterms:subject ?keywords .
+    }}
+  }}
   OPTIONAL {{ ?work dcterms:accessRights ?acesso . }}
   OPTIONAL {{ ?work pinakes:ragText ?ragText . }}
 
@@ -79,38 +146,168 @@ WHERE {{
 LIMIT {limit}
 """
 
+SPARQL_BROWSE_TEMPLATE = """
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX bibo:    <http://purl.org/ontology/bibo/>
+PREFIX foaf:    <http://xmlns.com/foaf/0.1/>
+PREFIX pinakes: <https://pinakes.ibict.br/ontology/>
+PREFIX schema:  <https://schema.org/>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?work ?titulo ?resumo ?ano ?tipo ?autores ?keywords ?acesso
+WHERE {{
+  ?work a bibo:Document .
+  {{
+    ?work dc:title ?titulo .
+  }} UNION {{
+    ?work dcterms:title ?titulo .
+  }}
+  OPTIONAL {{ ?work dcterms:abstract ?resumo . }}
+  OPTIONAL {{
+    {{
+      ?work dc:date ?ano .
+    }} UNION {{
+      ?work dcterms:issued ?ano .
+    }}
+  }}
+  OPTIONAL {{ ?work a               ?tipo . FILTER(?tipo != <http://www.w3.org/2002/07/owl#Thing>) }}
+  OPTIONAL {{
+    {{
+      ?work dc:creator ?autor .
+    }} UNION {{
+      ?work dcterms:creator ?autor .
+    }}
+    OPTIONAL {{ ?autor foaf:name ?autorNome . }}
+    BIND(COALESCE(?autorNome, ?autor) AS ?autores)
+  }}
+  OPTIONAL {{
+    {{
+      ?work schema:keywords ?keywords .
+    }} UNION {{
+      ?work dcterms:subject ?keywords .
+    }}
+  }}
+  OPTIONAL {{ ?work dcterms:accessRights ?acesso . }}
+  OPTIONAL {{ ?work pinakes:ragText ?ragText . }}
+}}
+LIMIT {limit}
+"""
+
+def _row_to_result(row) -> dict:
+    return {
+        "uri":      str(row.work),
+        "titulo":   str(row.titulo)   if row.titulo   else "—",
+        "resumo":   str(row.resumo)   if row.resumo   else "",
+        "ano":      str(row.ano)      if row.ano      else "s/d",
+        "tipo":     str(row.tipo)     if row.tipo     else "",
+        "autores":  str(row.autores)  if row.autores  else "Desconhecido",
+        "keywords": str(row.keywords) if row.keywords else "",
+        "acesso":   str(row.acesso)   if row.acesso   else "—",
+    }
+
+
+def _result_score(result: dict, tokens: list[str]) -> tuple[int, int]:
+    text = " ".join(
+        [
+            str(result.get("titulo", "")),
+            str(result.get("resumo", "")),
+            str(result.get("keywords", "")),
+            str(result.get("acesso", "")),
+            str(result.get("tipo", "")),
+        ]
+    )
+    normalized = _normalize_term(text)
+    token_hits = sum(1 for token in tokens if token in normalized)
+    year_match = re.search(r"\d{4}", str(result.get("ano", "")))
+    year_value = int(year_match.group(0)) if year_match else 0
+    return token_hits, year_value
+
+
+def _broaden_results(
+    g: Graph,
+    seen_uris: set[str],
+    seen_titles: set[str],
+    top_k: int,
+    tokens: list[str],
+) -> list[dict]:
+    broaden_limit = max(30, top_k * 10)
+    query = SPARQL_BROWSE_TEMPLATE.format(limit=broaden_limit)
+    fallback_pool = []
+    for row in g.query(query):
+        item = _row_to_result(row)
+        title_key = _normalize_term(item.get("titulo", ""))
+        if item["uri"] in seen_uris or title_key in seen_titles:
+            continue
+        fallback_pool.append(item)
+
+    fallback_pool.sort(key=lambda item: _result_score(item, tokens), reverse=True)
+    return fallback_pool
+
+
 def sparql_retrieve(g: Graph, query: str, top_k: int = TOP_K_RESULTS) -> list[dict]:
     """Executa busca SPARQL no grafo local e retorna lista de resultados."""
-    # Tokenização básica: busca por cada palavra com ≥ 4 chars
-    tokens = [t for t in re.split(r"\s+", query.strip()) if len(t) >= 4]
+    tokens = _query_tokens(query)
     if not tokens:
         tokens = [query.strip()[:40]]
 
-    seen, results = set(), []
-    for token in tokens[:4]:   # limita para não explodir a query
+    seen_uris, seen_titles, results = set(), set(), []
+    for token in tokens[:TOKEN_LIMIT]:
         sparql = SPARQL_TEMPLATE.format(
             query=token.replace('"', '').replace("'", ""),
             limit=top_k * 2,
         )
         try:
             for row in g.query(sparql):
-                work_uri = str(row.work)
-                if work_uri not in seen:
-                    seen.add(work_uri)
-                    results.append({
-                        "uri":      work_uri,
-                        "titulo":   str(row.titulo)   if row.titulo   else "—",
-                        "resumo":   str(row.resumo)   if row.resumo   else "",
-                        "ano":      str(row.ano)       if row.ano      else "s/d",
-                        "tipo":     str(row.tipo)      if row.tipo     else "",
-                        "autores":  str(row.autores)   if row.autores  else "Desconhecido",
-                        "keywords": str(row.keywords)  if row.keywords else "",
-                        "acesso":   str(row.acesso)    if row.acesso   else "—",
-                    })
+                item = _row_to_result(row)
+                work_uri = item["uri"]
+                title_key = _normalize_term(item.get("titulo", ""))
+                if work_uri in seen_uris or title_key in seen_titles:
+                    continue
+                seen_uris.add(work_uri)
+                seen_titles.add(title_key)
+                results.append(item)
         except Exception as exc:
             logger.warning(f"Erro SPARQL para token '{token}': {exc}")
 
+    if len(results) < top_k:
+        broadened = _broaden_results(g, seen_uris, seen_titles, top_k, tokens)
+        for item in broadened:
+            if len(results) >= top_k:
+                break
+            title_key = _normalize_term(item.get("titulo", ""))
+            if item["uri"] in seen_uris or title_key in seen_titles:
+                continue
+            seen_uris.add(item["uri"])
+            seen_titles.add(title_key)
+            results.append(item)
+
     return results[:top_k]
+
+
+def _normalize_term(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value)
+    normalized = normalized.encode("ascii", "ignore").decode("ascii")
+    return normalized.lower().strip()
+
+
+def _query_tokens(query: str) -> list[str]:
+    terms = []
+    seen = set()
+    for raw in re.split(r"[^\w]+", query.strip()):
+        if not raw:
+            continue
+        token = _normalize_term(raw)
+        if len(token) < 4 or token in STOPWORDS_PT:
+            continue
+        if token in seen:
+            continue
+        seen.add(token)
+        terms.append(token)
+
+    priority = [term for term in terms if term in PRIORITY_TERMS]
+    regular = [term for term in terms if term not in PRIORITY_TERMS]
+    return priority + regular
 
 
 # ─── Groq: geração aumentada ──────────────────────────────────────────────────
@@ -135,7 +332,73 @@ com foco no ecossistema Pinakes/BrCris do IBICT. Responda **em português**, de 
 precisa, clara e acadêmica. Use exclusivamente o contexto semântico fornecido (recuperado
 por SPARQL de um grafo RDF Turtle com ontologias BIBO/DC/FOAF/VIVO). Se a informação não
 constar no contexto, diga explicitamente. Respeite as diretrizes FAIR e LGPD ao tratar
-dados de pesquisa. Cite os documentos recuperados pelos seus títulos."""
+dados de pesquisa. Não invente DOI, URI, título ou percentual: use apenas os valores que
+aparecem no contexto fornecido."""
+
+
+def build_governance_context(compliance: dict, governance: dict, analytics: dict) -> str:
+    lines = [f"Documentos avaliados: {compliance.get('documents', 0)}"]
+    for score in compliance.get("scores", []):
+        pct = int(float(score.get("coverage", 0)) * 100)
+        lines.append(f"{score.get('pillar')}: {pct}%")
+    lines.append(f"DCTERMS.source cobertura: {int(governance.get('source_coverage', 0) * 100)}%")
+    lines.append(f"PROV.wasGeneratedBy cobertura: {int(governance.get('prov_coverage', 0) * 100)}%")
+    lines.append(f"LGPD base legal cobertura: {int(governance.get('lgpd_coverage', 0) * 100)}%")
+    lines.append(f"Acesso aberto: {int(analytics.get('open_access_ratio', 0) * 100)}%")
+    return "\n".join(lines)
+
+
+def is_governance_query(query: str) -> bool:
+    tokens = _query_tokens(query)
+    return any(token in GOVERNANCE_QUERY_TERMS for token in tokens)
+
+
+def deterministic_governance_answer(
+    compliance: dict,
+    governance: dict,
+    analytics: dict,
+    results: list[dict],
+) -> str:
+    score_map = {
+        score.get("pillar"): int(float(score.get("coverage", 0)) * 100)
+        for score in compliance.get("scores", [])
+    }
+    fair_parts = [
+        f"Findable {score_map.get('FAIR_FINDABLE', 0)}%",
+        f"Accessible {score_map.get('FAIR_ACCESSIBLE', 0)}%",
+        f"Interoperable {score_map.get('FAIR_INTEROPERABLE', 0)}%",
+        f"Reusable {score_map.get('FAIR_REUSABLE', 0)}%",
+    ]
+    care_parts = [
+        f"Collective {score_map.get('CARE_COLLECTIVE', 0)}%",
+        f"Authority {score_map.get('CARE_AUTHORITY', 0)}%",
+        f"Responsibility {score_map.get('CARE_RESPONSIBILITY', 0)}%",
+    ]
+
+    sources_cov = int(governance.get("source_coverage", 0) * 100)
+    prov_cov = int(governance.get("prov_coverage", 0) * 100)
+    lgpd_cov = int(governance.get("lgpd_coverage", 0) * 100)
+    open_access = int(analytics.get("open_access_ratio", 0) * 100)
+    deia_cov = int(analytics.get("deia_coverage", 0) * 100)
+    total_docs = int(compliance.get("documents", 0))
+
+    doc_titles = []
+    for row in results:
+        title = str(row.get("titulo") or "").strip()
+        if title and title not in doc_titles:
+            doc_titles.append(title)
+    cited = "; ".join(doc_titles[:3]) if doc_titles else "Nenhum documento específico recuperado nesta consulta."
+
+    return (
+        f"O grafo Pinakes avalia {total_docs} documentos com cobertura FAIR de "
+        f"{', '.join(fair_parts)}.\n\n"
+        f"No bloco CARE implementado no validador atual, as coberturas são: {', '.join(care_parts)}. "
+        "A dimensão CARE Ethics não aparece como pilar separado neste relatório.\n\n"
+        f"Indicadores de governança/proveniência: DCTERMS.source {sources_cov}%, "
+        f"PROV.wasGeneratedBy {prov_cov}%, base legal LGPD {lgpd_cov}%, acesso aberto {open_access}%.\n\n"
+        f"Observação: a cobertura DEIA calculada está em {deia_cov}% no grafo atual.\n\n"
+        f"Documentos recuperados nesta resposta: {cited}."
+    )
 
 
 def groq_generate(client: Groq, user_query: str, context: str) -> str:
@@ -180,7 +443,7 @@ def get_groq_api_key() -> str:
 
 
 # ─── UI ───────────────────────────────────────────────────────────────────────
-def render_sidebar(graph: Graph) -> tuple[Groq | None, int]:
+def render_sidebar(graph: Graph, active_graph_path: Path) -> tuple[Groq | None, int]:
     st.sidebar.image(
         "https://www.ibict.br/images/ibict-logo.png",
         width=120,
@@ -210,9 +473,21 @@ def render_sidebar(graph: Graph) -> tuple[Groq | None, int]:
     # Top-K
     top_k = st.sidebar.slider("🎯 Documentos recuperados (top-k)", 1, 10, TOP_K_RESULTS)
 
+    if st.sidebar.button("🔄 Atualizar grafo via APIs/cache", use_container_width=True):
+        with st.sidebar:
+            with st.spinner("Atualizando fontes e regenerando grafo..."):
+                try:
+                    docs_count, triple_count = refresh_graph_from_sources(DEFAULT_GRAPH_PATH)
+                    st.cache_resource.clear()
+                    st.success(f"Grafo atualizado: {docs_count} registros, {triple_count} triplas.")
+                    st.rerun()
+                except Exception as exc:
+                    st.error(f"Falha ao atualizar grafo: {exc}")
+
     # Info do grafo
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"**📊 Grafo RDF**  \n`{len(graph)}` triplas carregadas")
+    st.sidebar.markdown(f"**Arquivo ativo:** `{active_graph_path}`")
     st.sidebar.markdown(
         "**Stack:** RDFLib · SPARQL · Groq Llama 3.3 70B · Streamlit  \n"
         "**Ontologias:** BIBO · DC · FOAF · VIVO · PROV-O  \n"
@@ -226,10 +501,11 @@ def render_sidebar(graph: Graph) -> tuple[Groq | None, int]:
     return client, top_k
 
 
-def render_results(results: list[dict]):
+def render_results(results: list[dict], top_k: int):
     if not results:
         st.info("Nenhum documento encontrado no grafo para esta consulta.")
         return
+    st.caption(f"Top-k configurado: {top_k}")
     st.markdown(f"**{len(results)} documento(s) recuperado(s) via SPARQL:**")
     for r in results:
         with st.expander(f"📄 {r['titulo']} ({r['ano']})", expanded=False):
@@ -264,8 +540,10 @@ def main():
     st.divider()
 
     # Carrega o grafo e renderiza a sidebar
-    graph  = load_graph()
-    client, top_k = render_sidebar(graph)
+    graph_path = resolve_graph_path()
+    graph_mtime = graph_path.stat().st_mtime if graph_path.exists() else None
+    graph  = load_graph(str(graph_path), graph_mtime)
+    client, top_k = render_sidebar(graph, graph_path)
 
     # Histórico de chat
     if "messages" not in st.session_state:
@@ -275,8 +553,27 @@ def main():
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Input
-    user_query = st.chat_input("💬 Faça uma pergunta sobre as pesquisas do Pinakes…")
+    # Input: suporta campo com botão "Buscar" e chat_input.
+    user_query = None
+    with st.form("search_form", clear_on_submit=False):
+        query_text = st.text_input(
+            "🔎 Consulta",
+            value="",
+            placeholder="Faça uma pergunta sobre as pesquisas do Pinakes…",
+        )
+        submitted = st.form_submit_button("Buscar")
+
+    if submitted:
+        typed_query = (query_text or "").strip()
+        if typed_query:
+            user_query = typed_query
+        else:
+            st.warning("Digite uma pergunta antes de buscar.")
+
+    if user_query is None:
+        chat_query = st.chat_input("💬 Faça uma pergunta sobre as pesquisas do Pinakes…")
+        if chat_query:
+            user_query = chat_query.strip()
 
     if user_query:
         st.session_state.messages.append({"role": "user", "content": user_query})
@@ -301,7 +598,7 @@ def main():
             )
 
             with tab_docs:
-                render_results(results)
+                render_results(results, top_k)
 
             with tab_governance:
                 st.markdown(f"**Documentos avaliados:** {compliance['documents']}")
@@ -358,10 +655,22 @@ def main():
                     st.success("Todos os registros contam com tags DEIA.")
 
             with tab_resp:
-                if not client:
+                if is_governance_query(user_query):
+                    answer = deterministic_governance_answer(compliance, governance, analytics, results)
+                    st.markdown(answer)
+                    st.caption("Resposta calculada diretamente a partir dos indicadores do grafo local.")
+                    st.session_state.messages.append(
+                        {"role": "assistant", "content": answer}
+                    )
+                elif not client:
                     st.warning("Configure a Groq API Key na sidebar para gerar respostas.")
                 else:
-                    context = build_context(results)
+                    docs_context = build_context(results)
+                    governance_context = build_governance_context(compliance, governance, analytics)
+                    context = (
+                        f"{docs_context}\n\n"
+                        f"[Indicadores FAIR/CARE/LGPD do grafo]\n{governance_context}"
+                    )
                     with st.spinner("🤖 Gerando resposta com Llama 3.3 70B…"):
                         try:
                             t0 = time.time()
