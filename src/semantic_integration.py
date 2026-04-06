@@ -275,7 +275,7 @@ def build_graph(raw_data: list, source_file: str = "raw_data.json") -> Graph:
         try:
             map_work(g, item, prov_activity)
         except Exception as exc:
-            print(f"  [AVISO] Erro ao processar item {item.get('id','?')}: {exc}")
+            print(f"  [AVISO] Erro ao processar item {item.get('id','[build]')}: {exc}")
 
     print(f"  ✅ Grafo gerado: {len(g)} triplas | {len(items)} itens processados")
     return g

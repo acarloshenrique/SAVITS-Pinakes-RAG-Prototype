@@ -3,3 +3,4 @@ __pycache__/
 *.pyo
 *.pyd
 .env
+pinakes_graph_enriched.ttl

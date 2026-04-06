@@ -108,4 +108,6 @@ def normalize_record(record: Dict[str, Any]) -> Dict[str, Any]:
     normalized["lgpd_legal_basis"] = record.get("base_legal_lgpd") or ("Consentimento" if has_personal_data else "Art. 7º, IV")
     normalized["processed_at"] = datetime.utcnow().isoformat()
     normalized["source"] = record.get("source") or "openalex"
+    normalized["source_reference"] = record.get("source_uri") or record.get("fonte") or normalized["source"]
+    normalized["provenance_uri"] = record.get("prov_generated_by") or f"https://pinakes.ibict.br/activity/{normalized['id']}"
     return normalized

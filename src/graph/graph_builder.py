@@ -8,6 +8,7 @@ from rdflib.namespace import DCTERMS, FOAF, RDF
 SCHEMA = Namespace("https://schema.org/")
 PINAKES = Namespace("https://pinakes.ibict.br/ontology/")
 BIBO = Namespace("http://purl.org/ontology/bibo/")
+PROV = Namespace("http://www.w3.org/ns/prov#")
 EX = Namespace("http://example.org/")
 
 
@@ -60,6 +61,8 @@ def build_graph(records):
             g.add((doc, DCTERMS.accessRights, Literal(record["access"])))
         if record.get("license"):
             g.add((doc, DCTERMS.license, URIRef(record["license"])))
+        if record.get("source_reference"):
+            g.add((doc, DCTERMS.source, Literal(record["source_reference"])))
 
         for keyword in record.get("keywords", []):
             g.add((doc, DCTERMS.subject, Literal(keyword, lang="pt")))
@@ -76,6 +79,14 @@ def build_graph(records):
         g.add((doc, PINAKES.statusLGPD, Literal(record.get("lgpd_status", "Desconhecido"))))
         g.add((doc, PINAKES.baseLegalLGPD, Literal(record.get("lgpd_legal_basis", "N/A"))))
         g.add((doc, PINAKES.dataProcessamento, Literal(record.get("processed_at"))))
+
+        activity_uri = URIRef(
+            _encode_http_uri(record.get("provenance_uri") or f"https://pinakes.ibict.br/activity/{record['id']}")
+        )
+        g.add((activity_uri, RDF.type, PROV.Activity))
+        g.add((doc, PROV.wasGeneratedBy, activity_uri))
+        if record.get("source_reference"):
+            g.add((activity_uri, DCTERMS.source, Literal(record["source_reference"])))
 
         for author in record.get("authors", []):
             name = author.get("name", "").replace(" ", "_") or "autor_desconhecido"
