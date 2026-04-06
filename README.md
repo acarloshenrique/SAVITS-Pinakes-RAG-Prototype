@@ -10,8 +10,6 @@ colorTo: indigo
 
 sdk: docker
 
-sdk\_version: "1.35.0"
-
 app\_file: app.py
 
 pinned: false
@@ -38,8 +36,8 @@ short\_description: short\_description: RAG semântico com RDFLib + SPARQL + Gro
 
 # 🔍 SAVITS Pinakes RAG Prototype
 
-> \\\*\\\*PoC de Arquitetura Semântica e RAG\\\*\\\* para o ecossistema Pinakes/BrCris (IBICT),  
-> com foco em governança de dados \\\*\\\*FAIR\\\*\\\* e \\\*\\\*LGPD\\\*\\\*.
+> \\\\\\\*\\\\\\\*PoC de Arquitetura Semântica e RAG\\\\\\\*\\\\\\\* para o ecossistema Pinakes/BrCris (IBICT),  
+> com foco em governança de dados \\\\\\\*\\\\\\\*FAIR\\\\\\\*\\\\\\\* e \\\\\\\*\\\\\\\*LGPD\\\\\\\*\\\\\\\*.
 
 [!\[Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://python.org)
 [!\[Streamlit](https://img.shields.io/badge/Streamlit-1.35-red?logo=streamlit)](https://streamlit.io)
@@ -72,8 +70,8 @@ Neste Hugging Face Space, a chave é configurada como **Secret**:
 
 ```
 Configurações do Space → Variables and Secrets → New Secret
-Nome: GROQ\\\_API\\\_KEY
-Valor: gsk\\\_xxxxxxxxxxxxxxxxxx
+Nome: GROQ\\\\\\\_API\\\\\\\_KEY
+Valor: gsk\\\\\\\_xxxxxxxxxxxxxxxxxx
 ```
 
 Obtenha sua chave gratuitamente em [console.groq.com](https://console.groq.com).
@@ -97,11 +95,11 @@ O sistema irá:
 ## 🏗️ Arquitetura
 
 ```
-raw\\\_data.json
+raw\\\\\\\_data.json
      │
-     ▼ semantic\\\_integration.py (RDFLib)
+     ▼ semantic\\\\\\\_integration.py (RDFLib)
      │
-pinakes\\\_graph.ttl  ──► SPARQL Query ──► Contexto
+pinakes\\\\\\\_graph.ttl  ──► SPARQL Query ──► Contexto
                                              │
                                              ▼
                               Groq API (Llama 3.3 70B)
@@ -127,14 +125,14 @@ pinakes\\\_graph.ttl  ──► SPARQL Query ──► Contexto
 ```
 SAVITS-Pinakes-RAG-Prototype/
 ├── app.py                      # Interface Streamlit (HF Spaces)
-├── pinakes\\\_graph.ttl           # Grafo RDF gerado (versionado)
+├── pinakes\\\\\\\_graph.ttl           # Grafo RDF gerado (versionado)
 ├── requirements.txt            # Dependências Python
 ├── README.md                   # Este arquivo
 ├── data/
-│   └── raw\\\_data.json           # Dados brutos de entrada
+│   └── raw\\\\\\\_data.json           # Dados brutos de entrada
 └── src/
-    ├── \\\_\\\_init\\\_\\\_.py
-    └── semantic\\\_integration.py # Geração do grafo TTL
+    ├── \\\\\\\_\\\\\\\_init\\\\\\\_\\\\\\\_.py
+    └── semantic\\\\\\\_integration.py # Geração do grafo TTL
 ```
 
 \---
@@ -150,10 +148,10 @@ cd SAVITS-Pinakes-RAG-Prototype
 pip install -r requirements.txt
 
 # 3. Gere o grafo RDF a partir dos dados brutos
-python src/semantic\\\_integration.py --input data/raw\\\_data.json --output pinakes\\\_graph.ttl
+python src/semantic\\\\\\\_integration.py --input data/raw\\\\\\\_data.json --output pinakes\\\\\\\_graph.ttl
 
 # 4. Configure a API Key (local)
-export GROQ\\\_API\\\_KEY="gsk\\\_sua\\\_chave\\\_aqui"
+export GROQ\\\\\\\_API\\\\\\\_KEY="gsk\\\\\\\_sua\\\\\\\_chave\\\\\\\_aqui"
 
 # 5. Execute o app
 streamlit run app.py
