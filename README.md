@@ -8,31 +8,21 @@ colorFrom: blue
 
 colorTo: indigo
 
-sdk: docker
+sdk: streamlit
+
+sdk\_version: "1.35.0"
+
+python\_version: "3.10"
 
 app\_file: app.py
 
 pinned: false
 
-\---license: mit
-tags:
+license: mit
 
-* rag
-* semantic-web
-* rdflib
-* sparql
-* groq
-* llama
-* knowledge-graph
-* fair-data
-* lgpd
-* ibict
-* pinakes
-* brcris
-* python
-short\_description: short\_description: RAG semântico com RDFLib + SPARQL + Groq para Pinakes/BrCris
+short\_description: Semantic GraphRAG for Pinakes research data
 
-\---
+\------
 
 # 🔍 SAVITS Pinakes RAG Prototype
 
