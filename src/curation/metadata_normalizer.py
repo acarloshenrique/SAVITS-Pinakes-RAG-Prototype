@@ -1,22 +1,26 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
+from src.ontology.ontology_mapper import (
+    ensure_deia_annotation,
+    infer_lgpd_legal_basis,
+    normalize_impact_labels,
+)
+
 DEFAULT_LICENSE = "https://creativecommons.org/licenses/by/4.0/"
 DEFAULT_ACCESS_RIGHTS = "aberto"
+DEFAULT_IMPACT = ["Ciencia da Informacao"]
 
 
 def _slugify(value: str) -> str:
+    value = unicodedata.normalize("NFKD", value)
+    value = value.encode("ascii", "ignore").decode("ascii")
     value = value.lower().strip()
-    value = re.sub(r"[áàãâä]", "a", value)
-    value = re.sub(r"[éèêë]", "e", value)
-    value = re.sub(r"[íìîï]", "i", value)
-    value = re.sub(r"[óòõôö]", "o", value)
-    value = re.sub(r"[úùûü]", "u", value)
-    value = re.sub(r"[ç]", "c", value)
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-")
 
@@ -101,13 +105,14 @@ def normalize_record(record: Dict[str, Any]) -> Dict[str, Any]:
     normalized["keywords"] = _ensure_keywords(record)
     normalized["access"] = record.get("acesso") or DEFAULT_ACCESS_RIGHTS
     normalized["license"] = record.get("licenca") or DEFAULT_LICENSE
-    normalized["impact_area"] = record.get("impact_area") or record.get("areas_cnpq") or ["Ciência da Informação"]
-    normalized["maturity_level"] = record.get("maturity_level") or "Pesquisa exploratória"
+    normalized["impact_area"] = normalize_impact_labels(record.get("impact_area") or record.get("areas_cnpq") or DEFAULT_IMPACT)
+    normalized["maturity_level"] = record.get("maturity_level") or "Pesquisa exploratoria"
     has_personal_data = bool(record.get("dados_pessoais"))
     normalized["lgpd_status"] = "Controlado" if has_personal_data else "Anonimizado"
-    normalized["lgpd_legal_basis"] = record.get("base_legal_lgpd") or ("Consentimento" if has_personal_data else "Art. 7º, IV")
+    normalized["lgpd_legal_basis"] = infer_lgpd_legal_basis(has_personal_data, record.get("base_legal_lgpd"))
     normalized["processed_at"] = datetime.utcnow().isoformat()
     normalized["source"] = record.get("source") or "openalex"
-    normalized["source_reference"] = record.get("source_uri") or record.get("fonte") or normalized["source"]
+    normalized["source_reference"] = record.get("source_uri") or record.get("fonte") or record.get("url") or normalized["source"]
     normalized["provenance_uri"] = record.get("prov_generated_by") or f"https://pinakes.ibict.br/activity/{normalized['id']}"
-    return normalized
+    return ensure_deia_annotation(normalized)
+

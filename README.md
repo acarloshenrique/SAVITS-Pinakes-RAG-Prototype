@@ -14,21 +14,58 @@ short_description: Semantic GraphRAG for Pinakes research data
 
 # SAVITS Pinakes RAG
 
-Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem.
+Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem with FAIR/CARE/DEIA governance.
 
-## Destaques recentes
+## Novidades principais
 
-- **Governança FAIR/CARE integrada**: o app Streamlit agora executa validações automáticas (Findable, Accessible, Interoperable, Reusable + CARE) via `src/governance/fair_validator.py`, exibindo alertas diretamente na aba “Governança” e permitindo que a equipe corrija metadados antes das respostas RAG.
-- **Curadoria bibliotecária reforçada**: o pipeline (`src/curation`) normaliza autores, ORCID, licenças, direitos de acesso e gera identificadores dARK para cada obra, alinhado às exigências do edital SAVITS para o perfil de bibliotecário de dados.
-- **Grafos enriquecidos**: `src/graph/graph_builder.py` escreve triplas com licenças, LGPD, impactos sociais e afiliações FOAF/Schema.org, garantindo interoperabilidade com Pinakes/BrCris.
+- **Coletores reais + fallback seguro** (`src/ingestion`)  
+  Os conectores de BrCris, Oasisbr, BDTD e OpenAlex agora tentam consumir APIs oficiais (com suporte a `BRCRIS_API_TOKEN`, `OASISBR_API_URL`, etc.) e retrocedem para o dataset curado `data/raw_data.json` quando não houver rede, garantindo demos off-line.
+- **Curadoria LGPD/DEIA completa** (`src/curation/metadata_normalizer.py`, `src/ontology/ontology_mapper.py`)  
+  Todos os registros recebem `ark:/13030/savits-*`, `DCTERMS.source`, base legal LGPD inferida e tags DEIA automáticas, eliminando os avisos FAIR_FINDABLE/FAIR_REUSABLE.
+- **Analytics e governança visuais** (`app.py`, `src/analytics`, `src/governance/provenance_tracker.py`)  
+  A aba “Analytics LGPD/DEIA” exibe cobertura de acesso aberto, impacto social, fontes DCTERMS e lacunas DEIA, enquanto a aba de Governança mostra métricas PROV/DCTERMS e alertas detalhados.
+- **Pipeline automatizado** (`build_all.cmd`, `.github/workflows/ci.yml`)  
+  O comando único executa ingestão → grafo → validação FAIR → `pytest`, com `PYTHONIOENCODING` forçado para evitar problemas de encoding e com execução contínua no GitHub Actions (Node 24-ready).
+- **Perguntas de avaliação prontas** (`docs/chat_eval_prompts.md`)  
+  Roteiro oficial para a banca testar o chat e comprovar aderência ao edital SAVITS.
 
-## Fluxo de trabalho recomendado
+## Como executar localmente
 
-1. `python build_graph.py` – executa o pipeline de ingestão/curadoria (OpenAlex → metadados FAIR/CARE) e gera `pinakes_graph.ttl` enriquecido.
-2. `streamlit run app.py` – carrega o grafo, disponibiliza busca SPARQL + Groq e apresenta o painel de governança.
-3. Opcional: `python -m src.governance.fair_validator pinakes_graph.ttl` – produz relatório JSON utilizável em CI para comprovar aderência ao edital.
+1. **Gerar grafos e validar FAIR/CARE**  
+   - Windows: `build_all.cmd` (configura `PYTHONIOENCODING`, recria TTLs, executa validações e testes).  
+   - Multi-plataforma:  
+     ```bash
+     export PYTHONIOENCODING=utf-8
+     python build_graph.py
+     python -m src.governance.fair_validator pinakes_graph.ttl > reports/governance_report.json
+     pytest
+     ```
+2. **Executar a interface Streamlit**  
+   ```bash
+   streamlit run app.py
+   ```
+3. **Reexecutar apenas o grafo sem Streamlit**  
+   ```bash
+   python src/semantic_integration.py --input data/raw_data.json --output pinakes_graph.ttl
+   ```
 
-## Próximos passos sugeridos
+## Testes
 
-- Conectar coletores adicionais (BrCris, Oasisbr, BDTD) via `src/ingestion`.
-- Completar os módulos `analytics/`, `governance/` e `ontology/` com métricas e validadores específicos de LGPD/DEIA.
+- Suite mínima em `tests/` cobrindo curadoria LGPD/DEIA e indicadores de governança (`pytest`).
+- Relatório FAIR/CARE automatizado em `reports/governance_report.json`.
+
+## Deploy contínuo
+
+1. **GitHub**  
+   - Configure o remote `origin` conforme o repo [`acarloshenrique/SAVITS-Pinakes-RAG-Prototype`](https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype).  
+   - `git add . && git commit -m "feat: governance analytics"`  
+   - `git push origin main` (aciona o workflow `ci.yml`).
+2. **Hugging Face Spaces**  
+   - `huggingface-cli login`  
+   - `huggingface-cli repo create acarloshenrique/SAVITS-Pinakes-RAG --type space --sdk streamlit` (uma vez).  
+   - `huggingface-cli upload ./app.py` e dependências ou `git push` para o repo Space.  
+   - Configure `GROQ_API_KEY` como Secret no Space.
+
+## Roteiro de perguntas para a banca
+
+Consulte `docs/chat_eval_prompts.md` para um conjunto de 7 prompts que cobrem FAIR, LGPD, impacto social e DEIA.

@@ -14,7 +14,9 @@ import streamlit as st
 from rdflib import Graph
 from groq import Groq
 
+from src.analytics.bibliometrics import compute_graph_kpis, detect_deia_gaps
 from src.governance.fair_validator import evaluate_graph
+from src.governance.provenance_tracker import governance_indicators
 # ─── Configuração de logging ──────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -286,8 +288,16 @@ def main():
                 results = sparql_retrieve(graph, user_query, top_k)
 
             compliance = evaluate_graph(graph)
-            tab_resp, tab_docs, tab_governance = st.tabs(
-                ["💬 Resposta RAG", "📚 Documentos Recuperados", "⚖️ Governança FAIR/CARE"]
+            governance = governance_indicators(graph)
+            analytics = compute_graph_kpis(graph)
+            deia_gaps = detect_deia_gaps(graph)
+            tab_resp, tab_docs, tab_governance, tab_analytics = st.tabs(
+                [
+                    "💬 Resposta RAG",
+                    "📚 Documentos Recuperados",
+                    "⚖️ Governança FAIR/CARE",
+                    "📈 Analytics LGPD/DEIA",
+                ]
             )
 
             with tab_docs:
@@ -302,12 +312,50 @@ def main():
                         pct = score["coverage"]
                         st.metric(score["pillar"], f"{int(pct * 100)}%", delta=None)
                         st.progress(pct)
+                prov_cols = st.columns(3)
+                prov_cols[0].metric("DCTERMS.source", f"{int(governance['source_coverage'] * 100)}%")
+                prov_cols[1].metric("PROV.wasGeneratedBy", f"{int(governance['prov_coverage'] * 100)}%")
+                prov_cols[2].metric("LGPD base legal", f"{int(governance['lgpd_coverage'] * 100)}%")
                 if compliance["issues"]:
                     st.divider()
                     for issue in compliance["issues"]:
                         st.warning(f"[{issue['pillar']}] {issue['resource']}: {issue['detail']}")
                 else:
                     st.success("Nenhum alerta de governança encontrado no grafo atual.")
+                missing = governance["provenance"]
+                if any(missing.values()):
+                    st.info(
+                        "Recursos sem metadados: "
+                        + ", ".join(
+                            f"{label}: {len(entries)}"
+                            for label, entries in missing.items()
+                            if entries
+                        )
+                    )
+
+            with tab_analytics:
+                st.metric("Documentos no grafo", analytics["total_documents"])
+                metrics_cols = st.columns(3)
+                metrics_cols[0].metric("Acesso aberto", f"{int(analytics['open_access_ratio'] * 100)}%")
+                metrics_cols[1].metric("Impacto social", f"{int(analytics['impact_coverage'] * 100)}%")
+                metrics_cols[2].metric("Cobertura DEIA", f"{int(analytics['deia_coverage'] * 100)}%")
+                lgpd_cols = st.columns(2)
+                lgpd_cols[0].metric("LGPD pronto", f"{int(analytics['lgpd_compliance'] * 100)}%")
+                lgpd_cols[1].metric("Fontes distintas", len(analytics["sources"]))
+                st.subheader("Principais fontes (DCTERMS.source)")
+                if analytics["sources"]:
+                    st.table(analytics["sources"])
+                else:
+                    st.write("Sem fontes declaradas nas triplas.")
+                st.subheader("Top keywords")
+                if analytics["top_keywords"]:
+                    st.table(analytics["top_keywords"])
+                else:
+                    st.write("Sem palavras-chave indexadas.")
+                if deia_gaps:
+                    st.warning(f"{len(deia_gaps)} registro(s) sem anotações DEIA. Exemplos: {', '.join(deia_gaps[:3])}")
+                else:
+                    st.success("Todos os registros contam com tags DEIA.")
 
             with tab_resp:
                 if not client:
