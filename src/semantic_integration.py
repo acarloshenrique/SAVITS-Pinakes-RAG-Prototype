@@ -199,9 +199,12 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
     # LGPD – dados sensíveis
     dados_pessoais = item.get("dados_pessoais", False)
     g.add((work_uri, PINAKES.contemDadosPessoais, Literal(dados_pessoais, datatype=XSD.boolean)))
-    if dados_pessoais:
-        base_legal = item.get("base_legal_lgpd", "Consentimento")
-        g.add((work_uri, PINAKES.baseLegalLGPD, Literal(base_legal)))
+    status_lgpd = item.get("status_lgpd") or ("Controlado" if dados_pessoais else "Anonimizado")
+    g.add((work_uri, PINAKES.statusLGPD, Literal(status_lgpd)))
+    base_legal = item.get("base_legal_lgpd")
+    if not base_legal:
+        base_legal = "Interesse público em pesquisa" if dados_pessoais else "LGPD Art. 7º III"
+    g.add((work_uri, PINAKES.baseLegalLGPD, Literal(base_legal)))
 
     # Autores
     for author_data in item.get("autores") or item.get("authors") or []:
@@ -220,12 +223,18 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
             venue = {"nome": venue}
         map_venue(g, venue, work_uri)
 
-    # Áreas de conhecimento (CNPQ)
-    for area in item.get("areas_cnpq") or []:
+    # Áreas de conhecimento (CNPQ) / impacto social
+    areas = item.get("areas_cnpq") or item.get("impact_area") or []
+    if isinstance(areas, str):
+        areas = [areas]
+    if not areas:
+        areas = ["Ciência da Informação"]
+    for area in areas:
         area_uri = mint_uri(BRCRIS, "area", area)
         g.add((area_uri, RDF.type, SCHEMA.CategoryCode))
         g.add((area_uri, RDFS.label, Literal(area, lang="pt")))
         g.add((work_uri, VIVO.hasResearchArea, area_uri))
+        g.add((work_uri, PINAKES.temImpactoSocial, Literal(area, lang="pt")))
 
     # Proveniência
     g.add((work_uri, PROV.wasGeneratedBy, prov_activity))
