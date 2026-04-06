@@ -1,127 +1,880 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pinakes: <https://pinakes.ibict.br/ontology/> .
+@prefix schema: <https://schema.org/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://example.org/2D_materials_for_quantum_information_science> a <http://example.org/Document> ;
+<https://doi.org/10.1002/%28issn%291532-2890> a bibo:Document ;
+    dcterms:abstract "Before the Web, story of online information services was largely one over-estimates and unmet expectations. This study examines sustained use non-use within organizations in a way that overcomes limitations traditional approaches repeatedly led to exuberant usage projections. By adopting an open-systems view, we see firms highly technical institutional environments have many more incentives gather data go than do low-tech, unregulated industries. But make important choices about partnering outsourcing can shift informational activities across organizational boundaries. Our analysis focuses on three industries: law, real estate biotech/pharmaceuticals. environmental model provides richer conceptualizations communication technologies, including Internet better projections future use. In support our analysis, briefly discuss insights from ongoing intranets informed by perspective."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/King,_John_Leslie>,
+        <http://example.org/Kling,_Rob>,
+        <http://example.org/Lamb,_Roberta> ;
+    dcterms:identifier "ark:/13030/savits-journal-of-the-american-society-for-information-science-and-technology" ;
+    dcterms:issued 2006 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Information science"@pt,
+        "Library science"@pt ;
+    dcterms:title "Journal of the American Society for Information Science and Technology"@pt ;
+    bibo:doi "https://doi.org/10.1002/(issn)1532-2890" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Information science"@pt,
+        "Library science"@pt .
+
+<https://doi.org/10.1002/%28issn%292330-1643> a bibo:Document ;
+    dcterms:abstract "This study examines a range of factors associating with future citation and altmetric counts to paper. The include journal impact factor, individual collaboration, international institution prestige, country research funding, abstract readability, length, title number cited references, field size, type will be modelled in association counts, Mendeley readers, Twitter posts, Facebook blog news posts. results demonstrate that eight are important for increased seven different three six five Journal factor collaboration the two significantly associate all scores. Moreover, it seems driving readership similar those counts. However, events differ from each other terms small factors; instance, prestige readers but is an insignificant findings contribute continued development theoretical models methodological developments associated capturing, interpreting, understanding events. <br />"@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Fereshteh_Didegah>,
+        <http://example.org/Kim_Holmberg>,
+        <http://example.org/Timothy_D._Bowman> ;
+    dcterms:identifier "ark:/13030/savits-journal-of-the-association-for-information-science-and-technology" ;
+    dcterms:issued 2018 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Association (psychology)"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Information science"@pt,
+        "Library science"@pt,
+        "Psychology"@pt,
+        "Psychotherapist"@pt ;
+    dcterms:title "Journal of the Association for Information Science and Technology"@pt ;
+    bibo:doi "https://doi.org/10.1002/(issn)2330-1643" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Association (psychology)"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Information science"@pt,
+        "Library science"@pt,
+        "Psychology"@pt,
+        "Psychotherapist"@pt .
+
+<https://doi.org/10.1002/%28sici%291097-4571%28199507%2946:6%3C400::aid-asi2%3E3.0.co%3B2-y> a bibo:Document ;
+    dcterms:abstract "This article is a programmatic article, which formulates new approach to information science (IS): domain-analysis. states that the most fruitful horizon for IS study knowledge-domains as thought or discourse communities, are parts of society's division labor. The also review providing multidisciplinary description research, illuminating this theoretical view. first section presents contemporary research in IS, sharing fundamental viewpoint should be seen social rather than purely mental discipline. In addition, important predecessors view mentioned and possibilities well limitations their approaches discussed. second describes recent transdisciplinary tendencies understanding knowledge. bordering disciplines such educational psychology, linguistics, philosophy science, an knowledge appearing 1990s. stresses social, ecological, content-oriented nature opposed more formal, computer-like dominated 1980s. third compares domain-analysis other major cognitive approach. final outlines problems investigated, how different affect informational value subject access points data bases. © 1995 John Wiley & Sons, Inc."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Birger_Hjørland>,
+        <http://example.org/Hanne_Albrechtsen> ;
+    dcterms:identifier "ark:/13030/savits-toward-a-new-horizon-in-information-science-domain-analysis" ;
+    dcterms:issued 1995 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Computer science"@pt,
+        "Data science"@pt,
+        "Domain (mathematical analysis)"@pt,
+        "Geometry"@pt,
+        "Horizon"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt ;
+    dcterms:title "Toward a new horizon in information science: Domain-analysis"@pt ;
+    bibo:doi "https://doi.org/10.1002/(sici)1097-4571(199507)46:6<400::aid-asi2>3.0.co;2-y" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Computer science"@pt,
+        "Data science"@pt,
+        "Domain (mathematical analysis)"@pt,
+        "Geometry"@pt,
+        "Horizon"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt .
+
+<https://doi.org/10.1002/%28sici%291097-4571%2819980401%2949:4%3C327::aid-asi4%3E3.0.co%3B2-w> a bibo:Document ;
+    dcterms:abstract "This study presents an extensive domain analysis of a in articles, regardless which their works are cited. discipline—information science—in terms its authors. Names those most frequently cited 12 key"@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Howard_D._White>,
+        <http://example.org/Katherine_W._McCain> ;
+    dcterms:identifier "ark:/13030/savits-visualizing-a-discipline-an-author-co-citation-analysis-of-information-science-1972-1995" ;
+    dcterms:issued 1998 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Citation"@pt,
+        "Citation analysis"@pt,
+        "Co-citation"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Library science"@pt ;
+    dcterms:title "Visualizing a discipline: An author co‐citation analysis of information science, 1972–1995"@pt ;
+    bibo:doi "https://doi.org/10.1002/(sici)1097-4571(19980401)49:4<327::aid-asi4>3.0.co;2-w" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Citation"@pt,
+        "Citation analysis"@pt,
+        "Co-citation"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Information retrieval"@pt,
+        "Library science"@pt .
+
+<https://doi.org/10.1002/asi.4630260604> a bibo:Document ;
+    dcterms:abstract "Abstract Information science emerged as the third subject, along with logic and philosophy, to deal relevance‐an elusive, human notion. The concern relevance, a key notion in information science, is traced problems of scientific communication. Relevance considered measure effectiveness contact between source destination communication process. different views relevance that are interpreted related within framework knowledge. Different arose because was at number points process knowledge It suggested there exists an interlocking, interplaying cycle various systems relevances."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Tefko_Saračević> ;
+    dcterms:identifier "ark:/13030/savits-relevance-a-review-of-and-a-framework-for-the-thinking-on-the-notion-in-information-science" ;
+    dcterms:issued 1975 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Cognition"@pt,
+        "Cognitive science"@pt,
+        "Computer science"@pt,
+        "Computer security"@pt,
+        "Epistemology"@pt,
+        "Key (lock)"@pt,
+        "Law"@pt,
+        "Neuroscience"@pt,
+        "Operating system"@pt,
+        "Philosophy"@pt,
+        "Philosophy of science"@pt,
+        "Political science"@pt,
+        "Process (computing)"@pt,
+        "Psychology"@pt,
+        "Relevance (law)"@pt,
+        "Relevance theory"@pt,
+        "Subject (documents)"@pt,
+        "World Wide Web"@pt ;
+    dcterms:title "RELEVANCE: A review of and a framework for the thinking on the notion in information science"@pt ;
+    bibo:doi "https://doi.org/10.1002/asi.4630260604" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Cognition"@pt,
+        "Cognitive science"@pt,
+        "Computer science"@pt,
+        "Computer security"@pt,
+        "Epistemology"@pt,
+        "Key (lock)"@pt,
+        "Law"@pt,
+        "Neuroscience"@pt,
+        "Operating system"@pt,
+        "Philosophy"@pt,
+        "Philosophy of science"@pt,
+        "Political science"@pt,
+        "Process (computing)"@pt,
+        "Psychology"@pt,
+        "Relevance (law)"@pt,
+        "Relevance theory"@pt,
+        "Subject (documents)"@pt,
+        "World Wide Web"@pt .
+
+<https://doi.org/10.1002/asi.4630350221> a bibo:Document ;
+    dcterms:accessRights "aberto" ;
+    dcterms:identifier "ark:/13030/savits-journal-of-the-american-society-for-information-science" ;
+    dcterms:issued 1984 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Citation"@pt,
+        "Computer science"@pt,
+        "Library science"@pt ;
+    dcterms:title "Journal of the American Society for Information Science"@pt ;
+    bibo:doi "https://doi.org/10.1002/asi.4630350221" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Citation"@pt,
+        "Computer science"@pt,
+        "Library science"@pt .
+
+<https://doi.org/10.1002/asi.5090190103> a bibo:Document ;
+    dcterms:abstract "Abstract In seeking a new sense of identity, we ask, in this article, the questions: What is information science? does scientist do? Tentative answers to these questions are given hope stimulating discussion that will help clarify nature our field and work."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Harold_Borko> ;
+    dcterms:identifier "ark:/13030/savits-information-science-what-is-it" ;
+    dcterms:issued 1968 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Aesthetics"@pt,
+        "Ask price"@pt,
+        "Business"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Engineering"@pt,
+        "Engineering ethics"@pt,
+        "Epistemology"@pt,
+        "Field (mathematics)"@pt,
+        "Finance"@pt,
+        "Identity (music)"@pt,
+        "Information science"@pt,
+        "Library science"@pt,
+        "Mathematics"@pt,
+        "Mechanical engineering"@pt,
+        "Philosophy"@pt,
+        "Pure mathematics"@pt,
+        "Sociology"@pt,
+        "Work (physics)"@pt ;
+    dcterms:title "Information science: What is it?"@pt ;
+    bibo:doi "https://doi.org/10.1002/asi.5090190103" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Aesthetics"@pt,
+        "Ask price"@pt,
+        "Business"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Engineering"@pt,
+        "Engineering ethics"@pt,
+        "Epistemology"@pt,
+        "Field (mathematics)"@pt,
+        "Finance"@pt,
+        "Identity (music)"@pt,
+        "Information science"@pt,
+        "Library science"@pt,
+        "Mathematics"@pt,
+        "Mechanical engineering"@pt,
+        "Philosophy"@pt,
+        "Pure mathematics"@pt,
+        "Sociology"@pt,
+        "Work (physics)"@pt .
+
+<https://doi.org/10.1007/978-3-642-46890-2_1> a bibo:Document ;
+    dcterms:abstract "The interface between information science and statistics is more often implicit that explicit. It true the rapid growth of computer technology development a better understanding how to handle large amounts data, has shaped statistics. egually true, however, way influenced seldom in past was subject scientific studies on part statisticians. interest, therefore, discuss extent which de facto use statistical methods."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Erling_B._Andersen> ;
+    dcterms:identifier "ark:/13030/savits-information-science-and-statistics" ;
+    dcterms:issued 1986 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Bubble"@pt,
+        "Computational statistics"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Development (topology)"@pt,
+        "Interface (matter)"@pt,
+        "Library science"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt,
+        "Maximum bubble pressure method"@pt,
+        "Parallel computing"@pt,
+        "Statistics"@pt,
+        "Subject (documents)"@pt,
+        "Summary statistics"@pt ;
+    dcterms:title "Information Science and Statistics"@pt ;
+    bibo:doi "https://doi.org/10.1007/978-3-642-46890-2_1" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Bubble"@pt,
+        "Computational statistics"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Development (topology)"@pt,
+        "Interface (matter)"@pt,
+        "Library science"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt,
+        "Maximum bubble pressure method"@pt,
+        "Parallel computing"@pt,
+        "Statistics"@pt,
+        "Subject (documents)"@pt,
+        "Summary statistics"@pt .
+
+<https://doi.org/10.1038/s41578-019-0136-x> a bibo:Document ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/Mark_C._Hersam>,
         <http://example.org/Xiaolong_Liu> ;
+    dcterms:identifier "ark:/13030/savits-2d-materials-for-quantum-information-science" ;
     dcterms:issued 2019 ;
-    dcterms:title "2D materials for quantum information science" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Computer science"@pt,
+        "Materials science"@pt,
+        "Nanotechnology"@pt,
+        "Open quantum system"@pt,
+        "Physics"@pt,
+        "Quantum"@pt,
+        "Quantum computer"@pt,
+        "Quantum dot"@pt,
+        "Quantum entanglement"@pt,
+        "Quantum information"@pt,
+        "Quantum information science"@pt,
+        "Quantum mechanics"@pt,
+        "Quantum network"@pt,
+        "Quantum sensor"@pt,
+        "Quantum technology"@pt,
+        "Qubit"@pt ;
+    dcterms:title "2D materials for quantum information science"@pt ;
+    bibo:doi "https://doi.org/10.1038/s41578-019-0136-x" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Computer science"@pt,
+        "Materials science"@pt,
+        "Nanotechnology"@pt,
+        "Open quantum system"@pt,
+        "Physics"@pt,
+        "Quantum"@pt,
+        "Quantum computer"@pt,
+        "Quantum dot"@pt,
+        "Quantum entanglement"@pt,
+        "Quantum information"@pt,
+        "Quantum information science"@pt,
+        "Quantum mechanics"@pt,
+        "Quantum network"@pt,
+        "Quantum sensor"@pt,
+        "Quantum technology"@pt,
+        "Qubit"@pt .
 
-<http://example.org/A_Design_Science_Research_Methodology_for_Information_Systems_Research> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Ken_Peffers>,
-        <http://example.org/Marcus_A._Rothenberger>,
-        <http://example.org/Samir_Chatterjee>,
-        <http://example.org/Tuure_Tuunanen> ;
-    dcterms:issued 2007 ;
-    dcterms:title "A Design Science Research Methodology for Information Systems Research" .
+<https://doi.org/10.1080/02693799208901893> a bibo:Document ;
+    dcterms:abstract "Abstract. Research papers at conferences such as EGIS and the International Symposia on Spatial Data Handling address a set of intellectual scientific questions which go well beyond limited technical capabilities current technology in geographical information systems. This paper reviews topics might be included science information. these fundamental issues is better prospect for long-term survival acceptance academy than development capabilities. state research series key areas speculates why progress has been so uneven. The final section looks to future new significant potential this area research."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Michael_F._Goodchild> ;
+    dcterms:identifier "ark:/13030/savits-geographical-information-science" ;
+    dcterms:issued 1992 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Algorithm"@pt,
+        "Computer science"@pt,
+        "Computer security"@pt,
+        "Data science"@pt,
+        "Engineering"@pt,
+        "Engineering ethics"@pt,
+        "Engineering physics"@pt,
+        "Geography"@pt,
+        "Key (lock)"@pt,
+        "Operating system"@pt,
+        "Political science"@pt,
+        "Programming language"@pt,
+        "Regional science"@pt,
+        "Section (typography)"@pt,
+        "Set (abstract data type)"@pt,
+        "Special section"@pt,
+        "State (computer science)"@pt ;
+    dcterms:title "Geographical information science"@pt ;
+    bibo:doi "https://doi.org/10.1080/02693799208901893" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Algorithm"@pt,
+        "Computer science"@pt,
+        "Computer security"@pt,
+        "Data science"@pt,
+        "Engineering"@pt,
+        "Engineering ethics"@pt,
+        "Engineering physics"@pt,
+        "Geography"@pt,
+        "Key (lock)"@pt,
+        "Operating system"@pt,
+        "Political science"@pt,
+        "Programming language"@pt,
+        "Regional science"@pt,
+        "Section (typography)"@pt,
+        "Set (abstract data type)"@pt,
+        "Special section"@pt,
+        "State (computer science)"@pt .
 
-<http://example.org/Communications_in_Computer_and_Information_Science> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Daniel_W._Lewis>,
-        <http://example.org/Trevor_Martin> ;
-    dcterms:issued 2014 ;
-    dcterms:title "Communications in Computer and Information Science" .
+<https://doi.org/10.1163/9789004337862_lgbo_com_050369> a bibo:Document ;
+    dcterms:abstract "Names as Catalog Entries, A. M. Abdul Huq Nashville Public Libraries, David Marshall Stewart National Agricultural Library, Leila P. Moran Archives (United States), James B. Rhoads Bibliography, Frank McGowan Book Committee, John C. Frantz Commission on Libraries and Information Science, Charles H. Stevens Federation of Abstracting Indexing Services, Stella Keenan Toni Carbo Bearman Fire Protection Association, S. Morgan Lending Library for Science Technology (British Division), G. Myatt (Translated by Rosalind Kent), Natalia Tyulina Task Force, Riley Marlene D. Morrisey Week, Gloria Hastings Medicine: Catalogs Cataloging Emilie V. Wiggins The Introduction History, Robert Menhert Reprographic Centre Documentation (NRCd), J. Williams Foundation---Science Information, Burton W. Adkinson Canada, Jack E. Brown Union Catalog, Phillip Immroth Natural Classification, Jay Daily Naude, Gabriel, Eric de Grolier Nebraska Vivian Peterson Nebraska. University Eugene Johnson Nepal, in, Narayan Mishra Shanti Netherlands, Centers Maltha Networks, Cognitive, Hays Neuroscience Resources, Edgar Bering, Jr. Nevada Billie Mae Polson New England Deposit R. Walsh Document Conservation Center, George Martin Cunha Historic Genealogical Society York Historical Society, Lawrence Thompson Mary McKenzie Board, Walter Brahm Hampshire Louise Price Mexico Jo Duck Walker Mexico. F. Harvey Orleans Colin Bradfield Hamer, Helen Rice Club, Joseph N. Whitten Mackenzie Cory Carlton Rochell York. State College Arts School Geneseo, Ivan L. Kaldor at Buffalo, Studies, Bobinski Times, Rothman Stony Brook Donald Cook Zealand, MacLean Newark Julia Sabine Newberry Towner Newcastle. Newcastle upon Tyne Enright News Collections, Geoffrey Whatmore Nicaragua, Eileen Bloch Nicholson, Edward Byron, K. Manley Nigeria, Academic Khalil Mahmud "@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Allen_Kent> ;
+    dcterms:identifier "ark:/13030/savits-encyclopedia-of-library-and-information-science" ;
+    dcterms:issued 2017 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Archaeology"@pt,
+        "Computer science"@pt,
+        "History"@pt,
+        "Library science"@pt,
+        "National archives"@pt,
+        "National library"@pt,
+        "National park"@pt ;
+    dcterms:title "Encyclopedia of Library and Information Science"@pt ;
+    bibo:doi "https://doi.org/10.1163/9789004337862_lgbo_com_050369" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Archaeology"@pt,
+        "Computer science"@pt,
+        "History"@pt,
+        "Library science"@pt,
+        "National archives"@pt,
+        "National library"@pt,
+        "National park"@pt .
 
-<http://example.org/Design_Science_in_Information_Systems_Research1> a <http://example.org/Document> ;
+<https://doi.org/10.1177/016555150202800601> a bibo:Document ;
+    dcterms:abstract "Social network analysis (SNA) is not a formal theory in sociology but rather strategy for investigating social structures. As it an idea that can be applied many fields, we study, particular, its influence the information sciences. Information scientists study publication, citation and co-citation networks, collaboration structures other forms of interaction networks. Moreover, Internet represents unprecedented scale. In all these studies successfully applied. SNA further related to recent theories concerning free market economy, geography transport The growth documented co-author drawn. Centrality measures are calculated."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Evelien_Otte>,
+        <http://example.org/Ronald_Rousseau> ;
+    dcterms:identifier "ark:/13030/savits-social-network-analysis-a-powerful-strategy-also-for-the-information-sciences" ;
+    dcterms:issued 2002 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Centrality"@pt,
+        "Citation"@pt,
+        "Co-citation"@pt,
+        "Combinatorics"@pt,
+        "Complex network"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Dynamic network analysis"@pt,
+        "Information science"@pt,
+        "Knowledge management"@pt,
+        "Library science"@pt,
+        "Mathematics"@pt,
+        "Network analysis"@pt,
+        "Network science"@pt,
+        "Network theory"@pt,
+        "Organizational learning"@pt,
+        "Organizational network analysis"@pt,
+        "Physics"@pt,
+        "Quantum mechanics"@pt,
+        "Social capital"@pt,
+        "Social media"@pt,
+        "Social network (sociolinguistics)"@pt,
+        "Social network analysis"@pt,
+        "Social science"@pt,
+        "Sociology"@pt,
+        "Statistics"@pt,
+        "The Internet"@pt,
+        "World Wide Web"@pt ;
+    dcterms:title "Social network analysis: a powerful strategy, also for the information sciences"@pt ;
+    bibo:doi "https://doi.org/10.1177/016555150202800601" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Centrality"@pt,
+        "Citation"@pt,
+        "Co-citation"@pt,
+        "Combinatorics"@pt,
+        "Complex network"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Dynamic network analysis"@pt,
+        "Information science"@pt,
+        "Knowledge management"@pt,
+        "Library science"@pt,
+        "Mathematics"@pt,
+        "Network analysis"@pt,
+        "Network science"@pt,
+        "Network theory"@pt,
+        "Organizational learning"@pt,
+        "Organizational network analysis"@pt,
+        "Physics"@pt,
+        "Quantum mechanics"@pt,
+        "Social capital"@pt,
+        "Social media"@pt,
+        "Social network (sociolinguistics)"@pt,
+        "Social network analysis"@pt,
+        "Social science"@pt,
+        "Sociology"@pt,
+        "Statistics"@pt,
+        "The Internet"@pt,
+        "World Wide Web"@pt .
+
+<https://doi.org/10.1201/9780203757635> a bibo:Document ;
+    dcterms:abstract "Reflects the growing convergence among several disciplines that concern themselves with information and cultural record. This encyclopedia explores institutions of more than 30 countries."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Marcia_J._Bates>,
+        <http://example.org/Mary_Niles_Maack> ;
+    dcterms:identifier "ark:/13030/savits-encyclopedia-of-library-and-information-sciences" ;
+    dcterms:issued 2009 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Computer science"@pt,
+        "Encyclopedia"@pt,
+        "Information retrieval"@pt,
+        "Library science"@pt,
+        "World Wide Web"@pt ;
+    dcterms:title "Encyclopedia of Library and Information Sciences"@pt ;
+    bibo:doi "https://doi.org/10.1201/9780203757635" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Computer science"@pt,
+        "Encyclopedia"@pt,
+        "Information retrieval"@pt,
+        "Library science"@pt,
+        "World Wide Web"@pt .
+
+<https://doi.org/10.1234/pinakes.2024.001> a bibo:Document ;
+    dcterms:abstract "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Ana_Beatriz_Silva>,
+        <http://example.org/Carlos_Mendes_Oliveira> ;
+    dcterms:identifier "ark:/13030/savits-001" ;
+    dcterms:issued 2024 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Amazônia"@pt,
+        "biodiversidade"@pt,
+        "classificação de espécies"@pt,
+        "redes neurais"@pt,
+        "visão computacional"@pt ;
+    dcterms:title "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica"@pt ;
+    bibo:doi "10.1234/pinakes.2024.001" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Computação"@pt,
+        "Ecologia"@pt ;
+    schema:keywords "Amazônia"@pt,
+        "biodiversidade"@pt,
+        "classificação de espécies"@pt,
+        "redes neurais"@pt,
+        "visão computacional"@pt .
+
+<https://doi.org/10.2307/25148625> a bibo:Document ;
+    dcterms:abstract "Two paradigms characterize much of the research in Information Systems discipline: behavioral science and design science. The behavioral-science paradigm seeks to develop verify theories that explain or predict human organizational behavior. design-science extend boundaries capabilities by creating new innovative artifacts. Both are foundational IS discipline, positioned as it is at confluence people, organizations, technology. Our objective describe performance via a concise conceptual framework clear guidelines for understanding, executing, evaluating research. In paradigm, knowledge understanding problem domain its solution achieved building application designed artifact. Three recent exemplars literature used demonstrate these guidelines. We conclude with an analysis challenges performing high-quality context broader community."@pt ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/Hevner>,
         <http://example.org/Jinsoo_Park>,
         <http://example.org/March_March>,
         <http://example.org/Ram_Ram> ;
+    dcterms:identifier "ark:/13030/savits-design-science-in-information-systems-research1" ;
     dcterms:issued 2004 ;
-    dcterms:title "Design Science in Information Systems Research1" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Business"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Design science"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Engineering management"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Management science"@pt,
+        "Systems engineering"@pt ;
+    dcterms:title "Design Science in Information Systems Research1"@pt ;
+    bibo:doi "https://doi.org/10.2307/25148625" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Business"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Design science"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Engineering management"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Management science"@pt,
+        "Systems engineering"@pt .
 
-<http://example.org/Design_science_in_information_systems_research> a <http://example.org/Document> ;
+<https://doi.org/10.2753/mis0742-1222240302> a bibo:Document ;
+    dcterms:abstract "The paper motivates, presents, demonstrates in use, and evaluates a methodology for conducting design science (DS) research information systems (IS). DS is of importance discipline oriented to the creation successful artifacts. Several researchers have pioneered IS, yet over past 15 years, little has been done within discipline. lack serve as commonly accepted framework template its presentation may contributed slow adoption. (DSRM) presented here incorporates principles, practices, procedures required carry out such meets three objectives: it consistent with prior literature, provides nominal process model doing research, mental presenting evaluating IS. includes six steps: problem identification motivation, definition objectives solution, development, demonstration, evaluation, communication. We demonstrate evaluate by four case studies terms DSRM, including cases that present database support health assessment methods, software reuse measure, an Internet video telephony application, IS planning method. designed effectively satisfies potential help aid acceptance"@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Ken_Peffers>,
+        <http://example.org/Marcus_A._Rothenberger>,
+        <http://example.org/Samir_Chatterjee>,
+        <http://example.org/Tuure_Tuunanen> ;
+    dcterms:identifier "ark:/13030/savits-a-design-science-research-methodology-for-information-systems-research" ;
+    dcterms:issued 2007 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Biology"@pt,
+        "Botany"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Design methods"@pt,
+        "Design science"@pt,
+        "Design science research"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Identification (biology)"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Management science"@pt,
+        "Mechanical engineering"@pt,
+        "Medicine"@pt,
+        "Operating system"@pt,
+        "Presentation (obstetrics)"@pt,
+        "Process (computing)"@pt,
+        "Process management"@pt,
+        "Radiology"@pt,
+        "Reuse"@pt,
+        "The Internet"@pt,
+        "Waste management"@pt,
+        "World Wide Web"@pt ;
+    dcterms:title "A Design Science Research Methodology for Information Systems Research"@pt ;
+    bibo:doi "https://doi.org/10.2753/mis0742-1222240302" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Biology"@pt,
+        "Botany"@pt,
+        "Computer science"@pt,
+        "Data science"@pt,
+        "Design methods"@pt,
+        "Design science"@pt,
+        "Design science research"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Identification (biology)"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Management science"@pt,
+        "Mechanical engineering"@pt,
+        "Medicine"@pt,
+        "Operating system"@pt,
+        "Presentation (obstetrics)"@pt,
+        "Process (computing)"@pt,
+        "Process management"@pt,
+        "Radiology"@pt,
+        "Reuse"@pt,
+        "The Internet"@pt,
+        "Waste management"@pt,
+        "World Wide Web"@pt .
+
+<https://doi.org/10.5555/2017212.2017217> a bibo:Document ;
+    dcterms:abstract "Two paradigms characterize much of the research in Information Systems discipline: behavioral science and design science. The behavioral-science paradigm seeks to develop verify theories that explain or predict human organizational behavior. design-science extend boundaries capabilities by creating new innovative artifacts. Both are foundational IS discipline, positioned as it is at confluence people, organizations, technology. Our objective describe performance via a concise conceptual framework clear guidelines for understanding, executing, evaluating research. In paradigm, knowledge understanding problem domain its solution achieved building application designed artifact. Three recent exemplars literature used demonstrate these guidelines. We conclude with an analysis challenges performing high-quality context broader community."@pt ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/Alan_R._Hevner>,
         <http://example.org/Jinsoo_Park>,
         <http://example.org/Salvatore_T._March>,
         <http://example.org/Sudha_Ram> ;
+    dcterms:identifier "ark:/13030/savits-design-science-in-information-systems-research" ;
     dcterms:issued 2004 ;
-    dcterms:title "Design science in information systems research" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Artifact (error)"@pt,
+        "Artificial intelligence"@pt,
+        "Biology"@pt,
+        "Computer science"@pt,
+        "Conceptual framework"@pt,
+        "Context (archaeology)"@pt,
+        "Data science"@pt,
+        "Design science"@pt,
+        "Design science research"@pt,
+        "Domain (mathematical analysis)"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Epistemology"@pt,
+        "Human-centered computing"@pt,
+        "Information science"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Library science"@pt,
+        "Management science"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt,
+        "Paleontology"@pt,
+        "Paradigm shift"@pt,
+        "Philosophy"@pt,
+        "Social science"@pt,
+        "Sociology"@pt ;
+    dcterms:title "Design science in information systems research"@pt ;
+    bibo:doi "https://doi.org/10.5555/2017212.2017217" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Artifact (error)"@pt,
+        "Artificial intelligence"@pt,
+        "Biology"@pt,
+        "Computer science"@pt,
+        "Conceptual framework"@pt,
+        "Context (archaeology)"@pt,
+        "Data science"@pt,
+        "Design science"@pt,
+        "Design science research"@pt,
+        "Domain (mathematical analysis)"@pt,
+        "Electrical engineering"@pt,
+        "Engineering"@pt,
+        "Epistemology"@pt,
+        "Human-centered computing"@pt,
+        "Information science"@pt,
+        "Information system"@pt,
+        "Knowledge management"@pt,
+        "Library science"@pt,
+        "Management science"@pt,
+        "Mathematical analysis"@pt,
+        "Mathematics"@pt,
+        "Paleontology"@pt,
+        "Paradigm shift"@pt,
+        "Philosophy"@pt,
+        "Social science"@pt,
+        "Sociology"@pt .
 
-<http://example.org/Encyclopedia_of_Library_and_Information_Science> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Allen_Kent> ;
-    dcterms:issued 2017 ;
-    dcterms:title "Encyclopedia of Library and Information Science" .
+<https://doi.org/10.5678/brcris.2024.005> a bibo:Document ;
+    dcterms:abstract "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Lúcia_Viana_Campos>,
+        <http://example.org/Roberto_Fonseca_Neto> ;
+    dcterms:identifier "ark:/13030/savits-005" ;
+    dcterms:issued 2024 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "OAI-PMH"@pt,
+        "SKOS"@pt,
+        "interoperabilidade"@pt,
+        "linked data"@pt,
+        "ontologias"@pt,
+        "repositórios"@pt ;
+    dcterms:title "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"@pt ;
+    bibo:doi "10.5678/brcris.2024.005" ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Computação"@pt,
+        "Ciência da Informação"@pt ;
+    schema:keywords "OAI-PMH"@pt,
+        "SKOS"@pt,
+        "interoperabilidade"@pt,
+        "linked data"@pt,
+        "ontologias"@pt,
+        "repositórios"@pt .
 
-<http://example.org/Encyclopedia_of_Library_and_Information_Sciences> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Marcia_J._Bates>,
-        <http://example.org/Mary_Niles_Maack> ;
-    dcterms:issued 2009 ;
-    dcterms:title "Encyclopedia of Library and Information Sciences" .
+<https://pinakes.ibict.br/resource/ark//13030/savits-002> a bibo:Document ;
+    dcterms:abstract "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Fernanda_Rocha_Lima> ;
+    dcterms:identifier "ark:/13030/savits-002" ;
+    dcterms:issued 2023 ;
+    dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    dcterms:subject "FAIR"@pt,
+        "LGPD"@pt,
+        "ciência da informação"@pt,
+        "governança de dados"@pt,
+        "repositórios institucionais"@pt ;
+    dcterms:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "FAIR"@pt,
+        "LGPD"@pt,
+        "ciência da informação"@pt,
+        "governança de dados"@pt,
+        "repositórios institucionais"@pt .
 
-<http://example.org/Geographical_information_science> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Michael_F._Goodchild> ;
-    dcterms:issued 1992 ;
-    dcterms:title "Geographical information science" .
+<https://pinakes.ibict.br/resource/ark//13030/savits-003> a bibo:Document ;
+    dcterms:abstract "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/João_Pedro_Alves> ;
+    dcterms:identifier "ark:/13030/savits-003" ;
+    dcterms:issued 2022 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "BERT"@pt,
+        "RDF"@pt,
+        "SPARQL"@pt,
+        "recuperação de informação"@pt,
+        "web semântica"@pt ;
+    dcterms:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt,
+        "Inteligência Artificial"@pt ;
+    schema:keywords "BERT"@pt,
+        "RDF"@pt,
+        "SPARQL"@pt,
+        "recuperação de informação"@pt,
+        "web semântica"@pt .
 
-<http://example.org/Geomatics_and_Information_Science_of_Wuhan_University> a <http://example.org/Document> ;
+<https://pinakes.ibict.br/resource/ark//13030/savits-communications-in-computer-and-information-science> a bibo:Document ;
+    dcterms:accessRights "aberto" ;
+    dcterms:creator <http://example.org/Daniel_W._Lewis>,
+        <http://example.org/Trevor_Martin> ;
+    dcterms:identifier "ark:/13030/savits-communications-in-computer-and-information-science" ;
+    dcterms:issued 2014 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Computer science"@pt,
+        "Telecommunications"@pt ;
+    dcterms:title "Communications in Computer and Information Science"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Computer science"@pt,
+        "Telecommunications"@pt .
+
+<https://pinakes.ibict.br/resource/ark//13030/savits-geomatics-and-information-science-of-wuhan-university> a bibo:Document ;
+    dcterms:abstract "The veracity of land evaluation is tightly related to the reasonable weights estimate factors.By mapping qualitative linguistic words into a fine-changeable cloud drops and translating uncertain factor conditions quantitative values with illation based on model,and then,integrating correlation analysis,a new way figuring out weight factors proposed.It may solve limitations conventional ways."@pt ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/Deyi_Li>,
         <http://example.org/LI_Deren>,
         <http://example.org/Shiyuan_Hu>,
         <http://example.org/Yaolin_Liu> ;
+    dcterms:identifier "ark:/13030/savits-geomatics-and-information-science-of-wuhan-university" ;
     dcterms:issued 2006 ;
-    dcterms:title "Geomatics and Information Science of Wuhan University" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Cloud computing"@pt,
+        "Computer science"@pt,
+        "Data mining"@pt,
+        "Data science"@pt,
+        "Figuring"@pt,
+        "Geography"@pt,
+        "Geomatics"@pt,
+        "Operating system"@pt,
+        "Optics"@pt,
+        "Physics"@pt,
+        "Remote sensing"@pt ;
+    dcterms:title "Geomatics and Information Science of Wuhan University"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.150586" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Cloud computing"@pt,
+        "Computer science"@pt,
+        "Data mining"@pt,
+        "Data science"@pt,
+        "Figuring"@pt,
+        "Geography"@pt,
+        "Geomatics"@pt,
+        "Operating system"@pt,
+        "Optics"@pt,
+        "Physics"@pt,
+        "Remote sensing"@pt .
 
-<http://example.org/Information_Science_and_Statistics> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Erling_B._Andersen> ;
-    dcterms:issued 1986 ;
-    dcterms:title "Information Science and Statistics" .
-
-<http://example.org/Information_science:_What_is_it?> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Harold_Borko> ;
-    dcterms:issued 1968 ;
-    dcterms:title "Information science: What is it?" .
-
-<http://example.org/Journal_of_the_American_Society_for_Information_Science> a <http://example.org/Document> ;
-    dcterms:issued 1984 ;
-    dcterms:title "Journal of the American Society for Information Science" .
-
-<http://example.org/Journal_of_the_American_Society_for_Information_Science_and_Technology> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/King,_John_Leslie>,
-        <http://example.org/Kling,_Rob>,
-        <http://example.org/Lamb,_Roberta> ;
-    dcterms:issued 2006 ;
-    dcterms:title "Journal of the American Society for Information Science and Technology" .
-
-<http://example.org/Journal_of_the_Association_for_Information_Science_and_Technology> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Fereshteh_Didegah>,
-        <http://example.org/Kim_Holmberg>,
-        <http://example.org/Timothy_D._Bowman> ;
-    dcterms:issued 2018 ;
-    dcterms:title "Journal of the Association for Information Science and Technology" .
-
-<http://example.org/Lecture_notes_in_control_and_information_sciences> a <http://example.org/Document> ;
+<https://pinakes.ibict.br/resource/ark//13030/savits-lecture-notes-in-control-and-information-sciences> a bibo:Document ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/J.D._Aplevich> ;
+    dcterms:identifier "ark:/13030/savits-lecture-notes-in-control-and-information-sciences" ;
     dcterms:issued 1991 ;
-    dcterms:title "Lecture notes in control and information sciences" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Artificial intelligence"@pt,
+        "Computer science"@pt,
+        "Control (management)"@pt,
+        "Data science"@pt,
+        "Library science"@pt ;
+    dcterms:title "Lecture notes in control and information sciences"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Artificial intelligence"@pt,
+        "Computer science"@pt,
+        "Control (management)"@pt,
+        "Data science"@pt,
+        "Library science"@pt .
 
-<http://example.org/Pattern_Recognition_and_Machine_Learning_(Information_Science_and_Statistics)> a <http://example.org/Document> ;
+<https://pinakes.ibict.br/resource/ark//13030/savits-pattern-recognition-and-machine-learning-information-science-and-statistics> a bibo:Document ;
+    dcterms:accessRights "aberto" ;
     dcterms:creator <http://example.org/Chris_Bishop> ;
+    dcterms:identifier "ark:/13030/savits-pattern-recognition-and-machine-learning-information-science-and-statistics" ;
     dcterms:issued 2006 ;
-    dcterms:title "Pattern Recognition and Machine Learning (Information Science and Statistics)" .
-
-<http://example.org/RELEVANCE:_A_review_of_and_a_framework_for_the_thinking_on_the_notion_in_information_science> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Tefko_Saračević> ;
-    dcterms:issued 1975 ;
-    dcterms:title "RELEVANCE: A review of and a framework for the thinking on the notion in information science" .
-
-<http://example.org/Social_network_analysis:_a_powerful_strategy,_also_for_the_information_sciences> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Evelien_Otte>,
-        <http://example.org/Ronald_Rousseau> ;
-    dcterms:issued 2002 ;
-    dcterms:title "Social network analysis: a powerful strategy, also for the information sciences" .
-
-<http://example.org/Toward_a_new_horizon_in_information_science:_Domain-analysis> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Birger_Hjørland>,
-        <http://example.org/Hanne_Albrechtsen> ;
-    dcterms:issued 1995 ;
-    dcterms:title "Toward a new horizon in information science: Domain-analysis" .
-
-<http://example.org/Visualizing_a_discipline:_An_author_co‐citation_analysis_of_information_science,_1972–1995> a <http://example.org/Document> ;
-    dcterms:creator <http://example.org/Howard_D._White>,
-        <http://example.org/Katherine_W._McCain> ;
-    dcterms:issued 1998 ;
-    dcterms:title "Visualizing a discipline: An author co‐citation analysis of information science, 1972–1995" .
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:subject "Artificial intelligence"@pt,
+        "Computer science"@pt,
+        "Machine learning"@pt,
+        "Mathematics"@pt,
+        "Pattern recognition (psychology)"@pt,
+        "Statistics"@pt ;
+    dcterms:title "Pattern Recognition and Machine Learning (Information Science and Statistics)"@pt ;
+    pinakes:baseLegalLGPD "Art. 7º, IV" ;
+    pinakes:dataProcessamento "2026-04-06T18:23:08.149593" ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "Artificial intelligence"@pt,
+        "Computer science"@pt,
+        "Machine learning"@pt,
+        "Mathematics"@pt,
+        "Pattern recognition (psychology)"@pt,
+        "Statistics"@pt .
 
 <http://example.org/Alan_R._Hevner> a foaf:Person ;
     foaf:name "Alan R. Hevner" .
@@ -129,8 +882,14 @@
 <http://example.org/Allen_Kent> a foaf:Person ;
     foaf:name "Allen Kent" .
 
+<http://example.org/Ana_Beatriz_Silva> a foaf:Person ;
+    foaf:name "Ana Beatriz Silva" .
+
 <http://example.org/Birger_Hjørland> a foaf:Person ;
     foaf:name "Birger Hjørland" .
+
+<http://example.org/Carlos_Mendes_Oliveira> a foaf:Person ;
+    foaf:name "Carlos Mendes Oliveira" .
 
 <http://example.org/Chris_Bishop> a foaf:Person ;
     foaf:name "Chris Bishop" .
@@ -150,6 +909,9 @@
 <http://example.org/Fereshteh_Didegah> a foaf:Person ;
     foaf:name "Fereshteh Didegah" .
 
+<http://example.org/Fernanda_Rocha_Lima> a foaf:Person ;
+    foaf:name "Fernanda Rocha Lima" .
+
 <http://example.org/Hanne_Albrechtsen> a foaf:Person ;
     foaf:name "Hanne Albrechtsen" .
 
@@ -164,6 +926,9 @@
 
 <http://example.org/J.D._Aplevich> a foaf:Person ;
     foaf:name "J.D. Aplevich" .
+
+<http://example.org/João_Pedro_Alves> a foaf:Person ;
+    foaf:name "João Pedro Alves" .
 
 <http://example.org/Katherine_W._McCain> a foaf:Person ;
     foaf:name "Katherine W. McCain" .
@@ -186,6 +951,9 @@
 <http://example.org/Lamb,_Roberta> a foaf:Person ;
     foaf:name "Lamb, Roberta" .
 
+<http://example.org/Lúcia_Viana_Campos> a foaf:Person ;
+    foaf:name "Lúcia Viana Campos" .
+
 <http://example.org/March_March> a foaf:Person ;
     foaf:name "March March" .
 
@@ -206,6 +974,9 @@
 
 <http://example.org/Ram_Ram> a foaf:Person ;
     foaf:name "Ram Ram" .
+
+<http://example.org/Roberto_Fonseca_Neto> a foaf:Person ;
+    foaf:name "Roberto Fonseca Neto" .
 
 <http://example.org/Ronald_Rousseau> a foaf:Person ;
     foaf:name "Ronald Rousseau" .

@@ -14,6 +14,7 @@ import streamlit as st
 from rdflib import Graph
 from groq import Groq
 
+from src.governance.fair_validator import evaluate_graph
 # ─── Configuração de logging ──────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -284,10 +285,29 @@ def main():
             with st.spinner("🔎 Consultando grafo SPARQL…"):
                 results = sparql_retrieve(graph, user_query, top_k)
 
-            tab_resp, tab_docs = st.tabs(["💬 Resposta RAG", "📚 Documentos Recuperados"])
+            compliance = evaluate_graph(graph)
+            tab_resp, tab_docs, tab_governance = st.tabs(
+                ["💬 Resposta RAG", "📚 Documentos Recuperados", "⚖️ Governança FAIR/CARE"]
+            )
 
             with tab_docs:
                 render_results(results)
+
+            with tab_governance:
+                st.markdown(f"**Documentos avaliados:** {compliance['documents']}")
+                st.caption("Pontuações calculadas automaticamente conforme FAIR/CARE/DEIA do edital SAVITS.")
+                cols = st.columns(2)
+                for idx, score in enumerate(compliance["scores"]):
+                    with cols[idx % 2]:
+                        pct = score["coverage"]
+                        st.metric(score["pillar"], f"{int(pct * 100)}%", delta=None)
+                        st.progress(pct)
+                if compliance["issues"]:
+                    st.divider()
+                    for issue in compliance["issues"]:
+                        st.warning(f"[{issue['pillar']}] {issue['resource']}: {issue['detail']}")
+                else:
+                    st.success("Nenhum alerta de governança encontrado no grafo atual.")
 
             with tab_resp:
                 if not client:

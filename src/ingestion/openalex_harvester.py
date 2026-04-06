@@ -24,7 +24,13 @@ def harvest_openalex(query="information science", per_page=20):
                 for a in work.get("authorships", [])
             ],
             "doi": work.get("doi"),
-            "abstract": work.get("abstract_inverted_index")
+            "abstract": work.get("abstract_inverted_index"),
+            "keywords": [
+                concept["display_name"]
+                for concept in work.get("concepts", [])
+                if concept.get("display_name")
+            ],
+            "source": "openalex",
         }
 
         results.append(record)
