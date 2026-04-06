@@ -1,356 +1,245 @@
-@prefix bibo: <http://purl.org/ontology/bibo/> .
-@prefix brcris: <https://brcris.ibict.br/resource/> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pinakes: <https://pinakes.ibict.br/ontology/> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
-@prefix vivo: <http://vivoweb.org/ontology/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-brcris:work_002 a bibo:AcademicArticle,
-        bibo:Document ;
-    dc:creator brcris:author_fernanda_rocha_lima_80d902e9 ;
-    dc:date "2023" ;
-    dc:description "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
-    dc:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
-    dcterms:abstract "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:issued "2023"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_ciencia_da_informacao,
-        brcris:keyword_fair,
-        brcris:keyword_governanca_de_dados,
-        brcris:keyword_lgpd,
-        brcris:keyword_repositorios_institucionais ;
-    dcterms:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
-    bibo:authorList brcris:author_fernanda_rocha_lima_80d902e9 ;
-    vivo:hasResearchArea brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD | Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais. | FAIR | LGPD | governança de dados | repositórios institucionais | ciência da informação"@pt ;
-    schema:keywords "FAIR"@pt,
-        "LGPD"@pt,
-        "ciência da informação"@pt,
-        "governança de dados"@pt,
-        "repositórios institucionais"@pt .
+<http://example.org/2D_materials_for_quantum_information_science> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Mark_C._Hersam>,
+        <http://example.org/Xiaolong_Liu> ;
+    dcterms:issued 2019 ;
+    dcterms:title "2D materials for quantum information science" .
 
-brcris:work_003 a bibo:Document,
-        bibo:Thesis ;
-    dc:creator <https://orcid.org/0000-0003-1111-2222> ;
-    dc:date "2022" ;
-    dc:description "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
-    dc:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
-    dcterms:abstract "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:issued "2022"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_bert,
-        brcris:keyword_rdf,
-        brcris:keyword_recuperacao_de_informacao,
-        brcris:keyword_sparql,
-        brcris:keyword_web_semantica ;
-    dcterms:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
-    bibo:authorList <https://orcid.org/0000-0003-1111-2222> ;
-    vivo:hasResearchArea brcris:area_ciencia_da_informacao,
-        brcris:area_inteligencia_artificial ;
-    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas | Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES. | SPARQL | RDF | recuperação de informação | BERT | web semântica"@pt ;
-    schema:keywords "BERT"@pt,
-        "RDF"@pt,
-        "SPARQL"@pt,
-        "recuperação de informação"@pt,
-        "web semântica"@pt .
+<http://example.org/A_Design_Science_Research_Methodology_for_Information_Systems_Research> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Ken_Peffers>,
+        <http://example.org/Marcus_A._Rothenberger>,
+        <http://example.org/Samir_Chatterjee>,
+        <http://example.org/Tuure_Tuunanen> ;
+    dcterms:issued 2007 ;
+    dcterms:title "A Design Science Research Methodology for Information Systems Research" .
 
-brcris:work_004 a bibo:Document,
-        bibo:Report ;
-    dc:creator brcris:author_maria_das_gracas_ferreira_6ea72346 ;
-    dc:date "2023" ;
-    dc:description "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
-    dc:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
-    dcterms:abstract "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
-    dcterms:accessRights "restrito" ;
-    dcterms:issued "2023"^^xsd:gYear ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_agricultura_familiar,
-        brcris:keyword_mudancas_climaticas,
-        brcris:keyword_seguranca_alimentar,
-        brcris:keyword_semiarido ;
-    dcterms:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
-    bibo:authorList brcris:author_maria_das_gracas_ferreira_6ea72346 ;
-    vivo:hasResearchArea brcris:area_agronomia,
-        brcris:area_ciencias_ambientais ;
-    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
-    pinakes:baseLegalLGPD "Interesse público em pesquisa" ;
-    pinakes:contemDadosPessoais true ;
-    pinakes:ragText "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino | Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará. | mudanças climáticas | agricultura familiar | semiárido | segurança alimentar"@pt ;
-    schema:keywords "agricultura familiar"@pt,
-        "mudanças climáticas"@pt,
-        "segurança alimentar"@pt,
-        "semiárido"@pt .
+<http://example.org/Communications_in_Computer_and_Information_Science> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Daniel_W._Lewis>,
+        <http://example.org/Trevor_Martin> ;
+    dcterms:issued 2014 ;
+    dcterms:title "Communications in Computer and Information Science" .
 
-<https://doi.org/10.1234/pinakes.2024.001> a bibo:AcademicArticle,
-        bibo:Document ;
-    dc:creator <https://orcid.org/0000-0001-2345-6789>,
-        <https://orcid.org/0000-0002-9876-5432> ;
-    dc:date "2024" ;
-    dc:description "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies."@pt ;
-    dc:title "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica"@pt ;
-    dcterms:abstract "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:isPartOf brcris:venue_revista_brasileira_de_informatica_na_educacao ;
-    dcterms:issued "2024"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_amazonia,
-        brcris:keyword_biodiversidade,
-        brcris:keyword_classificacao_de_especies,
-        brcris:keyword_redes_neurais,
-        brcris:keyword_visao_computacional ;
-    dcterms:title "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica"@pt ;
-    bibo:authorList <https://orcid.org/0000-0001-2345-6789>,
-        <https://orcid.org/0000-0002-9876-5432> ;
-    bibo:doi "10.1234/pinakes.2024.001" ;
-    vivo:hasResearchArea brcris:area_ciencia_da_computacao,
-        brcris:area_ecologia ;
-    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica | Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies. | redes neurais | biodiversidade | Amazônia | visão computacional | classificação de espécies"@pt ;
-    schema:keywords "Amazônia"@pt,
-        "biodiversidade"@pt,
-        "classificação de espécies"@pt,
-        "redes neurais"@pt,
-        "visão computacional"@pt .
+<http://example.org/Design_Science_in_Information_Systems_Research1> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Hevner>,
+        <http://example.org/Jinsoo_Park>,
+        <http://example.org/March_March>,
+        <http://example.org/Ram_Ram> ;
+    dcterms:issued 2004 ;
+    dcterms:title "Design Science in Information Systems Research1" .
 
-<https://doi.org/10.5678/brcris.2024.005> a bibo:AcademicArticle,
-        bibo:Document ;
-    dc:creator brcris:author_lucia_viana_campos_fcbbfa9a,
-        <https://orcid.org/0000-0004-5678-9012> ;
-    dc:date "2024" ;
-    dc:description "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos."@pt ;
-    dc:title "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"@pt ;
-    dcterms:abstract "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:isPartOf brcris:venue_perspectivas_em_ciencia_da_informacao ;
-    dcterms:issued "2024"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_interoperabilidade,
-        brcris:keyword_linked_data,
-        brcris:keyword_oai_pmh,
-        brcris:keyword_ontologias,
-        brcris:keyword_repositorios,
-        brcris:keyword_skos ;
-    dcterms:title "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"@pt ;
-    bibo:authorList brcris:author_lucia_viana_campos_fcbbfa9a,
-        <https://orcid.org/0000-0004-5678-9012> ;
-    bibo:doi "10.5678/brcris.2024.005" ;
-    vivo:hasResearchArea brcris:area_ciencia_da_computacao,
-        brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias | Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos. | interoperabilidade | ontologias | SKOS | OAI-PMH | repositórios | linked data"@pt ;
-    schema:keywords "OAI-PMH"@pt,
-        "SKOS"@pt,
-        "interoperabilidade"@pt,
-        "linked data"@pt,
-        "ontologias"@pt,
-        "repositórios"@pt .
+<http://example.org/Design_science_in_information_systems_research> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Alan_R._Hevner>,
+        <http://example.org/Jinsoo_Park>,
+        <http://example.org/Salvatore_T._March>,
+        <http://example.org/Sudha_Ram> ;
+    dcterms:issued 2004 ;
+    dcterms:title "Design science in information systems research" .
 
-pinakes:Ontology a owl:Ontology ;
-    rdfs:label "Pinakes RAG Ontology"@en ;
-    dc:creator <https://github.com/acarloshenrique> ;
-    dcterms:modified "2026-03-30T20:07:40.131554"^^xsd:dateTime ;
-    rdfs:comment "Ontologia do protótipo SAVITS-Pinakes para RAG semântico (FAIR/LGPD)"@pt .
+<http://example.org/Encyclopedia_of_Library_and_Information_Science> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Allen_Kent> ;
+    dcterms:issued 2017 ;
+    dcterms:title "Encyclopedia of Library and Information Science" .
 
-brcris:area_agronomia a schema:CategoryCode ;
-    rdfs:label "Agronomia"@pt .
+<http://example.org/Encyclopedia_of_Library_and_Information_Sciences> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Marcia_J._Bates>,
+        <http://example.org/Mary_Niles_Maack> ;
+    dcterms:issued 2009 ;
+    dcterms:title "Encyclopedia of Library and Information Sciences" .
 
-brcris:area_ciencias_ambientais a schema:CategoryCode ;
-    rdfs:label "Ciências Ambientais"@pt .
+<http://example.org/Geographical_information_science> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Michael_F._Goodchild> ;
+    dcterms:issued 1992 ;
+    dcterms:title "Geographical information science" .
 
-brcris:area_ecologia a schema:CategoryCode ;
-    rdfs:label "Ecologia"@pt .
+<http://example.org/Geomatics_and_Information_Science_of_Wuhan_University> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Deyi_Li>,
+        <http://example.org/LI_Deren>,
+        <http://example.org/Shiyuan_Hu>,
+        <http://example.org/Yaolin_Liu> ;
+    dcterms:issued 2006 ;
+    dcterms:title "Geomatics and Information Science of Wuhan University" .
 
-brcris:area_inteligencia_artificial a schema:CategoryCode ;
-    rdfs:label "Inteligência Artificial"@pt .
+<http://example.org/Information_Science_and_Statistics> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Erling_B._Andersen> ;
+    dcterms:issued 1986 ;
+    dcterms:title "Information Science and Statistics" .
 
-brcris:institution_embrapa_semiarido a vivo:University,
-        foaf:Organization ;
-    foaf:name "Embrapa Semiárido"@pt ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Information_science:_What_is_it?> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Harold_Borko> ;
+    dcterms:issued 1968 ;
+    dcterms:title "Information science: What is it?" .
 
-brcris:institution_instituto_brasileiro_de_informacao_em_ciencia_e_tecnologia a vivo:University,
-        foaf:Organization ;
-    foaf:name "Instituto Brasileiro de Informação em Ciência e Tecnologia"@pt ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Journal_of_the_American_Society_for_Information_Science> a <http://example.org/Document> ;
+    dcterms:issued 1984 ;
+    dcterms:title "Journal of the American Society for Information Science" .
 
-brcris:institution_instituto_nacional_de_pesquisas_da_amazonia a vivo:University,
-        foaf:Organization ;
-    foaf:name "Instituto Nacional de Pesquisas da Amazônia"@pt ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Journal_of_the_American_Society_for_Information_Science_and_Technology> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/King,_John_Leslie>,
+        <http://example.org/Kling,_Rob>,
+        <http://example.org/Lamb,_Roberta> ;
+    dcterms:issued 2006 ;
+    dcterms:title "Journal of the American Society for Information Science and Technology" .
 
-brcris:institution_pontificia_universidade_catolica_do_rio_de_janeiro a vivo:University,
-        foaf:Organization ;
-    foaf:name "Pontifícia Universidade Católica do Rio de Janeiro"@pt ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Journal_of_the_Association_for_Information_Science_and_Technology> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Fereshteh_Didegah>,
+        <http://example.org/Kim_Holmberg>,
+        <http://example.org/Timothy_D._Bowman> ;
+    dcterms:issued 2018 ;
+    dcterms:title "Journal of the Association for Information Science and Technology" .
 
-brcris:keyword_agricultura_familiar a schema:DefinedTerm ;
-    rdfs:label "agricultura familiar"@pt .
+<http://example.org/Lecture_notes_in_control_and_information_sciences> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/J.D._Aplevich> ;
+    dcterms:issued 1991 ;
+    dcterms:title "Lecture notes in control and information sciences" .
 
-brcris:keyword_amazonia a schema:DefinedTerm ;
-    rdfs:label "Amazônia"@pt .
+<http://example.org/Pattern_Recognition_and_Machine_Learning_(Information_Science_and_Statistics)> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Chris_Bishop> ;
+    dcterms:issued 2006 ;
+    dcterms:title "Pattern Recognition and Machine Learning (Information Science and Statistics)" .
 
-brcris:keyword_bert a schema:DefinedTerm ;
-    rdfs:label "BERT"@pt .
+<http://example.org/RELEVANCE:_A_review_of_and_a_framework_for_the_thinking_on_the_notion_in_information_science> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Tefko_Saračević> ;
+    dcterms:issued 1975 ;
+    dcterms:title "RELEVANCE: A review of and a framework for the thinking on the notion in information science" .
 
-brcris:keyword_biodiversidade a schema:DefinedTerm ;
-    rdfs:label "biodiversidade"@pt .
+<http://example.org/Social_network_analysis:_a_powerful_strategy,_also_for_the_information_sciences> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Evelien_Otte>,
+        <http://example.org/Ronald_Rousseau> ;
+    dcterms:issued 2002 ;
+    dcterms:title "Social network analysis: a powerful strategy, also for the information sciences" .
 
-brcris:keyword_ciencia_da_informacao a schema:DefinedTerm ;
-    rdfs:label "ciência da informação"@pt .
+<http://example.org/Toward_a_new_horizon_in_information_science:_Domain-analysis> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Birger_Hjørland>,
+        <http://example.org/Hanne_Albrechtsen> ;
+    dcterms:issued 1995 ;
+    dcterms:title "Toward a new horizon in information science: Domain-analysis" .
 
-brcris:keyword_classificacao_de_especies a schema:DefinedTerm ;
-    rdfs:label "classificação de espécies"@pt .
+<http://example.org/Visualizing_a_discipline:_An_author_co‐citation_analysis_of_information_science,_1972–1995> a <http://example.org/Document> ;
+    dcterms:creator <http://example.org/Howard_D._White>,
+        <http://example.org/Katherine_W._McCain> ;
+    dcterms:issued 1998 ;
+    dcterms:title "Visualizing a discipline: An author co‐citation analysis of information science, 1972–1995" .
 
-brcris:keyword_fair a schema:DefinedTerm ;
-    rdfs:label "FAIR"@pt .
+<http://example.org/Alan_R._Hevner> a foaf:Person ;
+    foaf:name "Alan R. Hevner" .
 
-brcris:keyword_governanca_de_dados a schema:DefinedTerm ;
-    rdfs:label "governança de dados"@pt .
+<http://example.org/Allen_Kent> a foaf:Person ;
+    foaf:name "Allen Kent" .
 
-brcris:keyword_interoperabilidade a schema:DefinedTerm ;
-    rdfs:label "interoperabilidade"@pt .
+<http://example.org/Birger_Hjørland> a foaf:Person ;
+    foaf:name "Birger Hjørland" .
 
-brcris:keyword_lgpd a schema:DefinedTerm ;
-    rdfs:label "LGPD"@pt .
+<http://example.org/Chris_Bishop> a foaf:Person ;
+    foaf:name "Chris Bishop" .
 
-brcris:keyword_linked_data a schema:DefinedTerm ;
-    rdfs:label "linked data"@pt .
+<http://example.org/Daniel_W._Lewis> a foaf:Person ;
+    foaf:name "Daniel W. Lewis" .
 
-brcris:keyword_mudancas_climaticas a schema:DefinedTerm ;
-    rdfs:label "mudanças climáticas"@pt .
+<http://example.org/Deyi_Li> a foaf:Person ;
+    foaf:name "Deyi Li" .
 
-brcris:keyword_oai_pmh a schema:DefinedTerm ;
-    rdfs:label "OAI-PMH"@pt .
+<http://example.org/Erling_B._Andersen> a foaf:Person ;
+    foaf:name "Erling B. Andersen" .
 
-brcris:keyword_ontologias a schema:DefinedTerm ;
-    rdfs:label "ontologias"@pt .
+<http://example.org/Evelien_Otte> a foaf:Person ;
+    foaf:name "Evelien Otte" .
 
-brcris:keyword_rdf a schema:DefinedTerm ;
-    rdfs:label "RDF"@pt .
+<http://example.org/Fereshteh_Didegah> a foaf:Person ;
+    foaf:name "Fereshteh Didegah" .
 
-brcris:keyword_recuperacao_de_informacao a schema:DefinedTerm ;
-    rdfs:label "recuperação de informação"@pt .
+<http://example.org/Hanne_Albrechtsen> a foaf:Person ;
+    foaf:name "Hanne Albrechtsen" .
 
-brcris:keyword_redes_neurais a schema:DefinedTerm ;
-    rdfs:label "redes neurais"@pt .
+<http://example.org/Harold_Borko> a foaf:Person ;
+    foaf:name "Harold Borko" .
 
-brcris:keyword_repositorios a schema:DefinedTerm ;
-    rdfs:label "repositórios"@pt .
+<http://example.org/Hevner> a foaf:Person ;
+    foaf:name "Hevner" .
 
-brcris:keyword_repositorios_institucionais a schema:DefinedTerm ;
-    rdfs:label "repositórios institucionais"@pt .
+<http://example.org/Howard_D._White> a foaf:Person ;
+    foaf:name "Howard D. White" .
 
-brcris:keyword_seguranca_alimentar a schema:DefinedTerm ;
-    rdfs:label "segurança alimentar"@pt .
+<http://example.org/J.D._Aplevich> a foaf:Person ;
+    foaf:name "J.D. Aplevich" .
 
-brcris:keyword_semiarido a schema:DefinedTerm ;
-    rdfs:label "semiárido"@pt .
+<http://example.org/Katherine_W._McCain> a foaf:Person ;
+    foaf:name "Katherine W. McCain" .
 
-brcris:keyword_skos a schema:DefinedTerm ;
-    rdfs:label "SKOS"@pt .
+<http://example.org/Ken_Peffers> a foaf:Person ;
+    foaf:name "Ken Peffers" .
 
-brcris:keyword_sparql a schema:DefinedTerm ;
-    rdfs:label "SPARQL"@pt .
+<http://example.org/Kim_Holmberg> a foaf:Person ;
+    foaf:name "Kim Holmberg" .
 
-brcris:keyword_visao_computacional a schema:DefinedTerm ;
-    rdfs:label "visão computacional"@pt .
+<http://example.org/King,_John_Leslie> a foaf:Person ;
+    foaf:name "King, John Leslie" .
 
-brcris:keyword_web_semantica a schema:DefinedTerm ;
-    rdfs:label "web semântica"@pt .
+<http://example.org/Kling,_Rob> a foaf:Person ;
+    foaf:name "Kling, Rob" .
 
-brcris:venue_perspectivas_em_ciencia_da_informacao a bibo:Periodical ;
-    dc:title "Perspectivas em Ciência da Informação"@pt ;
-    bibo:issn "1981-5344" .
+<http://example.org/LI_Deren> a foaf:Person ;
+    foaf:name "LI Deren" .
 
-brcris:venue_revista_brasileira_de_informatica_na_educacao a bibo:Periodical ;
-    dc:title "Revista Brasileira de Informática na Educação"@pt ;
-    bibo:issn "1414-5685" .
+<http://example.org/Lamb,_Roberta> a foaf:Person ;
+    foaf:name "Lamb, Roberta" .
 
-<https://ror.org/00p991c53> a vivo:University,
-        foaf:Organization ;
-    foaf:name "Universidade Federal do Amazonas"@pt ;
-    pinakes:rorID "00p991c53" ;
-    schema:addressCountry "Brasil" .
+<http://example.org/March_March> a foaf:Person ;
+    foaf:name "March March" .
 
-<https://ror.org/02sprq727> a vivo:University,
-        foaf:Organization ;
-    foaf:name "Universidade de Brasília"@pt ;
-    pinakes:rorID "02sprq727" ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Marcia_J._Bates> a foaf:Person ;
+    foaf:name "Marcia J. Bates" .
 
-<https://ror.org/03490as77> a vivo:University,
-        foaf:Organization ;
-    foaf:name "Universidade Federal do Rio de Janeiro"@pt ;
-    pinakes:rorID "03490as77" ;
-    schema:addressCountry "Brasil" .
+<http://example.org/Marcus_A._Rothenberger> a foaf:Person ;
+    foaf:name "Marcus A. Rothenberger" .
 
-brcris:area_ciencia_da_computacao a schema:CategoryCode ;
-    rdfs:label "Ciência da Computação"@pt .
+<http://example.org/Mark_C._Hersam> a foaf:Person ;
+    foaf:name "Mark C. Hersam" .
 
-brcris:author_fernanda_rocha_lima_80d902e9 a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Fernanda Rocha Lima"@pt ;
-    pinakes:lattesID "9876543210987654" ;
-    schema:affiliation brcris:institution_instituto_brasileiro_de_informacao_em_ciencia_e_tecnologia .
+<http://example.org/Mary_Niles_Maack> a foaf:Person ;
+    foaf:name "Mary Niles Maack" .
 
-brcris:author_lucia_viana_campos_fcbbfa9a a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Lúcia Viana Campos"@pt ;
-    schema:affiliation brcris:institution_pontificia_universidade_catolica_do_rio_de_janeiro .
+<http://example.org/Michael_F._Goodchild> a foaf:Person ;
+    foaf:name "Michael F. Goodchild" .
 
-brcris:author_maria_das_gracas_ferreira_6ea72346 a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Maria das Graças Ferreira"@pt ;
-    schema:affiliation brcris:institution_embrapa_semiarido .
+<http://example.org/Ram_Ram> a foaf:Person ;
+    foaf:name "Ram Ram" .
 
-<https://orcid.org/0000-0001-2345-6789> a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Ana Beatriz Silva"@pt ;
-    pinakes:lattesID "1234567890123456" ;
-    pinakes:orcid "0000-0001-2345-6789" ;
-    schema:affiliation <https://ror.org/00p991c53> .
+<http://example.org/Ronald_Rousseau> a foaf:Person ;
+    foaf:name "Ronald Rousseau" .
 
-<https://orcid.org/0000-0002-9876-5432> a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Carlos Mendes Oliveira"@pt ;
-    pinakes:orcid "0000-0002-9876-5432" ;
-    schema:affiliation brcris:institution_instituto_nacional_de_pesquisas_da_amazonia .
+<http://example.org/Salvatore_T._March> a foaf:Person ;
+    foaf:name "Salvatore T. March" .
 
-<https://orcid.org/0000-0003-1111-2222> a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "João Pedro Alves"@pt ;
-    pinakes:orcid "0000-0003-1111-2222" ;
-    schema:affiliation <https://ror.org/02sprq727> .
+<http://example.org/Samir_Chatterjee> a foaf:Person ;
+    foaf:name "Samir Chatterjee" .
 
-<https://orcid.org/0000-0004-5678-9012> a vivo:FacultyMember,
-        foaf:Person ;
-    foaf:name "Roberto Fonseca Neto"@pt ;
-    pinakes:orcid "0000-0004-5678-9012" ;
-    schema:affiliation <https://ror.org/03490as77> .
+<http://example.org/Shiyuan_Hu> a foaf:Person ;
+    foaf:name "Shiyuan Hu" .
 
-brcris:area_ciencia_da_informacao a schema:CategoryCode ;
-    rdfs:label "Ciência da Informação"@pt .
+<http://example.org/Sudha_Ram> a foaf:Person ;
+    foaf:name "Sudha Ram" .
 
-brcris:gen_a8d18fbd a prov:Activity ;
-    rdfs:label "Geração automática via semantic_integration.py" ;
-    prov:startedAtTime "2026-03-30T20:07:40.132082"^^xsd:dateTime ;
-    prov:wasAssociatedWith <https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype> .
+<http://example.org/Tefko_Saračević> a foaf:Person ;
+    foaf:name "Tefko Saračević" .
+
+<http://example.org/Timothy_D._Bowman> a foaf:Person ;
+    foaf:name "Timothy D. Bowman" .
+
+<http://example.org/Trevor_Martin> a foaf:Person ;
+    foaf:name "Trevor Martin" .
+
+<http://example.org/Tuure_Tuunanen> a foaf:Person ;
+    foaf:name "Tuure Tuunanen" .
+
+<http://example.org/Xiaolong_Liu> a foaf:Person ;
+    foaf:name "Xiaolong Liu" .
+
+<http://example.org/Yaolin_Liu> a foaf:Person ;
+    foaf:name "Yaolin Liu" .
+
+<http://example.org/Jinsoo_Park> a foaf:Person ;
+    foaf:name "Jinsoo Park" .
 
