@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import List
 
 from src.curation.metadata_normalizer import normalize_record
@@ -30,12 +31,19 @@ def run_pipeline(return_pinakes_graph: bool = False):
     Harvest raw records, normalize them for FAIR/CARE compliance and optionally
     materialize a Pinakes-ready RDF graph with dARK identifiers.
     """
-    harvested = (
-        harvest_openalex()
-        + harvest_brcris()
-        + harvest_oasisbr()
-        + harvest_bdtd()
-    )
+    use_remote = os.getenv("SAVITS_USE_REMOTE_SOURCES") == "1"
+    harvested: List[dict] = []
+    harvesters = [
+        lambda: harvest_openalex(),
+        lambda: harvest_brcris(use_remote=use_remote),
+        lambda: harvest_oasisbr(use_remote=use_remote),
+        lambda: harvest_bdtd(use_remote=use_remote),
+    ]
+    for getter in harvesters:
+        try:
+            harvested.extend(getter())
+        except Exception as exc:
+            print(f"[INGEST] Falha ao coletar dados ({exc}).")
 
     seen = set()
     cleaned: List[dict] = []

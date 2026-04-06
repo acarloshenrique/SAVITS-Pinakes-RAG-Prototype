@@ -35,7 +35,7 @@
     bibo:doi "10.1234/pinakes.2024.001" ;
     vivo:hasResearchArea brcris:area_ciencia_da_computacao,
         brcris:area_ecologia ;
-    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    prov:wasGeneratedBy brcris:gen_373ee8a7 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica | Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies. | redes neurais | biodiversidade | Amazônia | visão computacional | classificação de espécies"@pt ;
@@ -68,7 +68,7 @@
     bibo:authorList brcris:author_fernanda_rocha_lima_80d902e9 ;
     bibo:doi "10.1234/pinakes.2024.002" ;
     vivo:hasResearchArea brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    prov:wasGeneratedBy brcris:gen_373ee8a7 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD | Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais. | FAIR | LGPD | governança de dados | repositórios institucionais | ciência da informação"@pt ;
@@ -101,7 +101,7 @@
     bibo:doi "10.1234/pinakes.2024.003" ;
     vivo:hasResearchArea brcris:area_ciencia_da_informacao,
         brcris:area_inteligencia_artificial ;
-    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    prov:wasGeneratedBy brcris:gen_373ee8a7 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas | Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES. | SPARQL | RDF | recuperação de informação | BERT | web semântica"@pt ;
@@ -133,7 +133,7 @@
     bibo:doi "10.1234/pinakes.2024.004" ;
     vivo:hasResearchArea brcris:area_agronomia,
         brcris:area_ciencias_ambientais ;
-    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    prov:wasGeneratedBy brcris:gen_373ee8a7 ;
     pinakes:baseLegalLGPD "Interesse público em pesquisa" ;
     pinakes:contemDadosPessoais true ;
     pinakes:ragText "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino | Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará. | mudanças climáticas | agricultura familiar | semiárido | segurança alimentar"@pt ;
@@ -170,7 +170,7 @@
     bibo:doi "10.5678/brcris.2024.005" ;
     vivo:hasResearchArea brcris:area_ciencia_da_computacao,
         brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    prov:wasGeneratedBy brcris:gen_373ee8a7 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias | Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos. | interoperabilidade | ontologias | SKOS | OAI-PMH | repositórios | linked data"@pt ;
@@ -187,7 +187,7 @@
 pinakes:Ontology a owl:Ontology ;
     rdfs:label "Pinakes RAG Ontology"@en ;
     dc:creator <https://github.com/acarloshenrique> ;
-    dcterms:modified "2026-04-06T19:02:33.324176"^^xsd:dateTime ;
+    dcterms:modified "2026-04-06T19:18:46.423973"^^xsd:dateTime ;
     rdfs:comment "Ontologia do protótipo SAVITS-Pinakes para RAG semântico (FAIR/LGPD)"@pt .
 
 brcris:area_agronomia a schema:CategoryCode ;
@@ -370,8 +370,8 @@ brcris:author_maria_das_gracas_ferreira_6ea72346 a vivo:FacultyMember,
 brcris:area_ciencia_da_informacao a schema:CategoryCode ;
     rdfs:label "Ciência da Informação"@pt .
 
-brcris:gen_fa261806 a prov:Activity ;
+brcris:gen_373ee8a7 a prov:Activity ;
     rdfs:label "Geração automática via semantic_integration.py" ;
-    prov:startedAtTime "2026-04-06T19:02:33.324176"^^xsd:dateTime ;
+    prov:startedAtTime "2026-04-06T19:18:46.425027"^^xsd:dateTime ;
     prov:wasAssociatedWith <https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype> .
 
