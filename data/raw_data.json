@@ -28,8 +28,17 @@
           }
         }
       ],
-      "palavras_chave": ["redes neurais", "biodiversidade", "Amazônia", "visão computacional", "classificação de espécies"],
-      "areas_cnpq": ["Ciência da Computação", "Ecologia"],
+      "palavras_chave": [
+        "redes neurais",
+        "biodiversidade",
+        "Amazônia",
+        "visão computacional",
+        "classificação de espécies"
+      ],
+      "areas_cnpq": [
+        "Ciência da Computação",
+        "Ecologia"
+      ],
       "periodico": {
         "nome": "Revista Brasileira de Informática na Educação",
         "issn": "1414-5685"
@@ -55,11 +64,20 @@
           }
         }
       ],
-      "palavras_chave": ["FAIR", "LGPD", "governança de dados", "repositórios institucionais", "ciência da informação"],
-      "areas_cnpq": ["Ciência da Informação"],
+      "palavras_chave": [
+        "FAIR",
+        "LGPD",
+        "governança de dados",
+        "repositórios institucionais",
+        "ciência da informação"
+      ],
+      "areas_cnpq": [
+        "Ciência da Informação"
+      ],
       "acesso": "aberto",
       "licenca": "https://creativecommons.org/licenses/by-nc/4.0/",
-      "dados_pessoais": false
+      "dados_pessoais": false,
+      "doi": "10.1234/pinakes.2024.002"
     },
     {
       "id": "003",
@@ -79,11 +97,21 @@
           }
         }
       ],
-      "palavras_chave": ["SPARQL", "RDF", "recuperação de informação", "BERT", "web semântica"],
-      "areas_cnpq": ["Ciência da Informação", "Inteligência Artificial"],
+      "palavras_chave": [
+        "SPARQL",
+        "RDF",
+        "recuperação de informação",
+        "BERT",
+        "web semântica"
+      ],
+      "areas_cnpq": [
+        "Ciência da Informação",
+        "Inteligência Artificial"
+      ],
       "acesso": "aberto",
       "licenca": "https://creativecommons.org/licenses/by/4.0/",
-      "dados_pessoais": false
+      "dados_pessoais": false,
+      "doi": "10.1234/pinakes.2024.003"
     },
     {
       "id": "004",
@@ -95,14 +123,26 @@
       "autores": [
         {
           "nome": "Maria das Graças Ferreira",
-          "afiliacao": {"nome": "Embrapa Semiárido", "pais": "Brasil"}
+          "afiliacao": {
+            "nome": "Embrapa Semiárido",
+            "pais": "Brasil"
+          }
         }
       ],
-      "palavras_chave": ["mudanças climáticas", "agricultura familiar", "semiárido", "segurança alimentar"],
-      "areas_cnpq": ["Agronomia", "Ciências Ambientais"],
+      "palavras_chave": [
+        "mudanças climáticas",
+        "agricultura familiar",
+        "semiárido",
+        "segurança alimentar"
+      ],
+      "areas_cnpq": [
+        "Agronomia",
+        "Ciências Ambientais"
+      ],
       "acesso": "restrito",
       "dados_pessoais": true,
-      "base_legal_lgpd": "Interesse público em pesquisa"
+      "base_legal_lgpd": "Interesse público em pesquisa",
+      "doi": "10.1234/pinakes.2024.004"
     },
     {
       "id": "005",
@@ -116,16 +156,36 @@
         {
           "nome": "Roberto Fonseca Neto",
           "orcid": "0000-0004-5678-9012",
-          "afiliacao": {"nome": "Universidade Federal do Rio de Janeiro", "ror": "03490as77", "pais": "Brasil"}
+          "afiliacao": {
+            "nome": "Universidade Federal do Rio de Janeiro",
+            "ror": "03490as77",
+            "pais": "Brasil"
+          }
         },
         {
           "nome": "Lúcia Viana Campos",
-          "afiliacao": {"nome": "Pontifícia Universidade Católica do Rio de Janeiro", "pais": "Brasil"}
+          "afiliacao": {
+            "nome": "Pontifícia Universidade Católica do Rio de Janeiro",
+            "pais": "Brasil"
+          }
         }
       ],
-      "palavras_chave": ["interoperabilidade", "ontologias", "SKOS", "OAI-PMH", "repositórios", "linked data"],
-      "areas_cnpq": ["Ciência da Informação", "Ciência da Computação"],
-      "periodico": {"nome": "Perspectivas em Ciência da Informação", "issn": "1981-5344"},
+      "palavras_chave": [
+        "interoperabilidade",
+        "ontologias",
+        "SKOS",
+        "OAI-PMH",
+        "repositórios",
+        "linked data"
+      ],
+      "areas_cnpq": [
+        "Ciência da Informação",
+        "Ciência da Computação"
+      ],
+      "periodico": {
+        "nome": "Perspectivas em Ciência da Informação",
+        "issn": "1981-5344"
+      },
       "acesso": "aberto",
       "licenca": "https://creativecommons.org/licenses/by/4.0/",
       "dados_pessoais": false

@@ -11,100 +11,6 @@
 @prefix vivo: <http://vivoweb.org/ontology/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-brcris:work_002 a bibo:AcademicArticle,
-        bibo:Document ;
-    dc:creator brcris:author_fernanda_rocha_lima_80d902e9 ;
-    dc:date "2023" ;
-    dc:description "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
-    dc:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
-    dcterms:abstract "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:issued "2023"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_ciencia_da_informacao,
-        brcris:keyword_fair,
-        brcris:keyword_governanca_de_dados,
-        brcris:keyword_lgpd,
-        brcris:keyword_repositorios_institucionais ;
-    dcterms:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
-    bibo:authorList brcris:author_fernanda_rocha_lima_80d902e9 ;
-    vivo:hasResearchArea brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_680221c8 ;
-    pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD | Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais. | FAIR | LGPD | governança de dados | repositórios institucionais | ciência da informação"@pt ;
-    pinakes:statusLGPD "Anonimizado" ;
-    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
-    schema:keywords "FAIR"@pt,
-        "LGPD"@pt,
-        "ciência da informação"@pt,
-        "governança de dados"@pt,
-        "repositórios institucionais"@pt .
-
-brcris:work_003 a bibo:Document,
-        bibo:Thesis ;
-    dc:creator <https://orcid.org/0000-0003-1111-2222> ;
-    dc:date "2022" ;
-    dc:description "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
-    dc:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
-    dcterms:abstract "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
-    dcterms:accessRights "aberto" ;
-    dcterms:issued "2022"^^xsd:gYear ;
-    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_bert,
-        brcris:keyword_rdf,
-        brcris:keyword_recuperacao_de_informacao,
-        brcris:keyword_sparql,
-        brcris:keyword_web_semantica ;
-    dcterms:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
-    bibo:authorList <https://orcid.org/0000-0003-1111-2222> ;
-    vivo:hasResearchArea brcris:area_ciencia_da_informacao,
-        brcris:area_inteligencia_artificial ;
-    prov:wasGeneratedBy brcris:gen_680221c8 ;
-    pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
-    pinakes:contemDadosPessoais false ;
-    pinakes:ragText "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas | Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES. | SPARQL | RDF | recuperação de informação | BERT | web semântica"@pt ;
-    pinakes:statusLGPD "Anonimizado" ;
-    pinakes:temImpactoSocial "Ciência da Informação"@pt,
-        "Inteligência Artificial"@pt ;
-    schema:keywords "BERT"@pt,
-        "RDF"@pt,
-        "SPARQL"@pt,
-        "recuperação de informação"@pt,
-        "web semântica"@pt .
-
-brcris:work_004 a bibo:Document,
-        bibo:Report ;
-    dc:creator brcris:author_maria_das_gracas_ferreira_6ea72346 ;
-    dc:date "2023" ;
-    dc:description "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
-    dc:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
-    dcterms:abstract "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
-    dcterms:accessRights "restrito" ;
-    dcterms:issued "2023"^^xsd:gYear ;
-    dcterms:source "raw_data.json" ;
-    dcterms:subject brcris:keyword_agricultura_familiar,
-        brcris:keyword_mudancas_climaticas,
-        brcris:keyword_seguranca_alimentar,
-        brcris:keyword_semiarido ;
-    dcterms:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
-    bibo:authorList brcris:author_maria_das_gracas_ferreira_6ea72346 ;
-    vivo:hasResearchArea brcris:area_agronomia,
-        brcris:area_ciencias_ambientais ;
-    prov:wasGeneratedBy brcris:gen_680221c8 ;
-    pinakes:baseLegalLGPD "Interesse público em pesquisa" ;
-    pinakes:contemDadosPessoais true ;
-    pinakes:ragText "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino | Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará. | mudanças climáticas | agricultura familiar | semiárido | segurança alimentar"@pt ;
-    pinakes:statusLGPD "Controlado" ;
-    pinakes:temImpactoSocial "Agronomia"@pt,
-        "Ciências Ambientais"@pt ;
-    schema:keywords "agricultura familiar"@pt,
-        "mudanças climáticas"@pt,
-        "segurança alimentar"@pt,
-        "semiárido"@pt .
-
 <https://doi.org/10.1234/pinakes.2024.001> a bibo:AcademicArticle,
         bibo:Document ;
     dc:creator <https://orcid.org/0000-0001-2345-6789>,
@@ -129,7 +35,7 @@ brcris:work_004 a bibo:Document,
     bibo:doi "10.1234/pinakes.2024.001" ;
     vivo:hasResearchArea brcris:area_ciencia_da_computacao,
         brcris:area_ecologia ;
-    prov:wasGeneratedBy brcris:gen_680221c8 ;
+    prov:wasGeneratedBy brcris:gen_fa261806 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica | Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies. | redes neurais | biodiversidade | Amazônia | visão computacional | classificação de espécies"@pt ;
@@ -141,6 +47,103 @@ brcris:work_004 a bibo:Document,
         "classificação de espécies"@pt,
         "redes neurais"@pt,
         "visão computacional"@pt .
+
+<https://doi.org/10.1234/pinakes.2024.002> a bibo:AcademicArticle,
+        bibo:Document ;
+    dc:creator brcris:author_fernanda_rocha_lima_80d902e9 ;
+    dc:date "2023" ;
+    dc:description "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
+    dc:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
+    dcterms:abstract "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:issued "2023"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_ciencia_da_informacao,
+        brcris:keyword_fair,
+        brcris:keyword_governanca_de_dados,
+        brcris:keyword_lgpd,
+        brcris:keyword_repositorios_institucionais ;
+    dcterms:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
+    bibo:authorList brcris:author_fernanda_rocha_lima_80d902e9 ;
+    bibo:doi "10.1234/pinakes.2024.002" ;
+    vivo:hasResearchArea brcris:area_ciencia_da_informacao ;
+    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD | Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais. | FAIR | LGPD | governança de dados | repositórios institucionais | ciência da informação"@pt ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt ;
+    schema:keywords "FAIR"@pt,
+        "LGPD"@pt,
+        "ciência da informação"@pt,
+        "governança de dados"@pt,
+        "repositórios institucionais"@pt .
+
+<https://doi.org/10.1234/pinakes.2024.003> a bibo:Document,
+        bibo:Thesis ;
+    dc:creator <https://orcid.org/0000-0003-1111-2222> ;
+    dc:date "2022" ;
+    dc:description "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
+    dc:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
+    dcterms:abstract "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:issued "2022"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_bert,
+        brcris:keyword_rdf,
+        brcris:keyword_recuperacao_de_informacao,
+        brcris:keyword_sparql,
+        brcris:keyword_web_semantica ;
+    dcterms:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
+    bibo:authorList <https://orcid.org/0000-0003-1111-2222> ;
+    bibo:doi "10.1234/pinakes.2024.003" ;
+    vivo:hasResearchArea brcris:area_ciencia_da_informacao,
+        brcris:area_inteligencia_artificial ;
+    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas | Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES. | SPARQL | RDF | recuperação de informação | BERT | web semântica"@pt ;
+    pinakes:statusLGPD "Anonimizado" ;
+    pinakes:temImpactoSocial "Ciência da Informação"@pt,
+        "Inteligência Artificial"@pt ;
+    schema:keywords "BERT"@pt,
+        "RDF"@pt,
+        "SPARQL"@pt,
+        "recuperação de informação"@pt,
+        "web semântica"@pt .
+
+<https://doi.org/10.1234/pinakes.2024.004> a bibo:Document,
+        bibo:Report ;
+    dc:creator brcris:author_maria_das_gracas_ferreira_6ea72346 ;
+    dc:date "2023" ;
+    dc:description "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
+    dc:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
+    dcterms:abstract "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
+    dcterms:accessRights "restrito" ;
+    dcterms:issued "2023"^^xsd:gYear ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_agricultura_familiar,
+        brcris:keyword_mudancas_climaticas,
+        brcris:keyword_seguranca_alimentar,
+        brcris:keyword_semiarido ;
+    dcterms:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
+    bibo:authorList brcris:author_maria_das_gracas_ferreira_6ea72346 ;
+    bibo:doi "10.1234/pinakes.2024.004" ;
+    vivo:hasResearchArea brcris:area_agronomia,
+        brcris:area_ciencias_ambientais ;
+    prov:wasGeneratedBy brcris:gen_fa261806 ;
+    pinakes:baseLegalLGPD "Interesse público em pesquisa" ;
+    pinakes:contemDadosPessoais true ;
+    pinakes:ragText "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino | Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará. | mudanças climáticas | agricultura familiar | semiárido | segurança alimentar"@pt ;
+    pinakes:statusLGPD "Controlado" ;
+    pinakes:temImpactoSocial "Agronomia"@pt,
+        "Ciências Ambientais"@pt ;
+    schema:keywords "agricultura familiar"@pt,
+        "mudanças climáticas"@pt,
+        "segurança alimentar"@pt,
+        "semiárido"@pt .
 
 <https://doi.org/10.5678/brcris.2024.005> a bibo:AcademicArticle,
         bibo:Document ;
@@ -167,7 +170,7 @@ brcris:work_004 a bibo:Document,
     bibo:doi "10.5678/brcris.2024.005" ;
     vivo:hasResearchArea brcris:area_ciencia_da_computacao,
         brcris:area_ciencia_da_informacao ;
-    prov:wasGeneratedBy brcris:gen_680221c8 ;
+    prov:wasGeneratedBy brcris:gen_fa261806 ;
     pinakes:baseLegalLGPD "LGPD Art. 7º III" ;
     pinakes:contemDadosPessoais false ;
     pinakes:ragText "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias | Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos. | interoperabilidade | ontologias | SKOS | OAI-PMH | repositórios | linked data"@pt ;
@@ -184,7 +187,7 @@ brcris:work_004 a bibo:Document,
 pinakes:Ontology a owl:Ontology ;
     rdfs:label "Pinakes RAG Ontology"@en ;
     dc:creator <https://github.com/acarloshenrique> ;
-    dcterms:modified "2026-04-06T19:00:04.890394"^^xsd:dateTime ;
+    dcterms:modified "2026-04-06T19:02:33.324176"^^xsd:dateTime ;
     rdfs:comment "Ontologia do protótipo SAVITS-Pinakes para RAG semântico (FAIR/LGPD)"@pt .
 
 brcris:area_agronomia a schema:CategoryCode ;
@@ -367,8 +370,8 @@ brcris:author_maria_das_gracas_ferreira_6ea72346 a vivo:FacultyMember,
 brcris:area_ciencia_da_informacao a schema:CategoryCode ;
     rdfs:label "Ciência da Informação"@pt .
 
-brcris:gen_680221c8 a prov:Activity ;
+brcris:gen_fa261806 a prov:Activity ;
     rdfs:label "Geração automática via semantic_integration.py" ;
-    prov:startedAtTime "2026-04-06T19:00:04.890394"^^xsd:dateTime ;
+    prov:startedAtTime "2026-04-06T19:02:33.324176"^^xsd:dateTime ;
     prov:wasAssociatedWith <https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype> .
 
