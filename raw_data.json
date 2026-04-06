@@ -1,0 +1,134 @@
+{
+  "works": [
+    {
+      "id": "001",
+      "doi": "10.1234/pinakes.2024.001",
+      "titulo": "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica",
+      "tipo": "artigo",
+      "ano": "2024",
+      "idioma": "pt",
+      "resumo": "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies.",
+      "autores": [
+        {
+          "nome": "Ana Beatriz Silva",
+          "orcid": "0000-0001-2345-6789",
+          "lattes": "1234567890123456",
+          "afiliacao": {
+            "nome": "Universidade Federal do Amazonas",
+            "ror": "00p991c53",
+            "pais": "Brasil"
+          }
+        },
+        {
+          "nome": "Carlos Mendes Oliveira",
+          "orcid": "0000-0002-9876-5432",
+          "afiliacao": {
+            "nome": "Instituto Nacional de Pesquisas da Amazônia",
+            "pais": "Brasil"
+          }
+        }
+      ],
+      "palavras_chave": ["redes neurais", "biodiversidade", "Amazônia", "visão computacional", "classificação de espécies"],
+      "areas_cnpq": ["Ciência da Computação", "Ecologia"],
+      "periodico": {
+        "nome": "Revista Brasileira de Informática na Educação",
+        "issn": "1414-5685"
+      },
+      "acesso": "aberto",
+      "licenca": "https://creativecommons.org/licenses/by/4.0/",
+      "dados_pessoais": false
+    },
+    {
+      "id": "002",
+      "titulo": "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD",
+      "tipo": "artigo",
+      "ano": "2023",
+      "idioma": "pt",
+      "resumo": "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais.",
+      "autores": [
+        {
+          "nome": "Fernanda Rocha Lima",
+          "lattes": "9876543210987654",
+          "afiliacao": {
+            "nome": "Instituto Brasileiro de Informação em Ciência e Tecnologia",
+            "pais": "Brasil"
+          }
+        }
+      ],
+      "palavras_chave": ["FAIR", "LGPD", "governança de dados", "repositórios institucionais", "ciência da informação"],
+      "areas_cnpq": ["Ciência da Informação"],
+      "acesso": "aberto",
+      "licenca": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "dados_pessoais": false
+    },
+    {
+      "id": "003",
+      "titulo": "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas",
+      "tipo": "tese",
+      "ano": "2022",
+      "idioma": "pt",
+      "resumo": "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES.",
+      "autores": [
+        {
+          "nome": "João Pedro Alves",
+          "orcid": "0000-0003-1111-2222",
+          "afiliacao": {
+            "nome": "Universidade de Brasília",
+            "ror": "02sprq727",
+            "pais": "Brasil"
+          }
+        }
+      ],
+      "palavras_chave": ["SPARQL", "RDF", "recuperação de informação", "BERT", "web semântica"],
+      "areas_cnpq": ["Ciência da Informação", "Inteligência Artificial"],
+      "acesso": "aberto",
+      "licenca": "https://creativecommons.org/licenses/by/4.0/",
+      "dados_pessoais": false
+    },
+    {
+      "id": "004",
+      "titulo": "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino",
+      "tipo": "relatorio",
+      "ano": "2023",
+      "idioma": "pt",
+      "resumo": "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará.",
+      "autores": [
+        {
+          "nome": "Maria das Graças Ferreira",
+          "afiliacao": {"nome": "Embrapa Semiárido", "pais": "Brasil"}
+        }
+      ],
+      "palavras_chave": ["mudanças climáticas", "agricultura familiar", "semiárido", "segurança alimentar"],
+      "areas_cnpq": ["Agronomia", "Ciências Ambientais"],
+      "acesso": "restrito",
+      "dados_pessoais": true,
+      "base_legal_lgpd": "Interesse público em pesquisa"
+    },
+    {
+      "id": "005",
+      "doi": "10.5678/brcris.2024.005",
+      "titulo": "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias",
+      "tipo": "artigo",
+      "ano": "2024",
+      "idioma": "pt",
+      "resumo": "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos.",
+      "autores": [
+        {
+          "nome": "Roberto Fonseca Neto",
+          "orcid": "0000-0004-5678-9012",
+          "afiliacao": {"nome": "Universidade Federal do Rio de Janeiro", "ror": "03490as77", "pais": "Brasil"}
+        },
+        {
+          "nome": "Lúcia Viana Campos",
+          "afiliacao": {"nome": "Pontifícia Universidade Católica do Rio de Janeiro", "pais": "Brasil"}
+        }
+      ],
+      "palavras_chave": ["interoperabilidade", "ontologias", "SKOS", "OAI-PMH", "repositórios", "linked data"],
+      "areas_cnpq": ["Ciência da Informação", "Ciência da Computação"],
+      "periodico": {"nome": "Perspectivas em Ciência da Informação", "issn": "1981-5344"},
+      "acesso": "aberto",
+      "licenca": "https://creativecommons.org/licenses/by/4.0/",
+      "dados_pessoais": false
+    }
+  ]
+}

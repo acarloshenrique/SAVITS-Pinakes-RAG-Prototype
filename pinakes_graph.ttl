@@ -1,0 +1,356 @@
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix brcris: <https://brcris.ibict.br/resource/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pinakes: <https://pinakes.ibict.br/ontology/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix vivo: <http://vivoweb.org/ontology/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+brcris:work_002 a bibo:AcademicArticle,
+        bibo:Document ;
+    dc:creator brcris:author_fernanda_rocha_lima_80d902e9 ;
+    dc:date "2023" ;
+    dc:description "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
+    dc:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
+    dcterms:abstract "Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:issued "2023"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_ciencia_da_informacao,
+        brcris:keyword_fair,
+        brcris:keyword_governanca_de_dados,
+        brcris:keyword_lgpd,
+        brcris:keyword_repositorios_institucionais ;
+    dcterms:title "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"@pt ;
+    bibo:authorList brcris:author_fernanda_rocha_lima_80d902e9 ;
+    vivo:hasResearchArea brcris:area_ciencia_da_informacao ;
+    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD | Análise sistemática das políticas de dados de pesquisa nas universidades federais brasileiras, com foco na conformidade com os princípios FAIR (Findable, Accessible, Interoperable, Reusable) e com a Lei Geral de Proteção de Dados (LGPD). O estudo identifica lacunas críticas na infraestrutura de repositórios institucionais. | FAIR | LGPD | governança de dados | repositórios institucionais | ciência da informação"@pt ;
+    schema:keywords "FAIR"@pt,
+        "LGPD"@pt,
+        "ciência da informação"@pt,
+        "governança de dados"@pt,
+        "repositórios institucionais"@pt .
+
+brcris:work_003 a bibo:Document,
+        bibo:Thesis ;
+    dc:creator <https://orcid.org/0000-0003-1111-2222> ;
+    dc:date "2022" ;
+    dc:description "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
+    dc:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
+    dcterms:abstract "Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:issued "2022"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_bert,
+        brcris:keyword_rdf,
+        brcris:keyword_recuperacao_de_informacao,
+        brcris:keyword_sparql,
+        brcris:keyword_web_semantica ;
+    dcterms:title "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"@pt ;
+    bibo:authorList <https://orcid.org/0000-0003-1111-2222> ;
+    vivo:hasResearchArea brcris:area_ciencia_da_informacao,
+        brcris:area_inteligencia_artificial ;
+    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas | Esta tese propõe uma arquitetura híbrida de recuperação de informação combinando buscas SPARQL em grafos de conhecimento RDF com modelos de linguagem pré-treinados (BERT) para reranking semântico, aplicada ao acervo de teses e dissertações da CAPES. | SPARQL | RDF | recuperação de informação | BERT | web semântica"@pt ;
+    schema:keywords "BERT"@pt,
+        "RDF"@pt,
+        "SPARQL"@pt,
+        "recuperação de informação"@pt,
+        "web semântica"@pt .
+
+brcris:work_004 a bibo:Document,
+        bibo:Report ;
+    dc:creator brcris:author_maria_das_gracas_ferreira_6ea72346 ;
+    dc:date "2023" ;
+    dc:description "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
+    dc:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
+    dcterms:abstract "Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará."@pt ;
+    dcterms:accessRights "restrito" ;
+    dcterms:issued "2023"^^xsd:gYear ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_agricultura_familiar,
+        brcris:keyword_mudancas_climaticas,
+        brcris:keyword_seguranca_alimentar,
+        brcris:keyword_semiarido ;
+    dcterms:title "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino"@pt ;
+    bibo:authorList brcris:author_maria_das_gracas_ferreira_6ea72346 ;
+    vivo:hasResearchArea brcris:area_agronomia,
+        brcris:area_ciencias_ambientais ;
+    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
+    pinakes:baseLegalLGPD "Interesse público em pesquisa" ;
+    pinakes:contemDadosPessoais true ;
+    pinakes:ragText "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino | Relatório técnico sobre os efeitos das mudanças climáticas na produtividade agrícola de pequenos agricultores do semiárido brasileiro, com dados coletados de 2018 a 2023 em 45 municípios dos estados da Paraíba, Pernambuco e Ceará. | mudanças climáticas | agricultura familiar | semiárido | segurança alimentar"@pt ;
+    schema:keywords "agricultura familiar"@pt,
+        "mudanças climáticas"@pt,
+        "segurança alimentar"@pt,
+        "semiárido"@pt .
+
+<https://doi.org/10.1234/pinakes.2024.001> a bibo:AcademicArticle,
+        bibo:Document ;
+    dc:creator <https://orcid.org/0000-0001-2345-6789>,
+        <https://orcid.org/0000-0002-9876-5432> ;
+    dc:date "2024" ;
+    dc:description "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies."@pt ;
+    dc:title "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica"@pt ;
+    dcterms:abstract "Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:isPartOf brcris:venue_revista_brasileira_de_informatica_na_educacao ;
+    dcterms:issued "2024"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_amazonia,
+        brcris:keyword_biodiversidade,
+        brcris:keyword_classificacao_de_especies,
+        brcris:keyword_redes_neurais,
+        brcris:keyword_visao_computacional ;
+    dcterms:title "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica"@pt ;
+    bibo:authorList <https://orcid.org/0000-0001-2345-6789>,
+        <https://orcid.org/0000-0002-9876-5432> ;
+    bibo:doi "10.1234/pinakes.2024.001" ;
+    vivo:hasResearchArea brcris:area_ciencia_da_computacao,
+        brcris:area_ecologia ;
+    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica | Este artigo investiga a aplicação de redes neurais convolucionais para classificação automatizada de espécies da fauna amazônica a partir de imagens de armadilhas fotográficas. O método proposto alcança acurácia de 94,3% em um conjunto de dados com 150 espécies. | redes neurais | biodiversidade | Amazônia | visão computacional | classificação de espécies"@pt ;
+    schema:keywords "Amazônia"@pt,
+        "biodiversidade"@pt,
+        "classificação de espécies"@pt,
+        "redes neurais"@pt,
+        "visão computacional"@pt .
+
+<https://doi.org/10.5678/brcris.2024.005> a bibo:AcademicArticle,
+        bibo:Document ;
+    dc:creator brcris:author_lucia_viana_campos_fcbbfa9a,
+        <https://orcid.org/0000-0004-5678-9012> ;
+    dc:date "2024" ;
+    dc:description "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos."@pt ;
+    dc:title "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"@pt ;
+    dcterms:abstract "Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos."@pt ;
+    dcterms:accessRights "aberto" ;
+    dcterms:isPartOf brcris:venue_perspectivas_em_ciencia_da_informacao ;
+    dcterms:issued "2024"^^xsd:gYear ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:source "raw_data.json" ;
+    dcterms:subject brcris:keyword_interoperabilidade,
+        brcris:keyword_linked_data,
+        brcris:keyword_oai_pmh,
+        brcris:keyword_ontologias,
+        brcris:keyword_repositorios,
+        brcris:keyword_skos ;
+    dcterms:title "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"@pt ;
+    bibo:authorList brcris:author_lucia_viana_campos_fcbbfa9a,
+        <https://orcid.org/0000-0004-5678-9012> ;
+    bibo:doi "10.5678/brcris.2024.005" ;
+    vivo:hasResearchArea brcris:area_ciencia_da_computacao,
+        brcris:area_ciencia_da_informacao ;
+    prov:wasGeneratedBy brcris:gen_a8d18fbd ;
+    pinakes:contemDadosPessoais false ;
+    pinakes:ragText "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias | Proposta de um framework de interoperabilidade entre repositórios institucionais de dados de pesquisa utilizando ontologias de domínio, mapeamentos SKOS e protocolos OAI-PMH estendidos para suporte a metadados semânticos. | interoperabilidade | ontologias | SKOS | OAI-PMH | repositórios | linked data"@pt ;
+    schema:keywords "OAI-PMH"@pt,
+        "SKOS"@pt,
+        "interoperabilidade"@pt,
+        "linked data"@pt,
+        "ontologias"@pt,
+        "repositórios"@pt .
+
+pinakes:Ontology a owl:Ontology ;
+    rdfs:label "Pinakes RAG Ontology"@en ;
+    dc:creator <https://github.com/acarloshenrique> ;
+    dcterms:modified "2026-03-30T20:07:40.131554"^^xsd:dateTime ;
+    rdfs:comment "Ontologia do protótipo SAVITS-Pinakes para RAG semântico (FAIR/LGPD)"@pt .
+
+brcris:area_agronomia a schema:CategoryCode ;
+    rdfs:label "Agronomia"@pt .
+
+brcris:area_ciencias_ambientais a schema:CategoryCode ;
+    rdfs:label "Ciências Ambientais"@pt .
+
+brcris:area_ecologia a schema:CategoryCode ;
+    rdfs:label "Ecologia"@pt .
+
+brcris:area_inteligencia_artificial a schema:CategoryCode ;
+    rdfs:label "Inteligência Artificial"@pt .
+
+brcris:institution_embrapa_semiarido a vivo:University,
+        foaf:Organization ;
+    foaf:name "Embrapa Semiárido"@pt ;
+    schema:addressCountry "Brasil" .
+
+brcris:institution_instituto_brasileiro_de_informacao_em_ciencia_e_tecnologia a vivo:University,
+        foaf:Organization ;
+    foaf:name "Instituto Brasileiro de Informação em Ciência e Tecnologia"@pt ;
+    schema:addressCountry "Brasil" .
+
+brcris:institution_instituto_nacional_de_pesquisas_da_amazonia a vivo:University,
+        foaf:Organization ;
+    foaf:name "Instituto Nacional de Pesquisas da Amazônia"@pt ;
+    schema:addressCountry "Brasil" .
+
+brcris:institution_pontificia_universidade_catolica_do_rio_de_janeiro a vivo:University,
+        foaf:Organization ;
+    foaf:name "Pontifícia Universidade Católica do Rio de Janeiro"@pt ;
+    schema:addressCountry "Brasil" .
+
+brcris:keyword_agricultura_familiar a schema:DefinedTerm ;
+    rdfs:label "agricultura familiar"@pt .
+
+brcris:keyword_amazonia a schema:DefinedTerm ;
+    rdfs:label "Amazônia"@pt .
+
+brcris:keyword_bert a schema:DefinedTerm ;
+    rdfs:label "BERT"@pt .
+
+brcris:keyword_biodiversidade a schema:DefinedTerm ;
+    rdfs:label "biodiversidade"@pt .
+
+brcris:keyword_ciencia_da_informacao a schema:DefinedTerm ;
+    rdfs:label "ciência da informação"@pt .
+
+brcris:keyword_classificacao_de_especies a schema:DefinedTerm ;
+    rdfs:label "classificação de espécies"@pt .
+
+brcris:keyword_fair a schema:DefinedTerm ;
+    rdfs:label "FAIR"@pt .
+
+brcris:keyword_governanca_de_dados a schema:DefinedTerm ;
+    rdfs:label "governança de dados"@pt .
+
+brcris:keyword_interoperabilidade a schema:DefinedTerm ;
+    rdfs:label "interoperabilidade"@pt .
+
+brcris:keyword_lgpd a schema:DefinedTerm ;
+    rdfs:label "LGPD"@pt .
+
+brcris:keyword_linked_data a schema:DefinedTerm ;
+    rdfs:label "linked data"@pt .
+
+brcris:keyword_mudancas_climaticas a schema:DefinedTerm ;
+    rdfs:label "mudanças climáticas"@pt .
+
+brcris:keyword_oai_pmh a schema:DefinedTerm ;
+    rdfs:label "OAI-PMH"@pt .
+
+brcris:keyword_ontologias a schema:DefinedTerm ;
+    rdfs:label "ontologias"@pt .
+
+brcris:keyword_rdf a schema:DefinedTerm ;
+    rdfs:label "RDF"@pt .
+
+brcris:keyword_recuperacao_de_informacao a schema:DefinedTerm ;
+    rdfs:label "recuperação de informação"@pt .
+
+brcris:keyword_redes_neurais a schema:DefinedTerm ;
+    rdfs:label "redes neurais"@pt .
+
+brcris:keyword_repositorios a schema:DefinedTerm ;
+    rdfs:label "repositórios"@pt .
+
+brcris:keyword_repositorios_institucionais a schema:DefinedTerm ;
+    rdfs:label "repositórios institucionais"@pt .
+
+brcris:keyword_seguranca_alimentar a schema:DefinedTerm ;
+    rdfs:label "segurança alimentar"@pt .
+
+brcris:keyword_semiarido a schema:DefinedTerm ;
+    rdfs:label "semiárido"@pt .
+
+brcris:keyword_skos a schema:DefinedTerm ;
+    rdfs:label "SKOS"@pt .
+
+brcris:keyword_sparql a schema:DefinedTerm ;
+    rdfs:label "SPARQL"@pt .
+
+brcris:keyword_visao_computacional a schema:DefinedTerm ;
+    rdfs:label "visão computacional"@pt .
+
+brcris:keyword_web_semantica a schema:DefinedTerm ;
+    rdfs:label "web semântica"@pt .
+
+brcris:venue_perspectivas_em_ciencia_da_informacao a bibo:Periodical ;
+    dc:title "Perspectivas em Ciência da Informação"@pt ;
+    bibo:issn "1981-5344" .
+
+brcris:venue_revista_brasileira_de_informatica_na_educacao a bibo:Periodical ;
+    dc:title "Revista Brasileira de Informática na Educação"@pt ;
+    bibo:issn "1414-5685" .
+
+<https://ror.org/00p991c53> a vivo:University,
+        foaf:Organization ;
+    foaf:name "Universidade Federal do Amazonas"@pt ;
+    pinakes:rorID "00p991c53" ;
+    schema:addressCountry "Brasil" .
+
+<https://ror.org/02sprq727> a vivo:University,
+        foaf:Organization ;
+    foaf:name "Universidade de Brasília"@pt ;
+    pinakes:rorID "02sprq727" ;
+    schema:addressCountry "Brasil" .
+
+<https://ror.org/03490as77> a vivo:University,
+        foaf:Organization ;
+    foaf:name "Universidade Federal do Rio de Janeiro"@pt ;
+    pinakes:rorID "03490as77" ;
+    schema:addressCountry "Brasil" .
+
+brcris:area_ciencia_da_computacao a schema:CategoryCode ;
+    rdfs:label "Ciência da Computação"@pt .
+
+brcris:author_fernanda_rocha_lima_80d902e9 a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Fernanda Rocha Lima"@pt ;
+    pinakes:lattesID "9876543210987654" ;
+    schema:affiliation brcris:institution_instituto_brasileiro_de_informacao_em_ciencia_e_tecnologia .
+
+brcris:author_lucia_viana_campos_fcbbfa9a a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Lúcia Viana Campos"@pt ;
+    schema:affiliation brcris:institution_pontificia_universidade_catolica_do_rio_de_janeiro .
+
+brcris:author_maria_das_gracas_ferreira_6ea72346 a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Maria das Graças Ferreira"@pt ;
+    schema:affiliation brcris:institution_embrapa_semiarido .
+
+<https://orcid.org/0000-0001-2345-6789> a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Ana Beatriz Silva"@pt ;
+    pinakes:lattesID "1234567890123456" ;
+    pinakes:orcid "0000-0001-2345-6789" ;
+    schema:affiliation <https://ror.org/00p991c53> .
+
+<https://orcid.org/0000-0002-9876-5432> a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Carlos Mendes Oliveira"@pt ;
+    pinakes:orcid "0000-0002-9876-5432" ;
+    schema:affiliation brcris:institution_instituto_nacional_de_pesquisas_da_amazonia .
+
+<https://orcid.org/0000-0003-1111-2222> a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "João Pedro Alves"@pt ;
+    pinakes:orcid "0000-0003-1111-2222" ;
+    schema:affiliation <https://ror.org/02sprq727> .
+
+<https://orcid.org/0000-0004-5678-9012> a vivo:FacultyMember,
+        foaf:Person ;
+    foaf:name "Roberto Fonseca Neto"@pt ;
+    pinakes:orcid "0000-0004-5678-9012" ;
+    schema:affiliation <https://ror.org/03490as77> .
+
+brcris:area_ciencia_da_informacao a schema:CategoryCode ;
+    rdfs:label "Ciência da Informação"@pt .
+
+brcris:gen_a8d18fbd a prov:Activity ;
+    rdfs:label "Geração automática via semantic_integration.py" ;
+    prov:startedAtTime "2026-03-30T20:07:40.132082"^^xsd:dateTime ;
+    prov:wasAssociatedWith <https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype> .
+
