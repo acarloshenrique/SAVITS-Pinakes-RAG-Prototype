@@ -1,48 +1,17 @@
-\---
-
+---
 title: SAVITS Pinakes RAG
-
-emoji: 🔍
-
+emoji: 🔎
 colorFrom: blue
-
 colorTo: indigo
-
 sdk: streamlit
-
-sdk\_version: "1.35.0"
-
-python\_version: "3.10"
-
-app\_file: app.py
-
+sdk_version: "1.35.0"
+python_version: "3.10"
+app_file: app.py
 pinned: false
-
 license: mit
+short_description: Semantic GraphRAG for Pinakes research data
+---
 
-short\_description: Semantic GraphRAG for Pinakes research data
-
-\---
-
-
-
-\# SAVITS Pinakes RAG Prototype
-
-
+# SAVITS Pinakes RAG
 
 Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem.
-
-
-
-This project combines:
-
-
-
-\- RDF knowledge graphs
-
-\- SPARQL semantic retrieval
-
-\- Groq Llama generation
-
-\- Streamlit interface
-
