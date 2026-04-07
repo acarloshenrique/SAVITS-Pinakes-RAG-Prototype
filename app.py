@@ -9,6 +9,7 @@ import re
 import time
 import logging
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import streamlit as st
@@ -18,6 +19,10 @@ from groq import Groq
 from src.analytics.bibliometrics import compute_graph_kpis, detect_deia_gaps
 from src.governance.fair_validator import evaluate_graph
 from src.governance.provenance_tracker import governance_indicators
+from src.ingestion.bdtd_harvester import harvest_bdtd
+from src.ingestion.brcris_harvester import harvest_brcris
+from src.ingestion.oasisbr_harvester import harvest_oasisbr
+from src.ingestion.openalex_harvester import harvest_openalex
 # ─── Configuração de logging ──────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -44,6 +49,7 @@ PRIORITY_TERMS  = {
 GOVERNANCE_QUERY_TERMS = {
     "fair", "care", "lgpd", "deia", "governanca", "proveniencia", "prov", "dcterms",
 }
+API_SOURCE_NAMES = ("brcris", "oasisbr", "bdtd", "openalex")
 
 
 # ─── Carregamento do grafo RDF ─────────────────────────────────────────────────
@@ -204,6 +210,9 @@ def _row_to_result(row) -> dict:
         "autores":  str(row.autores)  if row.autores  else "Desconhecido",
         "keywords": str(row.keywords) if row.keywords else "",
         "acesso":   str(row.acesso)   if row.acesso   else "—",
+        "retrieval_channel": "sparql",
+        "retrieval_source": "graph",
+        "retrieval_mode": "local",
     }
 
 
@@ -310,15 +319,195 @@ def _query_tokens(query: str) -> list[str]:
     return priority + regular
 
 
+def _as_text_list(value) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        items = []
+        for item in value:
+            if isinstance(item, dict):
+                items.extend(_as_text_list(item.get("name") or item.get("nome")))
+            else:
+                text = str(item).strip()
+                if text:
+                    items.append(text)
+        return items
+    text = str(value).strip()
+    return [text] if text else []
+
+
+def _normalize_api_record(source: str, record: dict) -> dict | None:
+    title = str(record.get("title") or record.get("titulo") or "").strip()
+    if not title:
+        return None
+
+    raw_authors = record.get("authors") or record.get("autores")
+    authors = ", ".join(_as_text_list(raw_authors)) or "Desconhecido"
+
+    raw_keywords = record.get("keywords") or record.get("palavras_chave")
+    keywords = ", ".join(_as_text_list(raw_keywords))
+
+    uri = record.get("source_uri") or record.get("doi") or record.get("id") or f"{source}:{title}"
+    uri_text = str(uri).strip()
+    if uri_text and not uri_text.startswith("http"):
+        uri_text = f"{source}:{uri_text}"
+
+    return {
+        "uri": uri_text or f"{source}:{title}",
+        "titulo": title,
+        "resumo": str(record.get("abstract") or record.get("resumo") or ""),
+        "ano": str(record.get("year") or record.get("ano") or "s/d"),
+        "tipo": str(record.get("maturity_level") or record.get("tipo") or "Document"),
+        "autores": authors,
+        "keywords": keywords,
+        "acesso": str(record.get("acesso") or record.get("access") or "—"),
+        "retrieval_channel": "api",
+        "retrieval_source": source,
+        "retrieval_mode": str(record.get("ingestion_mode") or "remote"),
+    }
+
+
+def _retrieve_api_source(source: str, user_query: str, limit: int) -> list[dict]:
+    try:
+        if source == "openalex":
+            records = harvest_openalex(query=user_query, per_page=limit, force_refresh=True)
+        elif source == "brcris":
+            records = harvest_brcris(limit=limit, force_refresh=True, query=user_query)
+        elif source == "oasisbr":
+            records = harvest_oasisbr(limit=limit, force_refresh=True, query=user_query)
+        elif source == "bdtd":
+            records = harvest_bdtd(limit=limit, force_refresh=True, query=user_query)
+        else:
+            return []
+    except Exception as exc:
+        logger.warning("Falha ao consultar fonte %s: %s", source, exc)
+        return []
+
+    out = []
+    for record in records:
+        if not isinstance(record, dict):
+            continue
+        normalized = _normalize_api_record(source, record)
+        if normalized:
+            out.append(normalized)
+    return out
+
+
+@st.cache_data(show_spinner=False, ttl=900)
+def retrieve_api_results(user_query: str, top_k: int) -> list[dict]:
+    tokens = _query_tokens(user_query)
+    api_query = " ".join(tokens[:6]) if tokens else user_query
+    per_source_limit = max(8, top_k * 3)
+    results: list[dict] = []
+
+    with ThreadPoolExecutor(max_workers=len(API_SOURCE_NAMES)) as executor:
+        future_map = {
+            executor.submit(_retrieve_api_source, source, api_query, per_source_limit): source
+            for source in API_SOURCE_NAMES
+        }
+        for future in as_completed(future_map):
+            source = future_map[future]
+            try:
+                source_results = future.result()
+            except Exception as exc:
+                logger.warning("Erro na coleta da fonte %s: %s", source, exc)
+                source_results = []
+            results.extend(source_results)
+
+    unique = []
+    seen_uris = set()
+    seen_titles = set()
+    for item in results:
+        uri_key = str(item.get("uri") or "").strip()
+        title_key = _normalize_term(item.get("titulo", ""))
+        if (uri_key and uri_key in seen_uris) or (title_key and title_key in seen_titles):
+            continue
+        if uri_key:
+            seen_uris.add(uri_key)
+        if title_key:
+            seen_titles.add(title_key)
+        unique.append(item)
+
+    unique.sort(key=lambda item: _result_score(item, tokens), reverse=True)
+    return unique
+
+
+def _append_unique_result(
+    sink: list[dict],
+    seen_uris: set[str],
+    seen_titles: set[str],
+    item: dict,
+) -> bool:
+    uri_key = str(item.get("uri") or "").strip()
+    title_key = _normalize_term(item.get("titulo", ""))
+    if (uri_key and uri_key in seen_uris) or (title_key and title_key in seen_titles):
+        return False
+    if uri_key:
+        seen_uris.add(uri_key)
+    if title_key:
+        seen_titles.add(title_key)
+    sink.append(item)
+    return True
+
+
+def merge_retrieval_results(
+    user_query: str,
+    sparql_results: list[dict],
+    api_results: list[dict],
+    top_k: int,
+) -> list[dict]:
+    tokens = _query_tokens(user_query)
+    ranked_sparql = sorted(sparql_results, key=lambda item: _result_score(item, tokens), reverse=True)
+    ranked_api = sorted(api_results, key=lambda item: _result_score(item, tokens), reverse=True)
+
+    final: list[dict] = []
+    seen_uris: set[str] = set()
+    seen_titles: set[str] = set()
+
+    api_quota = min(len(ranked_api), max(1, top_k // 2)) if ranked_api else 0
+
+    if api_quota:
+        source_heads = {source: None for source in API_SOURCE_NAMES}
+        for item in ranked_api:
+            source = str(item.get("retrieval_source") or "")
+            if source in source_heads and source_heads[source] is None:
+                source_heads[source] = item
+        for source in API_SOURCE_NAMES:
+            if len(final) >= api_quota:
+                break
+            head = source_heads.get(source)
+            if head is not None:
+                _append_unique_result(final, seen_uris, seen_titles, head)
+
+    if len(final) < api_quota:
+        for item in ranked_api:
+            if len(final) >= api_quota:
+                break
+            _append_unique_result(final, seen_uris, seen_titles, item)
+
+    for item in ranked_sparql:
+        if len(final) >= top_k:
+            break
+        _append_unique_result(final, seen_uris, seen_titles, item)
+
+    for item in ranked_api:
+        if len(final) >= top_k:
+            break
+        _append_unique_result(final, seen_uris, seen_titles, item)
+
+    return final[:top_k]
+
+
 # ─── Groq: geração aumentada ──────────────────────────────────────────────────
 def build_context(results: list[dict]) -> str:
-    """Formata os resultados SPARQL como contexto para o LLM."""
+    """Formata resultados combinados (SPARQL + APIs) como contexto para o LLM."""
     if not results:
         return "Nenhum documento relevante encontrado no grafo semântico."
     parts = []
     for i, r in enumerate(results, 1):
         parts.append(
             f"[{i}] Título: {r['titulo']}\n"
+            f"    Fonte: {r.get('retrieval_source', 'graph')} | Canal: {r.get('retrieval_channel', 'sparql')}\n"
             f"    Autores: {r['autores']} | Ano: {r['ano']} | Acesso: {r['acesso']}\n"
             f"    Palavras-chave: {r['keywords']}\n"
             f"    Resumo: {r['resumo'][:400]}{'…' if len(r['resumo']) > 400 else ''}\n"
@@ -329,8 +518,8 @@ def build_context(results: list[dict]) -> str:
 
 SYSTEM_PROMPT = """Você é um assistente especializado em pesquisa científica brasileira,
 com foco no ecossistema Pinakes/BrCris do IBICT. Responda **em português**, de forma
-precisa, clara e acadêmica. Use exclusivamente o contexto semântico fornecido (recuperado
-por SPARQL de um grafo RDF Turtle com ontologias BIBO/DC/FOAF/VIVO). Se a informação não
+precisa, clara e acadêmica. Use exclusivamente o contexto consolidado fornecido
+(SPARQL do grafo RDF + conectores BrCris/Oasisbr/BDTD/OpenAlex). Se a informação não
 constar no contexto, diga explicitamente. Respeite as diretrizes FAIR e LGPD ao tratar
 dados de pesquisa. Não invente DOI, URI, título ou percentual: use apenas os valores que
 aparecem no contexto fornecido."""
@@ -505,12 +694,30 @@ def render_results(results: list[dict], top_k: int):
     if not results:
         st.info("Nenhum documento encontrado no grafo para esta consulta.")
         return
+    sparql_count = sum(1 for item in results if item.get("retrieval_channel") == "sparql")
+    api_count = sum(1 for item in results if item.get("retrieval_channel") == "api")
+    source_modes = {}
+    for item in results:
+        if item.get("retrieval_channel") != "api":
+            continue
+        source = str(item.get("retrieval_source") or "api")
+        mode = str(item.get("retrieval_mode") or "remote")
+        source_modes[source] = mode
     st.caption(f"Top-k configurado: {top_k}")
-    st.markdown(f"**{len(results)} documento(s) recuperado(s) via SPARQL:**")
+    st.markdown(
+        f"**{len(results)} documento(s) recuperado(s): SPARQL {sparql_count} | APIs {api_count}**"
+    )
+    if source_modes:
+        mode_text = ", ".join(f"{source} ({mode})" for source, mode in source_modes.items())
+        st.caption(f"Fontes API consultadas: {mode_text}")
     for r in results:
         with st.expander(f"📄 {r['titulo']} ({r['ano']})", expanded=False):
             cols = st.columns([2, 1])
             with cols[0]:
+                st.markdown(
+                    f"**Canal/Fonte:** `{r.get('retrieval_channel', 'n/a')}` / "
+                    f"`{r.get('retrieval_source', 'n/a')}`"
+                )
                 st.markdown(f"**Autores:** {r['autores']}")
                 st.markdown(f"**Palavras-chave:** {r['keywords'] or '—'}")
                 if r['resumo']:
@@ -520,6 +727,8 @@ def render_results(results: list[dict], top_k: int):
                 st.markdown(f"**Tipo:** `{r['tipo'].split('/')[-1]}`")
                 if r['uri'].startswith("http"):
                     st.markdown(f"[🔗 URI]({r['uri']})")
+                else:
+                    st.markdown(f"**ID/URI:** `{r['uri']}`")
 
 
 def main():
@@ -533,8 +742,8 @@ def main():
     st.title(APP_TITLE)
     st.caption(APP_SUBTITLE)
     st.markdown(
-        "Este sistema usa um grafo RDF construído com **RDFLib** e consultado via **SPARQL** "
-        "para recuperar documentos científicos brasileiros. A geração de respostas é feita pelo "
+        "Este sistema recupera documentos por **SPARQL** no grafo RDF local e também por "
+        "**APIs BrCris/Oasisbr/BDTD/OpenAlex**. A geração de respostas é feita pelo "
         "**Llama 3.3 70B** via Groq, seguindo as diretrizes **FAIR** e **LGPD**."
     )
     st.divider()
@@ -581,8 +790,10 @@ def main():
             st.markdown(user_query)
 
         with st.chat_message("assistant"):
-            with st.spinner("🔎 Consultando grafo SPARQL…"):
-                results = sparql_retrieve(graph, user_query, top_k)
+            with st.spinner("🔎 Consultando SPARQL + APIs (BrCris/Oasisbr/BDTD/OpenAlex)…"):
+                sparql_results = sparql_retrieve(graph, user_query, top_k)
+                api_results = retrieve_api_results(user_query, top_k)
+                results = merge_retrieval_results(user_query, sparql_results, api_results, top_k)
 
             compliance = evaluate_graph(graph)
             governance = governance_indicators(graph)
