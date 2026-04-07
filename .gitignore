@@ -9,4 +9,5 @@ pinakes_graph_enriched.ttl
 # Local ingestion artifacts
 data/cache/
 reports/*.json
+reports/*.jsonl
 reports/ingestion_samples/

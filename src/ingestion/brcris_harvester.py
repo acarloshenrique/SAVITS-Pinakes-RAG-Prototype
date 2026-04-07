@@ -22,6 +22,15 @@ BRCRIS_API_URL = os.environ.get("BRCRIS_API_URL", "https://dados.brcris.ibict.br
 BRCRIS_API_TOKEN = os.environ.get("BRCRIS_API_TOKEN")
 
 
+def _candidate_urls() -> List[str]:
+    raw = os.environ.get("BRCRIS_API_URLS", "").strip()
+    if raw:
+        urls = [item.strip() for item in raw.split(",") if item.strip()]
+        if urls:
+            return urls
+    return [BRCRIS_API_URL]
+
+
 def _fallback_records(limit: int | None) -> List[Dict[str, Any]]:
     works = [w for w in load_sample_works() if (w.get("tipo") or "").startswith("artigo")]
     records: List[Dict[str, Any]] = []
@@ -102,7 +111,7 @@ def _map_remote_work(work: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def _fetch_remote(limit: int | None, query: str | None = None) -> List[Dict[str, Any]]:
+def _fetch_remote_from_url(url: str, limit: int | None, query: str | None = None) -> List[Dict[str, Any]]:
     headers = {"Accept": "application/json"}
     if BRCRIS_API_TOKEN:
         headers["Authorization"] = f"Bearer {BRCRIS_API_TOKEN}"
@@ -117,7 +126,7 @@ def _fetch_remote(limit: int | None, query: str | None = None) -> List[Dict[str,
         if query:
             params["q"] = query
             params["search"] = query
-        payload = request_json("brcris", BRCRIS_API_URL, params=params, headers=headers)
+        payload = request_json("brcris", url, params=params, headers=headers)
         if not captured_sample:
             write_sample("brcris", payload)
             captured_sample = True
@@ -139,6 +148,21 @@ def _fetch_remote(limit: int | None, query: str | None = None) -> List[Dict[str,
     if limit:
         return deduped[:limit]
     return deduped
+
+
+def _fetch_remote(limit: int | None, query: str | None = None) -> List[Dict[str, Any]]:
+    last_error: Exception | None = None
+    for url in _candidate_urls():
+        try:
+            records = _fetch_remote_from_url(url, limit, query=query)
+            if records:
+                return records
+        except Exception as exc:
+            last_error = exc
+            logger.warning("BrCris endpoint failed (%s): %s", url, exc)
+    if last_error:
+        raise RuntimeError(last_error)
+    return []
 
 
 def harvest_brcris(

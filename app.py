@@ -17,12 +17,19 @@ from rdflib import Graph
 from groq import Groq
 
 from src.analytics.bibliometrics import compute_graph_kpis, detect_deia_gaps
+from src.analytics.slo_monitor import log_retrieval_event
 from src.governance.fair_validator import evaluate_graph
 from src.governance.provenance_tracker import governance_indicators
 from src.ingestion.bdtd_harvester import harvest_bdtd
 from src.ingestion.brcris_harvester import harvest_brcris
 from src.ingestion.oasisbr_harvester import harvest_oasisbr
 from src.ingestion.openalex_harvester import harvest_openalex
+from src.retrieval.hybrid_service import (
+    merge_retrieval_results as merge_retrieval_results_service,
+    query_tokens as query_tokens_service,
+    retrieve_api_results as retrieve_api_results_service,
+    retrieval_diagnostics,
+)
 # ─── Configuração de logging ──────────────────────────────────────────────────
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -49,9 +56,7 @@ PRIORITY_TERMS  = {
 GOVERNANCE_QUERY_TERMS = {
     "fair", "care", "lgpd", "deia", "governanca", "proveniencia", "prov", "dcterms",
 }
-PRIMARY_REST_SOURCES = ("openalex", "oasisbr", "bdtd")
-SECONDARY_API_SOURCES = ("brcris",)
-API_SOURCE_NAMES = PRIMARY_REST_SOURCES + SECONDARY_API_SOURCES
+MIN_REMOTE_API_DOCS = int(os.environ.get("MIN_REMOTE_API_DOCS", "1"))
 
 
 # ─── Carregamento do grafo RDF ─────────────────────────────────────────────────
@@ -303,22 +308,7 @@ def _normalize_term(value: str) -> str:
 
 
 def _query_tokens(query: str) -> list[str]:
-    terms = []
-    seen = set()
-    for raw in re.split(r"[^\w]+", query.strip()):
-        if not raw:
-            continue
-        token = _normalize_term(raw)
-        if len(token) < 4 or token in STOPWORDS_PT:
-            continue
-        if token in seen:
-            continue
-        seen.add(token)
-        terms.append(token)
-
-    priority = [term for term in terms if term in PRIORITY_TERMS]
-    regular = [term for term in terms if term not in PRIORITY_TERMS]
-    return priority + regular
+    return query_tokens_service(query)
 
 
 def _as_text_list(value) -> list[str]:
@@ -397,47 +387,7 @@ def _retrieve_api_source(source: str, user_query: str, limit: int) -> list[dict]
 
 @st.cache_data(show_spinner=False, ttl=900)
 def retrieve_api_results(user_query: str, top_k: int) -> list[dict]:
-    tokens = _query_tokens(user_query)
-    api_query = " ".join(tokens[:6]) if tokens else user_query
-    per_source_limit = max(8, top_k * 3)
-    results: list[dict] = []
-
-    with ThreadPoolExecutor(max_workers=len(PRIMARY_REST_SOURCES)) as executor:
-        future_map = {
-            executor.submit(_retrieve_api_source, source, api_query, per_source_limit): source
-            for source in PRIMARY_REST_SOURCES
-        }
-        for future in as_completed(future_map):
-            source = future_map[future]
-            try:
-                source_results = future.result()
-            except Exception as exc:
-                logger.warning("Erro na coleta da fonte %s: %s", source, exc)
-                source_results = []
-            results.extend(source_results)
-
-    # BrCris entra como fonte secundária quando a camada REST principal
-    # ainda não trouxe volume suficiente para ranqueamento híbrido.
-    if len(results) < top_k * 2:
-        for source in SECONDARY_API_SOURCES:
-            results.extend(_retrieve_api_source(source, api_query, max(3, top_k)))
-
-    unique = []
-    seen_uris = set()
-    seen_titles = set()
-    for item in results:
-        uri_key = str(item.get("uri") or "").strip()
-        title_key = _normalize_term(item.get("titulo", ""))
-        if (uri_key and uri_key in seen_uris) or (title_key and title_key in seen_titles):
-            continue
-        if uri_key:
-            seen_uris.add(uri_key)
-        if title_key:
-            seen_titles.add(title_key)
-        unique.append(item)
-
-    unique.sort(key=lambda item: _result_score(item, tokens), reverse=True)
-    return unique
+    return retrieve_api_results_service(user_query, top_k)
 
 
 def _append_unique_result(
@@ -464,46 +414,7 @@ def merge_retrieval_results(
     api_results: list[dict],
     top_k: int,
 ) -> list[dict]:
-    tokens = _query_tokens(user_query)
-    ranked_sparql = sorted(sparql_results, key=lambda item: _result_score(item, tokens), reverse=True)
-    ranked_api = sorted(api_results, key=lambda item: _result_score(item, tokens), reverse=True)
-
-    final: list[dict] = []
-    seen_uris: set[str] = set()
-    seen_titles: set[str] = set()
-
-    api_quota = min(len(ranked_api), max(1, top_k // 2)) if ranked_api else 0
-
-    if api_quota:
-        source_heads = {source: None for source in API_SOURCE_NAMES}
-        for item in ranked_api:
-            source = str(item.get("retrieval_source") or "")
-            if source in source_heads and source_heads[source] is None:
-                source_heads[source] = item
-        for source in API_SOURCE_NAMES:
-            if len(final) >= api_quota:
-                break
-            head = source_heads.get(source)
-            if head is not None:
-                _append_unique_result(final, seen_uris, seen_titles, head)
-
-    if len(final) < api_quota:
-        for item in ranked_api:
-            if len(final) >= api_quota:
-                break
-            _append_unique_result(final, seen_uris, seen_titles, item)
-
-    for item in ranked_sparql:
-        if len(final) >= top_k:
-            break
-        _append_unique_result(final, seen_uris, seen_titles, item)
-
-    for item in ranked_api:
-        if len(final) >= top_k:
-            break
-        _append_unique_result(final, seen_uris, seen_titles, item)
-
-    return final[:top_k]
+    return merge_retrieval_results_service(user_query, sparql_results, api_results, top_k)
 
 
 # ─── Groq: geração aumentada ──────────────────────────────────────────────────
@@ -802,6 +713,10 @@ def main():
                 sparql_results = sparql_retrieve(graph, user_query, top_k)
                 api_results = retrieve_api_results(user_query, top_k)
                 results = merge_retrieval_results(user_query, sparql_results, api_results, top_k)
+                diagnostics = retrieval_diagnostics(results)
+                log_retrieval_event(user_query, top_k, diagnostics)
+                critical_query = is_governance_query(user_query)
+                remote_gate_ok = diagnostics.get("remote_api_docs", 0) >= MIN_REMOTE_API_DOCS
 
             compliance = evaluate_graph(graph)
             governance = governance_indicators(graph)
@@ -817,6 +732,11 @@ def main():
             )
 
             with tab_docs:
+                if diagnostics.get("remote_api_docs", 0) < MIN_REMOTE_API_DOCS:
+                    st.warning(
+                        f"Cobertura remota abaixo do mínimo ({diagnostics.get('remote_api_docs', 0)}/"
+                        f"{MIN_REMOTE_API_DOCS}). Parte dos resultados pode estar em cache/fallback."
+                    )
                 render_results(results, top_k)
 
             with tab_governance:
@@ -874,7 +794,16 @@ def main():
                     st.success("Todos os registros contam com tags DEIA.")
 
             with tab_resp:
-                if is_governance_query(user_query):
+                if critical_query and not remote_gate_ok:
+                    answer = (
+                        "Consulta crítica sem cobertura remota suficiente nas APIs. "
+                        "A resposta foi bloqueada para evitar fallback silencioso. "
+                        "Atualize as fontes e repita a consulta."
+                    )
+                    st.error(answer)
+                    st.caption("Gate de confiabilidade: MIN_REMOTE_API_DOCS.")
+                    st.session_state.messages.append({"role": "assistant", "content": answer})
+                elif is_governance_query(user_query):
                     answer = deterministic_governance_answer(compliance, governance, analytics, results)
                     st.markdown(answer)
                     st.caption("Resposta calculada diretamente a partir dos indicadores do grafo local.")
