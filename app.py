@@ -5,11 +5,9 @@ Deploy: Hugging Face Spaces (GROQ_API_KEY configurada como Secret)
 """
 
 import os
-import re
 import time
 import logging
 import unicodedata
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import streamlit as st
@@ -20,10 +18,7 @@ from src.analytics.bibliometrics import compute_graph_kpis, detect_deia_gaps
 from src.analytics.slo_monitor import log_retrieval_event
 from src.governance.fair_validator import evaluate_graph
 from src.governance.provenance_tracker import governance_indicators
-from src.ingestion.bdtd_harvester import harvest_bdtd
-from src.ingestion.brcris_harvester import harvest_brcris
-from src.ingestion.oasisbr_harvester import harvest_oasisbr
-from src.ingestion.openalex_harvester import harvest_openalex
+from src.ingestion.source_health import read_source_health
 from src.retrieval.hybrid_service import (
     merge_retrieval_results as merge_retrieval_results_service,
     query_tokens as query_tokens_service,
@@ -57,6 +52,7 @@ GOVERNANCE_QUERY_TERMS = {
     "fair", "care", "lgpd", "deia", "governanca", "proveniencia", "prov", "dcterms",
 }
 MIN_REMOTE_API_DOCS = int(os.environ.get("MIN_REMOTE_API_DOCS", "1"))
+MIN_PRIMARY_REMOTE_SOURCES = int(os.environ.get("MIN_PRIMARY_REMOTE_SOURCES", "2"))
 
 
 # ─── Carregamento do grafo RDF ─────────────────────────────────────────────────
@@ -710,13 +706,27 @@ def main():
 
         with st.chat_message("assistant"):
             with st.spinner("🔎 Consultando SPARQL + APIs REST (OpenAlex/Oasisbr/BDTD) e BrCris secundária…"):
+                retrieval_t0 = time.perf_counter()
                 sparql_results = sparql_retrieve(graph, user_query, top_k)
                 api_results = retrieve_api_results(user_query, top_k)
                 results = merge_retrieval_results(user_query, sparql_results, api_results, top_k)
+                retrieval_elapsed = time.perf_counter() - retrieval_t0
                 diagnostics = retrieval_diagnostics(results)
-                log_retrieval_event(user_query, top_k, diagnostics)
                 critical_query = is_governance_query(user_query)
                 remote_gate_ok = diagnostics.get("remote_api_docs", 0) >= MIN_REMOTE_API_DOCS
+                source_health = read_source_health()
+                health_gate_ok = (
+                    int(source_health.get("primary_remote_ready", 0)) >= MIN_PRIMARY_REMOTE_SOURCES
+                )
+                blocked_by_reliability_gate = critical_query and (not remote_gate_ok or not health_gate_ok)
+                log_retrieval_event(
+                    user_query,
+                    top_k,
+                    diagnostics,
+                    retrieval_elapsed_seconds=retrieval_elapsed,
+                    critical_query=critical_query,
+                    blocked_by_reliability_gate=blocked_by_reliability_gate,
+                )
 
             compliance = evaluate_graph(graph)
             governance = governance_indicators(graph)
@@ -732,6 +742,12 @@ def main():
             )
 
             with tab_docs:
+                if not health_gate_ok:
+                    st.warning(
+                        "Saúde de fontes abaixo do mínimo remoto. "
+                        f"Primárias remotas: {source_health.get('primary_remote_ready', 0)}/"
+                        f"{source_health.get('primary_required', 0)}."
+                    )
                 if diagnostics.get("remote_api_docs", 0) < MIN_REMOTE_API_DOCS:
                     st.warning(
                         f"Cobertura remota abaixo do mínimo ({diagnostics.get('remote_api_docs', 0)}/"
@@ -794,14 +810,16 @@ def main():
                     st.success("Todos os registros contam com tags DEIA.")
 
             with tab_resp:
-                if critical_query and not remote_gate_ok:
+                if critical_query and (not remote_gate_ok or not health_gate_ok):
                     answer = (
-                        "Consulta crítica sem cobertura remota suficiente nas APIs. "
+                        "Consulta crítica sem cobertura remota suficiente nas APIs/fontes. "
                         "A resposta foi bloqueada para evitar fallback silencioso. "
                         "Atualize as fontes e repita a consulta."
                     )
                     st.error(answer)
-                    st.caption("Gate de confiabilidade: MIN_REMOTE_API_DOCS.")
+                    st.caption(
+                        "Gate de confiabilidade: MIN_REMOTE_API_DOCS e MIN_PRIMARY_REMOTE_SOURCES."
+                    )
                     st.session_state.messages.append({"role": "assistant", "content": answer})
                 elif is_governance_query(user_query):
                     answer = deterministic_governance_answer(compliance, governance, analytics, results)

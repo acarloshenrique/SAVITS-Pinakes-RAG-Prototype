@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Any, Callable, Dict, List
 
@@ -25,6 +26,7 @@ def _source_mode(records: List[Dict[str, Any]]) -> str:
 
 def _run(source: str, fetch_fn: Callable[[], List[Dict[str, Any]]]) -> Dict[str, Any]:
     status: Dict[str, Any] = {"source": source}
+    t0 = time.perf_counter()
     try:
         records = fetch_fn()
         status["ok"] = bool(records)
@@ -35,6 +37,9 @@ def _run(source: str, fetch_fn: Callable[[], List[Dict[str, Any]]]) -> Dict[str,
         status["count"] = 0
         status["mode"] = "error"
         status["error"] = str(exc)
+    status["elapsed_seconds"] = round(time.perf_counter() - t0, 3)
+    status["remote_ok"] = bool(status["ok"]) and status.get("mode") in {"remote", "cache"}
+    status["fallback_only"] = bool(status["ok"]) and status.get("mode") == "fallback"
 
     cache_file = cache_path(source)
     sample_file = sample_path(source)

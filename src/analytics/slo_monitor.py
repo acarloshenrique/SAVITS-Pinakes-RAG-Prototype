@@ -14,6 +14,9 @@ def log_retrieval_event(
     query: str,
     top_k: int,
     diagnostics: Dict[str, object],
+    retrieval_elapsed_seconds: float | None = None,
+    critical_query: bool = False,
+    blocked_by_reliability_gate: bool = False,
     output_path: str = "reports/slo_events.jsonl",
 ) -> None:
     row = {
@@ -24,6 +27,9 @@ def log_retrieval_event(
         "remote_api_docs": diagnostics.get("remote_api_docs", 0),
         "fallback_api_docs": diagnostics.get("fallback_api_docs", 0),
         "per_source": diagnostics.get("per_source", {}),
+        "retrieval_elapsed_seconds": round(float(retrieval_elapsed_seconds or 0.0), 3),
+        "critical_query": bool(critical_query),
+        "blocked_by_reliability_gate": bool(blocked_by_reliability_gate),
     }
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)

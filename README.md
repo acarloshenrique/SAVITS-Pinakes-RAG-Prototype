@@ -43,16 +43,21 @@ Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem with FAIR/CARE/DE
 2. **Validar integrações das fontes e atualizar cache local**  
    ```bash
    python validate_sources.py
+   python monitor_sources.py
+   python evaluate_slos.py
    ```
    - Gera `reports/source_validation_report.json` com status por fonte.
+   - Gera histórico operacional em `reports/source_health_history.jsonl` com disponibilidade remota por execução.
+   - Gera `reports/slo_report.json` com avaliação de SLO (availability, latency p95, cobertura remota e fallback por fonte).
    - Salva amostras reais de payload em `reports/ingestion_samples/*.json`.
    - Persiste cache de coleta em `data/cache/ingestion/*.json` para reduzir dependência de rede.
    - Variáveis úteis:
      - `INGESTION_USE_CACHE_FIRST=1` (padrão: usar cache antes da rede)
      - `INGESTION_CACHE_TTL_HOURS=24`
      - `INGESTION_RETRIES=3`
-     - `INGESTION_TIMEOUT_SECONDS=30`
-     - `BRCRIS_API_URL` / `BRCRIS_API_TOKEN` para endpoint autenticado do BrCris
+   - `INGESTION_TIMEOUT_SECONDS=30`
+   - `BRCRIS_API_URL` / `BRCRIS_API_TOKEN` para endpoint autenticado do BrCris
+   - SLOs (opcional): `SLO_AVAILABILITY_MIN`, `SLO_LATENCY_P95_MAX_SECONDS`, `SLO_REMOTE_DOCS_MIN_N`, `SLO_REMOTE_DOCS_RATIO_MIN`, `SLO_FALLBACK_MAX_DEFAULT`, `SLO_FALLBACK_MAX_<FONTE>`
 3. **Executar a interface Streamlit**  
    ```bash
    streamlit run app.py
