@@ -49,7 +49,9 @@ PRIORITY_TERMS  = {
 GOVERNANCE_QUERY_TERMS = {
     "fair", "care", "lgpd", "deia", "governanca", "proveniencia", "prov", "dcterms",
 }
-API_SOURCE_NAMES = ("brcris", "oasisbr", "bdtd", "openalex")
+PRIMARY_REST_SOURCES = ("openalex", "oasisbr", "bdtd")
+SECONDARY_API_SOURCES = ("brcris",)
+API_SOURCE_NAMES = PRIMARY_REST_SOURCES + SECONDARY_API_SOURCES
 
 
 # ─── Carregamento do grafo RDF ─────────────────────────────────────────────────
@@ -400,10 +402,10 @@ def retrieve_api_results(user_query: str, top_k: int) -> list[dict]:
     per_source_limit = max(8, top_k * 3)
     results: list[dict] = []
 
-    with ThreadPoolExecutor(max_workers=len(API_SOURCE_NAMES)) as executor:
+    with ThreadPoolExecutor(max_workers=len(PRIMARY_REST_SOURCES)) as executor:
         future_map = {
             executor.submit(_retrieve_api_source, source, api_query, per_source_limit): source
-            for source in API_SOURCE_NAMES
+            for source in PRIMARY_REST_SOURCES
         }
         for future in as_completed(future_map):
             source = future_map[future]
@@ -413,6 +415,12 @@ def retrieve_api_results(user_query: str, top_k: int) -> list[dict]:
                 logger.warning("Erro na coleta da fonte %s: %s", source, exc)
                 source_results = []
             results.extend(source_results)
+
+    # BrCris entra como fonte secundária quando a camada REST principal
+    # ainda não trouxe volume suficiente para ranqueamento híbrido.
+    if len(results) < top_k * 2:
+        for source in SECONDARY_API_SOURCES:
+            results.extend(_retrieve_api_source(source, api_query, max(3, top_k)))
 
     unique = []
     seen_uris = set()
@@ -743,7 +751,7 @@ def main():
     st.caption(APP_SUBTITLE)
     st.markdown(
         "Este sistema recupera documentos por **SPARQL** no grafo RDF local e também por "
-        "**APIs BrCris/Oasisbr/BDTD/OpenAlex**. A geração de respostas é feita pelo "
+        "**APIs OpenAlex/Oasisbr/BDTD (prioridade REST) + BrCris (secundária)**. A geração de respostas é feita pelo "
         "**Llama 3.3 70B** via Groq, seguindo as diretrizes **FAIR** e **LGPD**."
     )
     st.divider()
@@ -790,7 +798,7 @@ def main():
             st.markdown(user_query)
 
         with st.chat_message("assistant"):
-            with st.spinner("🔎 Consultando SPARQL + APIs (BrCris/Oasisbr/BDTD/OpenAlex)…"):
+            with st.spinner("🔎 Consultando SPARQL + APIs REST (OpenAlex/Oasisbr/BDTD) e BrCris secundária…"):
                 sparql_results = sparql_retrieve(graph, user_query, top_k)
                 api_results = retrieve_api_results(user_query, top_k)
                 results = merge_retrieval_results(user_query, sparql_results, api_results, top_k)
