@@ -4,3 +4,9 @@ __pycache__/
 *.pyd
 .env
 pinakes_graph_enriched.ttl
+.pytest_cache/
+
+# Local ingestion artifacts
+data/cache/
+reports/*.json
+reports/ingestion_samples/
