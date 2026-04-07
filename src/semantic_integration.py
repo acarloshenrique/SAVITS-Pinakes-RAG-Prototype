@@ -157,7 +157,7 @@ def map_venue(g: Graph, venue_data: dict, work_uri: URIRef):
 
 
 # ─── Mapear Work ──────────────────────────────────────────────────────────────
-def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
+def map_work(g: Graph, item: dict, prov_activity: URIRef, source_label: str) -> URIRef:
     # Identidade
     work_id  = str(item.get("id") or item.get("doi") or short_hash(json.dumps(item)))
     doi      = item.get("doi")
@@ -165,7 +165,12 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
     tipo_str = (item.get("tipo") or item.get("type", "default")).lower()
     tipo_cls = WORK_TYPE_MAP.get(tipo_str, WORK_TYPE_MAP["default"])
 
-    work_uri = URIRef(f"https://doi.org/{doi}") if doi else mint_uri(BRCRIS, "work", work_id)
+    ark_identifier = None
+    if doi:
+        work_uri = URIRef(f"https://doi.org/{doi}")
+    else:
+        ark_identifier = item.get("ark") or f"ark:/13030/savits-{work_id}"
+        work_uri = mint_uri(BRCRIS, "work", work_id)
 
     # Tipo
     g.add((work_uri, RDF.type, tipo_cls))
@@ -178,6 +183,8 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
 
     if doi:
         g.add((work_uri, BIBO.doi, Literal(doi)))
+    if ark_identifier:
+        g.add((work_uri, DCTERMS.identifier, Literal(ark_identifier)))
 
     resumo = item.get("resumo") or item.get("abstract")
     if resumo:
@@ -199,9 +206,8 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
     # LGPD – dados sensíveis
     dados_pessoais = item.get("dados_pessoais", False)
     g.add((work_uri, PINAKES.contemDadosPessoais, Literal(dados_pessoais, datatype=XSD.boolean)))
-    if dados_pessoais:
-        base_legal = item.get("base_legal_lgpd", "Consentimento")
-        g.add((work_uri, PINAKES.baseLegalLGPD, Literal(base_legal)))
+    base_legal = item.get("base_legal_lgpd") or ("Consentimento" if dados_pessoais else "Dados anonimizados (Art. 12)")
+    g.add((work_uri, PINAKES.baseLegalLGPD, Literal(base_legal)))
 
     # Autores
     for author_data in item.get("autores") or item.get("authors") or []:
@@ -221,15 +227,18 @@ def map_work(g: Graph, item: dict, prov_activity: URIRef) -> URIRef:
         map_venue(g, venue, work_uri)
 
     # Áreas de conhecimento (CNPQ)
-    for area in item.get("areas_cnpq") or []:
+    impact_areas = item.get("areas_cnpq") or item.get("impact_area") or []
+    for area in impact_areas:
         area_uri = mint_uri(BRCRIS, "area", area)
         g.add((area_uri, RDF.type, SCHEMA.CategoryCode))
         g.add((area_uri, RDFS.label, Literal(area, lang="pt")))
         g.add((work_uri, VIVO.hasResearchArea, area_uri))
+        g.add((work_uri, PINAKES.temImpactoSocial, Literal(area, lang="pt")))
 
     # Proveniência
+    source_ref = item.get("fonte") or item.get("source") or source_label
     g.add((work_uri, PROV.wasGeneratedBy, prov_activity))
-    g.add((work_uri, DCTERMS.source, Literal("raw_data.json")))
+    g.add((work_uri, DCTERMS.source, Literal(source_ref)))
 
     # Texto completo RAG – concatenado para embedding/SPARQL
     rag_text_parts = [titulo]
@@ -273,7 +282,7 @@ def build_graph(raw_data: list, source_file: str = "raw_data.json") -> Graph:
     items = raw_data if isinstance(raw_data, list) else raw_data.get("works") or raw_data.get("dados") or []
     for item in items:
         try:
-            map_work(g, item, prov_activity)
+            map_work(g, item, prov_activity, source_file)
         except Exception as exc:
             print(f"  [AVISO] Erro ao processar item {item.get('id','[build]')}: {exc}")
 

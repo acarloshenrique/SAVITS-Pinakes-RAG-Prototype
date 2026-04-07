@@ -79,6 +79,8 @@ def build_graph(records):
         g.add((doc, PINAKES.statusLGPD, Literal(record.get("lgpd_status", "Desconhecido"))))
         g.add((doc, PINAKES.baseLegalLGPD, Literal(record.get("lgpd_legal_basis", "N/A"))))
         g.add((doc, PINAKES.dataProcessamento, Literal(record.get("processed_at"))))
+        for tag in record.get("deia_tags", []):
+            g.add((doc, PINAKES.deiaTag, Literal(tag)))
 
         activity_uri = URIRef(
             _encode_http_uri(record.get("provenance_uri") or f"https://pinakes.ibict.br/activity/{record['id']}")
