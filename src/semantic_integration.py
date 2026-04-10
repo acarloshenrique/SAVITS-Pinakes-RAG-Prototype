@@ -292,7 +292,7 @@ def build_graph(raw_data: list, source_file: str = "raw_data.json") -> Graph:
         except Exception as exc:
             print(f"  [AVISO] Erro ao processar item {item.get('id','[build]')}: {exc}")
 
-    print(f"  ✅ Grafo gerado: {len(g)} triplas | {len(items)} itens processados")
+    print(f"  [ok] Grafo gerado: {len(g)} triplas | {len(items)} itens processados")
     return g
 
 
@@ -301,16 +301,16 @@ def generate_graph(input_path: str, output_path: str):
     output_file = Path(output_path)
     output_file.parent.mkdir(parents=True, exist_ok=True)
 
-    print(f"📂 Lendo {input_file}...")
+    print(f"[read] Lendo {input_file}...")
     with open(input_file, encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    print("🔨 Construindo grafo RDF...")
+    print("[build] Construindo grafo RDF...")
     g = build_graph(raw_data, source_file=input_file.name)
 
-    print(f"💾 Serializando para {output_file}...")
+    print(f"[write] Serializando para {output_file}...")
     g.serialize(destination=str(output_file), format="turtle")
-    print(f"✅ {output_file} gerado com sucesso!")
+    print(f"[ok] {output_file} gerado com sucesso!")
 
 
 # ─── CLI ──────────────────────────────────────────────────────────────────────

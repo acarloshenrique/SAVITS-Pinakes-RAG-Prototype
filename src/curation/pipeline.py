@@ -10,6 +10,14 @@ from src.ingestion.oasisbr_harvester import harvest_oasisbr
 from src.ingestion.openalex_harvester import harvest_openalex
 from src.pinakes_mapper import create_pinakes_graph, process_social_technology_record
 
+SOURCE_PRIORITY = {
+    "brcris": 0,
+    "bdtd": 1,
+    "oasisbr": 2,
+    "openalex": 3,
+    "openalex-fallback": 4,
+}
+
 
 def _map_to_social_record(record: dict) -> dict:
     authors = record.get("authors") or []
@@ -26,18 +34,28 @@ def _map_to_social_record(record: dict) -> dict:
     }
 
 
-def run_pipeline(return_pinakes_graph: bool = False):
+def _dedup_key(record: dict) -> str | None:
+    return record.get("doi") or record.get("id") or record.get("title")
+
+
+def _source_priority(record: dict) -> int:
+    return SOURCE_PRIORITY.get(record.get("source", ""), 99)
+
+
+def run_pipeline(return_pinakes_graph: bool = False, use_remote: bool | None = None):
     """
     Harvest raw records, normalize them for FAIR/CARE compliance and optionally
     materialize a Pinakes-ready RDF graph with dARK identifiers.
     """
-    use_remote = os.getenv("SAVITS_USE_REMOTE_SOURCES") == "1"
+    if use_remote is None:
+        use_remote = os.getenv("SAVITS_USE_REMOTE_SOURCES") == "1"
+
     harvested: List[dict] = []
     harvesters = [
-        lambda: harvest_openalex(),
-        lambda: harvest_brcris(use_remote=use_remote),
-        lambda: harvest_oasisbr(use_remote=use_remote),
-        lambda: harvest_bdtd(use_remote=use_remote),
+        lambda: harvest_brcris(force_refresh=use_remote, use_remote=use_remote),
+        lambda: harvest_bdtd(force_refresh=use_remote, use_remote=use_remote),
+        lambda: harvest_oasisbr(force_refresh=use_remote, use_remote=use_remote),
+        lambda: harvest_openalex(use_remote=use_remote),
     ]
     for getter in harvesters:
         try:
@@ -45,13 +63,18 @@ def run_pipeline(return_pinakes_graph: bool = False):
         except Exception as exc:
             print(f"[INGEST] Falha ao coletar dados ({exc}).")
 
-    seen = set()
-    cleaned: List[dict] = []
+    deduped: dict[str, dict] = {}
     for record in harvested:
-        dedup_key = record.get("doi") or record.get("id") or record.get("title")
-        if not dedup_key or dedup_key not in seen:
-            seen.add(dedup_key)
-            cleaned.append(normalize_record(record))
+        normalized = normalize_record(record)
+        dedup_key = _dedup_key(normalized)
+        if not dedup_key:
+            continue
+
+        current = deduped.get(dedup_key)
+        if current is None or _source_priority(normalized) < _source_priority(current):
+            deduped[dedup_key] = normalized
+
+    cleaned = list(deduped.values())
 
     if not return_pinakes_graph:
         return cleaned

@@ -30,7 +30,10 @@ def _fallback_records(limit: int | None) -> list[dict]:
     ]
 
 
-def harvest_openalex(query: str = "information science", per_page: int = 20):
+def harvest_openalex(query: str = "information science", per_page: int = 20, use_remote: bool = True):
+    if not use_remote:
+        return _fallback_records(per_page)
+
     params = {"search": query, "per_page": per_page}
     try:
         response = requests.get(OPENALEX_URL, params=params, timeout=30)

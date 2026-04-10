@@ -1,0 +1,79 @@
+<svg width="1600" height="920" viewBox="0 0 1600 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="160" y1="64" x2="1428" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.5" stop-color="#0B3B52"/>
+      <stop offset="1" stop-color="#164E63"/>
+    </linearGradient>
+    <linearGradient id="cardA" x1="116" y1="132" x2="452" y2="344" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E0F2FE"/>
+      <stop offset="1" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <linearGradient id="cardB" x1="520" y1="132" x2="1050" y2="344" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ECFDF5"/>
+      <stop offset="1" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <linearGradient id="cardC" x1="1112" y1="132" x2="1474" y2="344" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FEF3C7"/>
+      <stop offset="1" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="cardD" x1="520" y1="418" x2="1050" y2="734" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDE9FE"/>
+      <stop offset="1" stop-color="#C4B5FD"/>
+    </linearGradient>
+    <linearGradient id="cardE" x1="1112" y1="418" x2="1474" y2="734" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FEE2E2"/>
+      <stop offset="1" stop-color="#FECACA"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12V0Z" fill="#E2E8F0"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="920" fill="url(#bg)"/>
+  <text x="118" y="86" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700">SAVITS Pinakes RAG architecture</text>
+  <text x="118" y="118" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">From multi-source ingestion to graph-backed search, governance, and release validation.</text>
+
+  <rect x="116" y="146" width="332" height="220" rx="28" fill="url(#cardA)"/>
+  <text x="148" y="192" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">1. Data sources</text>
+  <text x="148" y="232" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18">BrCris API</text>
+  <text x="148" y="264" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18">BDTD API</text>
+  <text x="148" y="296" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18">Oasisbr API</text>
+  <text x="148" y="328" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18">OpenAlex + bundled offline dataset</text>
+
+  <rect x="520" y="146" width="520" height="220" rx="28" fill="url(#cardB)"/>
+  <text x="556" y="192" fill="#022C22" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">2. Normalization and governance</text>
+  <text x="556" y="232" fill="#022C22" font-family="Segoe UI, Arial, sans-serif" font-size="18">Metadata cleanup and deduplication</text>
+  <text x="556" y="264" fill="#022C22" font-family="Segoe UI, Arial, sans-serif" font-size="18">ARK-style identifiers and source provenance</text>
+  <text x="556" y="296" fill="#022C22" font-family="Segoe UI, Arial, sans-serif" font-size="18">LGPD legal basis, DEIA tags, and impact labels</text>
+  <text x="556" y="328" fill="#022C22" font-family="Segoe UI, Arial, sans-serif" font-size="18">Offline-first fallback path for deterministic demos</text>
+
+  <rect x="1112" y="146" width="362" height="220" rx="28" fill="url(#cardC)"/>
+  <text x="1148" y="192" fill="#422006" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">3. Knowledge graph</text>
+  <text x="1148" y="232" fill="#422006" font-family="Segoe UI, Arial, sans-serif" font-size="18">RDFLib graph serialization</text>
+  <text x="1148" y="264" fill="#422006" font-family="Segoe UI, Arial, sans-serif" font-size="18">DCTERMS, BIBO, FOAF, PROV-O</text>
+  <text x="1148" y="296" fill="#422006" font-family="Segoe UI, Arial, sans-serif" font-size="18">`pinakes_graph.ttl` and enriched TTL output</text>
+
+  <rect x="520" y="438" width="520" height="262" rx="28" fill="url(#cardD)"/>
+  <text x="556" y="486" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">4. Retrieval and reasoning</text>
+  <text x="556" y="528" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="18">Local graph loading and query expansion</text>
+  <text x="556" y="560" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="18">SPARQL-style retrieval over graph fields</text>
+  <text x="556" y="592" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="18">Optional source refresh from APIs at query time</text>
+  <text x="556" y="624" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="18">Graph analytics and governance indicators</text>
+  <text x="556" y="656" fill="#2E1065" font-family="Segoe UI, Arial, sans-serif" font-size="18">Benchmark runner for release regression checks</text>
+
+  <rect x="1112" y="438" width="362" height="262" rx="28" fill="url(#cardE)"/>
+  <text x="1148" y="486" fill="#450A0A" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">5. Experience layer</text>
+  <text x="1148" y="528" fill="#450A0A" font-family="Segoe UI, Arial, sans-serif" font-size="18">Streamlit search and chat</text>
+  <text x="1148" y="560" fill="#450A0A" font-family="Segoe UI, Arial, sans-serif" font-size="18">LGPD / DEIA analytics</text>
+  <text x="1148" y="592" fill="#450A0A" font-family="Segoe UI, Arial, sans-serif" font-size="18">FAIR / CARE governance panel</text>
+  <text x="1148" y="624" fill="#450A0A" font-family="Segoe UI, Arial, sans-serif" font-size="18">Release docs and benchmark reports</text>
+
+  <path d="M448 256H502" stroke="#E2E8F0" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M1040 256H1094" stroke="#E2E8F0" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M780 366V414" stroke="#E2E8F0" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M1040 568H1094" stroke="#E2E8F0" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M1292 366V414" stroke="#E2E8F0" stroke-width="8" marker-end="url(#arrow)"/>
+
+  <rect x="116" y="742" width="1358" height="108" rx="26" fill="#0F172A" fill-opacity="0.72" stroke="#334155"/>
+  <text x="152" y="788" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Release validation loop</text>
+  <text x="152" y="824" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="18">`python build_graph.py` -> `pytest` -> `python -m src.evaluation.simple_benchmark` -> publish README assets, changelog, roadmap, and release notes.</text>

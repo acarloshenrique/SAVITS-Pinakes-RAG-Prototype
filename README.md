@@ -7,65 +7,114 @@ sdk: streamlit
 sdk_version: "1.35.0"
 python_version: "3.10"
 app_file: app.py
-pinned: false
+pinned: true
 license: mit
 short_description: Semantic GraphRAG for Pinakes research data
 ---
 
 # SAVITS Pinakes RAG
 
-Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem with FAIR/CARE/DEIA governance.
+<p align="center">
+  <img src="docs/assets/demo-screenshot.svg" alt="SAVITS Pinakes RAG demo screenshot" width="100%">
+</p>
 
-## Novidades principais
+Semantic GraphRAG prototype for the Pinakes / BrCris ecosystem, combining RDF knowledge graphs, FAIR/CARE governance checks, LGPD-aware normalization, and a Streamlit experience for search, analytics, and decision support.
 
-- **Coletores reais + fallback seguro** (`src/ingestion`)  
-  Os conectores de BrCris, Oasisbr, BDTD e OpenAlex agora tentam consumir APIs oficiais (com suporte a `BRCRIS_API_TOKEN`, `OASISBR_API_URL`, etc.) e retrocedem para o dataset curado `data/raw_data.json` quando não houver rede, garantindo demos off-line.
-- **Curadoria LGPD/DEIA completa** (`src/curation/metadata_normalizer.py`, `src/ontology/ontology_mapper.py`)  
-  Todos os registros recebem `ark:/13030/savits-*`, `DCTERMS.source`, base legal LGPD inferida e tags DEIA automáticas, eliminando os avisos FAIR_FINDABLE/FAIR_REUSABLE.
-- **Analytics e governança visuais** (`app.py`, `src/analytics`, `src/governance/provenance_tracker.py`)  
-  A aba “Analytics LGPD/DEIA” exibe cobertura de acesso aberto, impacto social, fontes DCTERMS e lacunas DEIA, enquanto a aba de Governança mostra métricas PROV/DCTERMS e alertas detalhados.
-- **Pipeline automatizado** (`build_all.cmd`, `.github/workflows/ci.yml`)  
-  O comando único executa ingestão → grafo → validação FAIR → `pytest`, com `PYTHONIOENCODING` forçado para evitar problemas de encoding e com execução contínua no GitHub Actions (Node 24-ready).
-- **Perguntas de avaliação prontas** (`docs/chat_eval_prompts.md`)  
-  Roteiro oficial para a banca testar o chat e comprovar aderência ao edital SAVITS.
+## Release Snapshot
 
-## Como executar localmente
+- **Release target:** `v1.0.0`
+- **Live app surface:** Streamlit UI in `app.py`
+- **Offline corpus:** 5 curated records
+- **Enriched graph:** 155 RDF triples
+- **Governance coverage:** 100% across FAIR and CARE checks in the bundled dataset
+- **Benchmark:** [`reports/benchmark_v1.0.0.md`](reports/benchmark_v1.0.0.md)
 
-1. **Gerar grafos e validar FAIR/CARE**  
-   - Windows: `build_all.cmd` (configura `PYTHONIOENCODING`, recria TTLs, executa validações e testes).  
-   - Multi-plataforma:  
-     ```bash
-     export PYTHONIOENCODING=utf-8
-     python build_graph.py
-     python -m src.governance.fair_validator pinakes_graph.ttl > reports/governance_report.json
-     pytest
-     ```
-2. **Executar a interface Streamlit**  
+## Why This Matters
+
+- **Shorter time-to-answer for research governance teams.** Instead of manually opening multiple repositories, the prototype centralizes metadata, provenance, access rights, and impact annotations in one queryable graph.
+- **Lower compliance risk.** LGPD, FAIR, and CARE attributes are normalized into the graph, making governance gaps visible before publication or reuse.
+- **Better decision support for funding and stewardship.** The app can surface which works are open, reusable, socially relevant, or weak on provenance, which helps prioritize curation and investment.
+- **A practical bridge from demo to pilot.** The architecture is simple enough to run as a reproducible prototype, but already structured around real connectors, provenance, and benchmarkable outputs.
+
+## Architecture
+
+![SAVITS Pinakes RAG architecture](docs/assets/architecture-diagram.svg)
+
+### Flow
+
+1. **Ingestion** pulls records from BrCris, BDTD, Oasisbr, and OpenAlex, with offline fallbacks to the bundled dataset.
+2. **Normalization** adds persistent identifiers, LGPD legal basis, DEIA tags, and normalized impact labels.
+3. **Knowledge graph build** serializes the enriched corpus into Turtle for local SPARQL-style retrieval and governance inspection.
+4. **Experience layer** exposes search, chat, analytics, and governance tabs in Streamlit.
+5. **Evaluation** validates FAIR/CARE coverage and runs a lightweight retrieval benchmark for each release.
+
+## Benchmark
+
+The repository now ships a reproducible offline benchmark:
+
+```bash
+python -m src.evaluation.simple_benchmark
+```
+
+Current `v1.0.0` results from [`reports/benchmark_v1.0.0.md`](reports/benchmark_v1.0.0.md):
+
+| Metric | Result |
+| --- | --- |
+| Documents | 5 |
+| Enriched graph triples | 155 |
+| Source mix | 3 BrCris, 1 BDTD, 1 OpenAlex fallback |
+| Retrieval Top-1 accuracy | 100% |
+| Retrieval Top-3 accuracy | 100% |
+| Median retrieval latency | 0.054 ms |
+| P95 retrieval latency | 0.098 ms |
+| FAIR/CARE issues | 0 |
+
+This benchmark is intentionally small and release-oriented. It is useful for regression detection and demos, not as a substitute for a large-scale IR evaluation.
+
+## Quick Start
+
+1. Build the graphs:
+
+   ```bash
+   python build_graph.py
+   ```
+
+2. Run the governance validator:
+
+   ```bash
+   python -m src.governance.fair_validator pinakes_graph.ttl > reports/governance_report.json
+   ```
+
+3. Start the app:
+
    ```bash
    streamlit run app.py
    ```
-3. **Reexecutar apenas o grafo sem Streamlit**  
+
+4. Run tests:
+
    ```bash
-   python src/semantic_integration.py --input data/raw_data.json --output pinakes_graph.ttl
+   pytest
    ```
 
-## Testes
+## What Changed For v1.0.0
 
-- Suite mínima em `tests/` cobrindo curadoria LGPD/DEIA e indicadores de governança (`pytest`).
-- Relatório FAIR/CARE automatizado em `reports/governance_report.json`.
+- Added release-quality README assets, including a demo screenshot and architecture image.
+- Added a reproducible benchmark with JSON and Markdown outputs.
+- Added `ROADMAP.md` and `CHANGELOG.md`.
+- Restored the missing ingestion support module required by `build_graph.py`.
+- Hardened the offline pipeline and added tests for cache utilities and offline graph generation.
 
-## Deploy contínuo
+## Project Files
 
-1. **GitHub**  
-   - Configure o remote `origin` conforme o repo [`acarloshenrique/SAVITS-Pinakes-RAG-Prototype`](https://github.com/acarloshenrique/SAVITS-Pinakes-RAG-Prototype).  
-   - `git add . && git commit -m "feat: governance analytics"`  
-   - `git push origin main` (aciona o workflow `ci.yml`).
-2. **Hugging Face Spaces**  
-   - `huggingface-cli login`  
-   - `huggingface-cli repo create acarloshenrique/SAVITS-Pinakes-RAG --type space --sdk streamlit` (uma vez).  
-   - `huggingface-cli upload ./app.py` e dependências ou `git push` para o repo Space.  
-   - Configure `GROQ_API_KEY` como Secret no Space.
+- [`ROADMAP.md`](ROADMAP.md)
+- [`CHANGELOG.md`](CHANGELOG.md)
+- [`docs/chat_eval_prompts.md`](docs/chat_eval_prompts.md)
+- [`reports/governance_report.json`](reports/governance_report.json)
+- [`reports/benchmark_v1.0.0.md`](reports/benchmark_v1.0.0.md)
 
-## Roteiro de perguntas para a banca
+## Notes
 
-Consulte `docs/chat_eval_prompts.md` para um conjunto de 7 prompts que cobrem FAIR, LGPD, impacto social e DEIA.
+- The Hugging Face Space front matter is now configured with `pinned: true`.
+- `build_graph.py` now runs without relying on special console encoding settings on Windows.
+- The offline dataset is intentionally compact so the demo remains deterministic and fast to validate.
