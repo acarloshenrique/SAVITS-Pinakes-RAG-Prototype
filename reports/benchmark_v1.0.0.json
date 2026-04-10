@@ -1,0 +1,100 @@
+{
+  "release": "v1.0.0",
+  "generated_at": "2026-04-10T01:46:08.918927+00:00",
+  "documents": 5,
+  "graph_triples": 155,
+  "source_mix": {
+    "brcris": 3,
+    "bdtd": 1,
+    "openalex-fallback": 1
+  },
+  "build_time_ms": 4.37,
+  "retrieval": {
+    "top_k": 3,
+    "cases": 5,
+    "top_1_accuracy": 1.0,
+    "top_3_accuracy": 1.0,
+    "median_latency_ms": 0.054,
+    "p95_latency_ms": 0.098,
+    "cases_detail": [
+      {
+        "id": "fair-lgpd",
+        "query": "Quais obras tratam especificamente de LGPD ou governanca de dados?",
+        "expected_title": "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD",
+        "top_titles": [
+          "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD",
+          "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica",
+          "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"
+        ],
+        "top_1_match": true,
+        "top_3_match": true,
+        "latency_ms": 0.098
+      },
+      {
+        "id": "agricultura-familiar",
+        "query": "Liste tecnologias sociais focadas em agricultura familiar com impacto comprovado.",
+        "expected_title": "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino",
+        "top_titles": [
+          "Impacto das Mudanças Climáticas na Agricultura Familiar do Semiárido Nordestino",
+          "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica",
+          "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias"
+        ],
+        "top_1_match": true,
+        "top_3_match": true,
+        "latency_ms": 0.058
+      },
+      {
+        "id": "amazonia-biodiversidade",
+        "query": "Existe alguma pesquisa que discuta biodiversidade na Amazonia? Cite autores e licencas.",
+        "expected_title": "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica",
+        "top_titles": [
+          "Aplicação de Redes Neurais na Análise de Biodiversidade Amazônica",
+          "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias",
+          "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"
+        ],
+        "top_1_match": true,
+        "top_3_match": true,
+        "latency_ms": 0.054
+      },
+      {
+        "id": "sparql-rag",
+        "query": "Recuperacao de informacao semantica com SPARQL em bases cientificas",
+        "expected_title": "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas",
+        "top_titles": [
+          "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas",
+          "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias",
+          "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD"
+        ],
+        "top_1_match": true,
+        "top_3_match": true,
+        "latency_ms": 0.045
+      },
+      {
+        "id": "interoperabilidade",
+        "query": "framework de interoperabilidade semantica entre repositorios de dados de pesquisa",
+        "expected_title": "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias",
+        "top_titles": [
+          "Interoperabilidade Semântica entre Repositórios de Dados de Pesquisa: Um Framework Baseado em Ontologias",
+          "Governança de Dados de Pesquisa no Brasil: Desafios FAIR e LGPD",
+          "Recuperação de Informação Semântica com SPARQL em Bases de Dados Científicas"
+        ],
+        "top_1_match": true,
+        "top_3_match": true,
+        "latency_ms": 0.049
+      }
+    ]
+  },
+  "governance": {
+    "documents": 5,
+    "scores": {
+      "FAIR_FINDABLE": 1.0,
+      "FAIR_ACCESSIBLE": 1.0,
+      "FAIR_INTEROPERABLE": 1.0,
+      "FAIR_REUSABLE": 1.0,
+      "CARE_COLLECTIVE": 1.0,
+      "CARE_AUTHORITY": 1.0,
+      "CARE_RESPONSIBILITY": 1.0
+    },
+    "issues": []
+  }
+}

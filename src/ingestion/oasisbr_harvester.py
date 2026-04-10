@@ -181,11 +181,18 @@ def harvest_oasisbr(
     limit: int | None = None,
     force_refresh: bool = False,
     query: str | None = None,
+    use_remote: bool = True,
 ) -> List[Dict[str, Any]]:
     if should_use_cache_first() and not force_refresh:
         cached = load_cache("oasisbr", limit=limit)
         if cached:
             return cached
+
+    if not use_remote:
+        stale_cache = load_cache("oasisbr", limit=limit, allow_stale=True)
+        if stale_cache:
+            return stale_cache
+        return _fallback_records(limit)
 
     try:
         remote = _fetch_remote(limit, query=query)

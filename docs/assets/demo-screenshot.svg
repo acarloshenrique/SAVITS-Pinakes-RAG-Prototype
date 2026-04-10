@@ -1,0 +1,77 @@
+<svg width="1440" height="920" viewBox="0 0 1440 920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="116" y1="54" x2="1284" y2="866" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C4A6E"/>
+      <stop offset="0.45" stop-color="#115E59"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="window" x1="176" y1="140" x2="1262" y2="794" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="334" y1="214" x2="1110" y2="372" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+    <filter id="shadow" x="102" y="90" width="1236" height="742" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="18"/>
+      <feGaussianBlur stdDeviation="28"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0313726 0 0 0 0 0.101961 0 0 0 0 0.2 0 0 0 0.24 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="920" fill="#09111F"/>
+  <circle cx="196" cy="170" r="220" fill="#0EA5E9" fill-opacity="0.14"/>
+  <circle cx="1206" cy="760" r="280" fill="#14B8A6" fill-opacity="0.12"/>
+  <rect x="158" y="122" width="1124" height="686" rx="28" fill="url(#window)" filter="url(#shadow)"/>
+  <rect x="158" y="122" width="1124" height="40" rx="28" fill="#E2E8F0"/>
+  <circle cx="196" cy="142" r="7" fill="#F87171"/>
+  <circle cx="220" cy="142" r="7" fill="#FBBF24"/>
+  <circle cx="244" cy="142" r="7" fill="#34D399"/>
+  <rect x="196" y="190" width="236" height="580" rx="24" fill="#0F172A"/>
+  <text x="228" y="236" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">SAVITS Pinakes RAG</text>
+  <text x="228" y="268" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="16">Semantic GraphRAG for governance-ready research data</text>
+  <rect x="228" y="312" width="172" height="42" rx="14" fill="#0EA5E9"/>
+  <text x="252" y="339" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">Chat + Search</text>
+  <rect x="228" y="368" width="172" height="42" rx="14" fill="#132338"/>
+  <text x="252" y="395" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="16">Analytics LGPD/DEIA</text>
+  <rect x="228" y="424" width="172" height="42" rx="14" fill="#132338"/>
+  <text x="252" y="451" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="16">Governance</text>
+  <rect x="228" y="506" width="172" height="96" rx="18" fill="#132338"/>
+  <text x="248" y="536" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="14">Offline corpus</text>
+  <text x="248" y="576" fill="#F8FAFC" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">5 docs</text>
+  <text x="248" y="604" fill="#22C55E" font-family="Segoe UI, Arial, sans-serif" font-size="14">Ready for demo</text>
+  <rect x="460" y="190" width="790" height="182" rx="24" fill="url(#hero)"/>
+  <text x="506" y="250" fill="#ECFEFF" font-family="Georgia, Times New Roman, serif" font-size="42" font-weight="700">Research graph answers with provenance</text>
+  <text x="506" y="294" fill="#E0F2FE" font-family="Segoe UI, Arial, sans-serif" font-size="20">Ask about FAIR, LGPD, DEIA, impact area, or interoperability and inspect the graph-backed evidence.</text>
+  <rect x="506" y="320" width="274" height="28" rx="14" fill="#E0F2FE" fill-opacity="0.22"/>
+  <rect x="792" y="320" width="220" height="28" rx="14" fill="#E0F2FE" fill-opacity="0.16"/>
+  <rect x="460" y="400" width="500" height="168" rx="24" fill="#FFFFFF"/>
+  <text x="492" y="438" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Prompt</text>
+  <rect x="492" y="458" width="436" height="44" rx="14" fill="#F1F5F9"/>
+  <text x="512" y="486" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="16">Quais obras tratam de LGPD ou governanca de dados?</text>
+  <rect x="492" y="520" width="192" height="20" rx="10" fill="#BAE6FD"/>
+  <rect x="692" y="520" width="150" height="20" rx="10" fill="#CCFBF1"/>
+  <text x="492" y="552" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="16">Top result: Governanca de Dados de Pesquisa no Brasil</text>
+  <rect x="984" y="400" width="266" height="168" rx="24" fill="#FFFFFF"/>
+  <text x="1016" y="438" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Release metrics</text>
+  <text x="1016" y="476" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="14">Top-1 benchmark accuracy</text>
+  <text x="1016" y="514" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">100%</text>
+  <text x="1016" y="548" fill="#14B8A6" font-family="Segoe UI, Arial, sans-serif" font-size="14">Offline v1.0.0 benchmark</text>
+  <rect x="460" y="596" width="374" height="146" rx="24" fill="#FFFFFF"/>
+  <text x="492" y="634" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Analytics LGPD / DEIA</text>
+  <rect x="492" y="660" width="54" height="48" rx="10" fill="#0EA5E9"/>
+  <rect x="558" y="644" width="54" height="64" rx="10" fill="#22C55E"/>
+  <rect x="624" y="628" width="54" height="80" rx="10" fill="#F59E0B"/>
+  <rect x="690" y="612" width="54" height="96" rx="10" fill="#14B8A6"/>
+  <text x="492" y="726" fill="#64748B" font-family="Segoe UI, Arial, sans-serif" font-size="14">Coverage of open access, social impact, source provenance, and DEIA tags.</text>
+  <rect x="860" y="596" width="390" height="146" rx="24" fill="#FFFFFF"/>
+  <text x="892" y="634" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Governance panel</text>
+  <rect x="892" y="654" width="326" height="18" rx="9" fill="#DCFCE7"/>
+  <rect x="892" y="682" width="326" height="18" rx="9" fill="#DCFCE7"/>
+  <rect x="892" y="710" width="326" height="18" rx="9" fill="#DCFCE7"/>
+  <text x="892" y="758" fill="#16A34A" font-family="Segoe UI, Arial, sans-serif" font-size="14">FAIR and CARE scores all green in the bundled release dataset.</text>
+</svg>
